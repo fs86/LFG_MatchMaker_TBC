@@ -27,6 +27,7 @@
 ## Notes: This is a fork to support TBC classic
 ## SavedVariablesPerCharacter: LFGMM_DB
 
+LFGMM_FrameBackdrops.lua
 LFGMM_Interface.xml
 LFGMM_Core.lua
 LFGMM_Utility.lua

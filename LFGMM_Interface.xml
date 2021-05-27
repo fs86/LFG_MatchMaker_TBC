@@ -1112,19 +1112,15 @@
 	</Frame>
 	
 	<!-- LIST CONFIRM FORGET ALL WINDOW -->
-	<Frame name="LFGMM_ListTab_ConfirmForgetAll" hidden="true" enableMouse="true" movable="false" frameLevel="50" topLevel="true" parent="LFGMM_MainWindow">
+	<Frame name="LFGMM_ListTab_ConfirmForgetAll" parent="LFGMM_MainWindow" inherits="BackdropTemplate" hidden="true" enableMouse="true" movable="false" frameLevel="50" topLevel="true">
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="FRAME_BACKDROP_DEFAULT_DIALOG" type="global"/>
+		</KeyValues>
+		<Size x="225" y="75" />
 		<Anchors>
 			<Anchor point="CENTER" relativePoint="CENTER" />
 		</Anchors>
 		
-		<Size x="225" y="75" />
-		
-		<Backdrop bgFile="Interface\FriendsFrame\UI-Toast-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<EdgeSize val="28" />
-			<TileSize val="28" />
-			<BackgroundInsets left="5" right="5" top="5" bottom="5" />
-		</Backdrop>
-	
 		<Layers>
 			<Layer level="OVERLAY">
 				<Texture name="LFGMM_ListTab_ConfirmForgetAll_Header" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -1256,20 +1252,16 @@
 	
 	<!-- BROADCAST WINDOW -->
 	<Frame name="LFGMM_BroadcastWindow" hidden="true" enableMouse="true" movable="true" frameStrata="HIGH" topLevel="true" parent="UIParent">
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="FRAME_BACKDROP_DEFAULT_DIALOG" type="global"/>
+		</KeyValues>
+		<Size x="225" y="75" />
 		<Anchors>
 			<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 				<Offset x="50" y="-125" />
 			</Anchor>
 		</Anchors>
 		
-		<Size x="225" y="75" />
-		
-		<Backdrop bgFile="Interface\FriendsFrame\UI-Toast-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<EdgeSize val="28" />
-			<TileSize val="28" />
-			<BackgroundInsets left="5" right="5" top="5" bottom="5" />
-		</Backdrop>
-	
 		<Layers>
 			<Layer level="OVERLAY">
 				<Texture name="LFGMM_BroadcastWindow_Header" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -1308,20 +1300,16 @@
 	</Frame>
 	
 	<!-- POPUP WINDOW -->
-	<Frame name="LFGMM_PopupWindow" hidden="true" enableMouse="true" movable="true" frameStrata="HIGH" topLevel="true" parent="UIParent">
+	<Frame name="LFGMM_PopupWindow" parent="UIParent" inherits="BackdropTemplate" hidden="true" enableMouse="true" movable="true" frameStrata="HIGH" topLevel="true">
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="FRAME_BACKDROP_DEFAULT_DIALOG" type="global"/>
+		</KeyValues>
+		<Size x="490" y="145" />
 		<Anchors>
 			<Anchor point="TOP">
 				<Offset y="-25" />
 			</Anchor>
 		</Anchors>
-
-		<Size x="490" y="145" />
-
-		<Backdrop bgFile="Interface\FriendsFrame\UI-Toast-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<EdgeSize val="28" />
-			<TileSize val="28" />
-			<BackgroundInsets left="5" right="5" top="5" bottom="5" />
-		</Backdrop>
 		
 		<Layers>
 			<Layer level="OVERLAY">
