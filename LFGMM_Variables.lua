@@ -2445,7 +2445,11 @@ LFGMM_GLOBAL = {
 					"rampart[s]?",
 					"ramp[s]?",
 					"hr"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 58,
@@ -2461,7 +2465,11 @@ LFGMM_GLOBAL = {
 					"blood[%W]*furnace",
 					"furnace",
 					"[t]?bf"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 59,
@@ -2478,7 +2486,11 @@ LFGMM_GLOBAL = {
 					"slave[s]?",
 					"pen[s]?",
 					"sp"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 61,
@@ -2493,7 +2505,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"under[%W]*bog",
 					"ub"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 61,
@@ -2510,7 +2526,11 @@ LFGMM_GLOBAL = {
 					"tomb[s]?",
 					"mana",
 					"mt"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 63,
@@ -2527,7 +2547,11 @@ LFGMM_GLOBAL = {
 					"crypt[a]?[s]?",
 					"auchenai",
 					"ac"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 63,
@@ -2543,7 +2567,11 @@ LFGMM_GLOBAL = {
 					"sethek[k]?[%W]*hall[s]?",
 					"sethek[k]?",
 					"sh"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 65,
@@ -2560,7 +2588,11 @@ LFGMM_GLOBAL = {
 					"durn[%W]*hold[e]?",
 					"hil[l]?s[%W]*brad",
 					"efd"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 65,
@@ -2575,7 +2607,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"mech[a]?",
 					"mechana[r]?"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2592,7 +2628,11 @@ LFGMM_GLOBAL = {
 					"moras[s]?",
 					"cot[%W]*2",
 					"bm"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2609,7 +2649,11 @@ LFGMM_GLOBAL = {
 					"shat[t]?[%W]*hal[l]?[s]?",
 					"shat[t]?ered",
 					"shh"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2624,7 +2668,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"bot[a]?",
 					"botanica"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2640,7 +2688,11 @@ LFGMM_GLOBAL = {
 					"shadow[%W]*lab[s]?",
 					"labs",
 					"sl"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2656,7 +2708,11 @@ LFGMM_GLOBAL = {
 					"steam[%W]*vault[s]?",
 					"steam",
 					"vault[s]?"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2671,7 +2727,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"arca[%W]*traz",
 					"arca"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 5,
 			MinLevel = 68,
@@ -2686,7 +2746,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"kara",
 					"kz"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 10,
 			MinLevel = 70,
@@ -2700,7 +2764,11 @@ LFGMM_GLOBAL = {
 			Identifiers = {
 				EN = {
 					"gru[u]?l[']?[s]?"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 25,
 			MinLevel = 70,
@@ -2715,7 +2783,11 @@ LFGMM_GLOBAL = {
 				EN = {
 					"magtheridon",
 					"mag[s]?"
-				}
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
 			},
 			Size = 25,
 			MinLevel = 70,
