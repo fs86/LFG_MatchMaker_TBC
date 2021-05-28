@@ -2436,6 +2436,292 @@ LFGMM_GLOBAL = {
 			MaxLevel = 60,
 			Pvp = true
 		},
+		{
+			Index = 54,
+			Name = "Hellfire Ramparts",
+			Abbreviation = "HR",
+			Identifiers = {
+				EN = {
+					"rampart[s]?",
+					"ramp[s]?",
+					"hr"
+				}
+			},
+			Size = 5,
+			MinLevel = 58,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 55,
+			Name = "The Blood Furnace",
+			Abbreviation = "BF",
+			Identifiers = {
+				EN = {
+					"blood[%W]*furnace",
+					"furnace",
+					"[t]?bf"
+				}
+			},
+			Size = 5,
+			MinLevel = 59,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 56,
+			Name = "The Slave Pens",
+			Abbreviation = "SP",
+			Identifiers = {
+				EN = {
+					"slave[s]?[%W]*pen[s]?",
+					"slave[s]?",
+					"pen[s]?",
+					"sp"
+				}
+			},
+			Size = 5,
+			MinLevel = 61,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 57,
+			Name = "The Underbog",
+			Abbreviation = "UB",
+			Identifiers = {
+				EN = {
+					"under[%W]*bog",
+					"ub"
+				}
+			},
+			Size = 5,
+			MinLevel = 61,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 58,
+			Name = "Mana-Tombs",
+			Abbreviation = "UB",
+			Identifiers = {
+				EN = {
+					"mana[%W]*tomb[s]?",
+					"tomb[s]?",
+					"mana",
+					"mt"
+				}
+			},
+			Size = 5,
+			MinLevel = 63,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 59,
+			Name = "Auchenai Cryptss",
+			Abbreviation = "AC",
+			Identifiers = {
+				EN = {
+					"auchenai[%W]*crypt[a]?[s]?",
+					"crypt[a]?[s]?",
+					"auchenai",
+					"ac"
+				}
+			},
+			Size = 5,
+			MinLevel = 63,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 60,
+			Name = "Sethekk Halls",
+			Abbreviation = "SH",
+			Identifiers = {
+				EN = {
+					"sethek[k]?[%W]*hall[s]?",
+					"sethek[k]?",
+					"sh"
+				}
+			},
+			Size = 5,
+			MinLevel = 65,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 61,
+			Name = "Escape from Durnholde",
+			Abbreviation = "EFD",
+			Identifiers = {
+				EN = {
+					"cot[%W]*1",
+					"durn[%W]*hold[e]?",
+					"hil[l]?s[%W]*brad",
+					"efd"
+				}
+			},
+			Size = 5,
+			MinLevel = 65,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 62,
+			Name = "The Mechanar",
+			Abbreviation = "MECH",
+			Identifiers = {
+				EN = {
+					"mech[a]?",
+					"mechana[r]?"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 63,
+			Name = "Black Morass",
+			Abbreviation = "BM",
+			Identifiers = {
+				EN = {
+					"black[%W]*moras[s]?",
+					"moras[s]?",
+					"cot[%W]*2",
+					"bm"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 64,
+			Name = "The Shattered Halls",
+			Abbreviation = "SHH",
+			Identifiers = {
+				EN = {
+					"shat[t]?ered[%W]*hal[l]?[s]?",
+					"shat[t]?[%W]*hal[l]?[s]?",
+					"shat[t]?ered",
+					"shh"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 65,
+			Name = "The Botanica",
+			Abbreviation = "BOT",
+			Identifiers = {
+				EN = {
+					"bot[a]?",
+					"botanica"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 66,
+			Name = "Shadow Labyrinth",
+			Abbreviation = "SL",
+			Identifiers = {
+				EN = {
+					"shadow[%W]*lab[s]?",
+					"labs",
+					"sl"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 67,
+			Name = "The Steamvaults",
+			Abbreviation = "STEAM",
+			Identifiers = {
+				EN = {
+					"steam[%W]*vault[s]?",
+					"steam",
+					"vault[s]?"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 68,
+			Name = "The Arcatraz",
+			Abbreviation = "ARCA",
+			Identifiers = {
+				EN = {
+					"arca[%W]*traz",
+					"arca"
+				}
+			},
+			Size = 5,
+			MinLevel = 68,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 69,
+			Name = "Karazahn",
+			Abbreviation = "KZ",
+			Identifiers = {
+				EN = {
+					"kara",
+					"kz"
+				}
+			},
+			Size = 10,
+			MinLevel = 70,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 70,
+			Name = "Gruul's Lair",
+			Abbreviation = "GRUUL",
+			Identifiers = {
+				EN = {
+					"gru[u]?l[']?[s]?"
+				}
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70,
+			Pvp = false
+		},
+		{
+			Index = 71,
+			Name = "Magtheridon's Lair",
+			Abbreviation = "MAG",
+			Identifiers = {
+				EN = {
+					"magtheridon",
+					"mag[s]?"
+				}
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70,
+			Pvp = false
+		},
 	},
 	DUNGEONS_FALLBACK = {
 		{
