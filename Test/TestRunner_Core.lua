@@ -33,12 +33,9 @@ function hasValue(tab, val)
   return false
 end
 
-function runTests(addonName, languages)
-  require("Test/" .. addonName .. "_Dungeons")
-  require("Test/" .. addonName .. "_TestData")
-
+function runTests(dungeons, testData, languages)
   local testResults = {}
-  for test in values(Tests) do
+  for test in values(testData) do
     for testDefinition in values(test.TestDefinitions) do
       local testResultEntry = {
         TestDefinition = testDefinition,
@@ -46,7 +43,7 @@ function runTests(addonName, languages)
         MatchesOnDungeons = {}
       }
 
-      for dungeon in values(getNormalizedDungeonArray(Dungeons, languages)) do
+      for dungeon in values(getNormalizedDungeonArray(dungeons, languages)) do
         for identifier in values(dungeon.Identifiers) do
           local isMatch = (
             string.find(testDefinition, "^"     .. identifier .. "[%W]+") ~= nil or

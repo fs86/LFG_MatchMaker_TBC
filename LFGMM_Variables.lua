@@ -2539,7 +2539,7 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 59,
-			Name = "Auchenai Cryptss",
+			Name = "Auchenai Crypts",
 			Abbreviation = "AC",
 			Identifiers = {
 				EN = {

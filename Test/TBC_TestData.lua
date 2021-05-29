@@ -1,4 +1,4 @@
-Tests = {
+TBC_TESTS = {
   {
     DungeonName = "Hellfire Ramparts",
     TestDefinitions = {
