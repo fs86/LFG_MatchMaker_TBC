@@ -31,6 +31,7 @@ local dbIcon, dbIconData;
 function LFGMM_MinimapButton_Initialize()
 	-- Initialize LibDB
 	dbIcon = LibStub("LibDBIcon-1.0");
+	---@diagnostic disable-next-line: lowercase-global
 	dataBroker = LibStub("LibDataBroker-1.1");
 
 	-- Create minimap button config
