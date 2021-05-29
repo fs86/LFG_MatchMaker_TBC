@@ -5,14 +5,16 @@ function values(t)
   return function() i = i + 1; return t[i] end
 end
 
-function getNormalizedDungeonArray(dungeons)
+function getNormalizedDungeonArray(dungeons, languages)
   local patternArray = {}
   for dungeon in values(dungeons) do
     local entry = { Name = dungeon.Name, Identifiers = {} }
     for lng in pairs(dungeon.Identifiers) do
-      if (#dungeon.Identifiers[lng] > 0) then
-        for pattern in values(dungeon.Identifiers[lng]) do
-          table.insert(entry.Identifiers, pattern)
+      if languages == nil or hasValue(languages, lng) then
+        if (#dungeon.Identifiers[lng] > 0) then
+          for pattern in values(dungeon.Identifiers[lng]) do
+            table.insert(entry.Identifiers, pattern)
+          end
         end
       end
     end
@@ -31,7 +33,7 @@ function hasValue(tab, val)
   return false
 end
 
-function runTests(addonName)
+function runTests(addonName, languages)
   require("Test/" .. addonName .. "_Dungeons")
   require("Test/" .. addonName .. "_TestData")
 
@@ -44,9 +46,14 @@ function runTests(addonName)
         MatchesOnDungeons = {}
       }
 
-      for dungeon in values(getNormalizedDungeonArray(Dungeons)) do
+      for dungeon in values(getNormalizedDungeonArray(Dungeons, languages)) do
         for identifier in values(dungeon.Identifiers) do
-          local isMatch = string.match(testDefinition, identifier)
+          local isMatch = (
+            string.find(testDefinition, "^"     .. identifier .. "[%W]+") ~= nil or
+            string.find(testDefinition, "^"     .. identifier .. "$") ~= nil or
+            string.find(testDefinition, "[%W]+" .. identifier .. "[%W]+") ~= nil or
+            string.find(testDefinition, "[%W]+" .. identifier .. "$") ~= nil)
+
           if isMatch and hasValue(testResultEntry.MatchesOnDungeons, dungeon.Name) == false then
             table.insert(testResultEntry.MatchesOnDungeons, dungeon.Name)
           end
@@ -69,7 +76,3 @@ function runTests(addonName)
     end
   end
 end
-
-
-
-runTests("TBC")

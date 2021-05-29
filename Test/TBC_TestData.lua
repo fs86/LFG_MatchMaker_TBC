@@ -5,7 +5,7 @@ Tests = {
       -- EN
       "lfg 1 tank for ramps",
       "lfm ramp",
-      "lfg rampart",
+      "lfg rampart"
     }
   },
   {
@@ -98,7 +98,6 @@ Tests = {
     DungeonName = "Black Morass",
     TestDefinitions = {
       -- EN
-      "lfg bkackmoras",
       "lfg black moras",
       "lfg black morass",
       "lfm 1 tank for moras",

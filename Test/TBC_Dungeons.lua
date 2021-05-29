@@ -215,6 +215,7 @@ Dungeons = {
         Name = "Karazahn",
         Identifiers = {
             EN = {
+                "kara[%W]*zahn",
                 "kara",
                 "kz"
             },

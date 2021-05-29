@@ -2503,8 +2503,8 @@ LFGMM_GLOBAL = {
 			Abbreviation = "UB",
 			Identifiers = {
 				EN = {
-					"under[%W]*bog",
-					"ub"
+	                "under[%W]*bog",
+                	"ub"
 				},
 				DE = {},
 				FR = {},
@@ -2744,6 +2744,7 @@ LFGMM_GLOBAL = {
 			Abbreviation = "KZ",
 			Identifiers = {
 				EN = {
+					"kara[%W]*zahn",
 					"kara",
 					"kz"
 				},
