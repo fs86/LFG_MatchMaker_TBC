@@ -35,8 +35,13 @@ end
 
 function runTests(dungeons, testData, languages)
   local testResults = {}
+  local testDefinitionCount = 0
+  local errorCount = 0
+
   for test in values(testData) do
     for testDefinition in values(test.TestDefinitions) do
+      testDefinitionCount = testDefinitionCount + 1
+
       local testResultEntry = {
         TestDefinition = testDefinition,
         ExpectedDungeonMatch = test.DungeonName,
@@ -63,13 +68,18 @@ function runTests(dungeons, testData, languages)
   for result in values(testResults) do
     if #result.MatchesOnDungeons == 0 then
       print(  "❌ '" .. result.TestDefinition .. "' \27[31m➟ NO MATCHES\27[0m \27[32mEXPECTED\27[0m " .. result.ExpectedDungeonMatch)
+      errorCount = errorCount + 1
     end
     for dungeonMatch in values(result.MatchesOnDungeons) do
       if dungeonMatch == result.ExpectedDungeonMatch then
         print(  "✔️ '" .. result.TestDefinition .. "' \27[32mMATCHES DUNGEON\27[0m " .. dungeonMatch)
       else
         print(  "❌ '" .. result.TestDefinition .. "' \27[31mMATCHES DUNGEON\27[0m " .. dungeonMatch .. " \27[32mEXPECTED\27[0m " .. result.ExpectedDungeonMatch)
+        errorCount = errorCount + 1
       end
     end
   end
+
+  local icon = errorCount == 0 and "😎" or "😰"
+  print("\n➟ " .. testDefinitionCount - errorCount .. " / " .. testDefinitionCount .. " successful " ..icon)
 end
