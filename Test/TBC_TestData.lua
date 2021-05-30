@@ -169,7 +169,8 @@ TBC_TESTS = {
       -- DE
       "lfg zerschmetterten hallen",
       "heal lfg zh",
-      "lfg zerschmeterte hale"
+      "lfg zerschmeterte hale",
+      "lfg zerschm. halle"
     }
   },
   {
@@ -189,7 +190,12 @@ TBC_TESTS = {
       -- EN
       "lfg shadow labs",
       "lfg labs",
-      "1 tank for shadowlabs"
+      "1 tank for shadowlabs",
+
+      -- DE
+      "lfg schattenlab",
+      "1 tank für schatenlabyrint",
+      "heal lfg schatten lab."
     }
   },
   {
@@ -202,7 +208,13 @@ TBC_TESTS = {
       "tank lfg steam vault",
       "dd lfg steam vaults",
       "lfm 3 dd vaults",
-      "heal lfg vault"
+      "heal lfg vault",
+
+      -- DE
+      "lfg damfkamer",
+      "1 heal for dampfkammer",
+      "tank lfg dampf",
+      "suche gruppe for dk"
     }
   },
   {
@@ -211,7 +223,12 @@ TBC_TESTS = {
       -- EN
       "lfg arca",
       "heal lfg arcatraz",
-      "1 dd for arca traz"
+      "1 dd for arca traz",
+
+      -- DE
+      "lfg arka",
+      "heal lfg arkatraz",
+      "1 dd für arka traz"
     }
   },
   {
@@ -229,7 +246,12 @@ TBC_TESTS = {
       -- EN
       "lfg gruul's lair",
       "2 heal for grul",
-      "1 tank for grul's lair"
+      "1 tank for grul's lair",
+
+      -- DE
+      "lfg gruuls unterschlupf",
+      "heal lfg gruls unterschl.",
+      "2 tanks für grul"
     }
   },
   {
@@ -238,7 +260,11 @@ TBC_TESTS = {
       -- EN
       "lfg magtheridon",
       "2 heal for mags",
-      "lfg mag /we me"
+      "lfg mag /we me",
+
+      -- DE
+      "lfg mags kammer",
+      "tank lfg magtheridon's kammer"
     }
   }
 }

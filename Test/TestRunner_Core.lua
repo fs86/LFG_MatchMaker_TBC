@@ -81,5 +81,5 @@ function runTests(dungeons, testData, languages)
   end
 
   local icon = errorCount == 0 and "😎" or "😰"
-  print("\n➟ " .. testDefinitionCount - errorCount .. " / " .. testDefinitionCount .. " successful " ..icon)
+  print("\n➟ " .. testDefinitionCount - errorCount .. " / " .. testDefinitionCount .. " successful " .. icon .. "\n")
 end
