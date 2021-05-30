@@ -28,7 +28,7 @@
 
 function LFGMM_Load()
 	LFGMM_DB_VERSION = 4;
-	
+
 	-- Get locale language
 	local locale = GetLocale();
 	if (locale == "deDE") then
@@ -96,7 +96,7 @@ function LFGMM_Load()
 				}
 			}
 		};
-		
+
 		-- Add locale identifier language
 		if (locale ~= nil) then
 			table.insert(LFGMM_DB.SETTINGS.IdentifierLanguages, locale);
@@ -116,24 +116,24 @@ function LFGMM_Load()
 				table.insert(LFGMM_DB.SETTINGS.IdentifierLanguages, locale);
 			end
 		end
-		
+
 		if (LFGMM_DB.VERSION <= 2) then
 			LFGMM_DB.SEARCH.LFG.AutoStop = true;
 			LFGMM_DB.SEARCH.LFM.AutoStop = true;
 		end
-		
+
 		if (LFGMM_DB.VERSION <= 3) then
 			LFGMM_DB.SETTINGS.MinimapLibDBSettings = {};
 			LFGMM_DB.SETTINGS.InfoWindowLocation = "right";
 			LFGMM_DB.SETTINGS.UseTradeChannel = false;
 			LFGMM_DB.SETTINGS.UseGeneralChannel = false;
 		end
-		
+
 		if (LFGMM_DB.VERSION < LFGMM_DB_VERSION) then
 			LFGMM_DB.VERSION = LFGMM_DB_VERSION;
 		end
 	end
-	
+
 	-- OnLoad search = off
 	LFGMM_DB.SEARCH.LFG.Running = false;
 	LFGMM_DB.SEARCH.LFM.Running = false;
@@ -162,23 +162,23 @@ LFGMM_GLOBAL = {
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
 	LANGUAGES = {
-		{ 
+		{
 			Code = "EN",
 			Name = "English",
 		},
-		{ 
+		{
 			Code = "DE",
 			Name = "German",
 		},
-		{ 
+		{
 			Code = "FR",
 			Name = "French",
 		},
-		{ 
+		{
 			Code = "ES",
 			Name = "Spanish",
 		},
-		-- { 
+		-- {
 			-- Code = "RU",
 			-- Name = "Russian",
 		-- },
@@ -499,12 +499,13 @@ LFGMM_GLOBAL = {
 			Name = "Wailing Caverns",
 			Abbreviation = "WC",
 			Identifiers = {
-				EN = { 
+				EN = {
 					"wa[i]?ling[%W]*cavern[s]?",
 					"wc",
 				},
 				DE = {
 					-- Die Höhlen des Wehklagens
+					"hö[h]?len[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"ho[e]?hlen[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"hdw",
 				},
@@ -560,7 +561,7 @@ LFGMM_GLOBAL = {
 			Name = "Shadowfang Keep",
 			Abbreviation = "SFK",
 			Identifiers = {
-				EN = { 
+				EN = {
 					"shadow[%W]*fang[%W]*ke[e]?p",
 					"shadow[%W]*fang",
 					"sfk",
@@ -594,7 +595,7 @@ LFGMM_GLOBAL = {
 			Name = "Blackfathom Deeps",
 			Abbreviation = "BFD",
 			Identifiers = {
-				EN = { 
+				EN = {
 					"black[%W]*fat[h]?om[%W]*de[e]?p[t]?[h]?[s]?",
 					"black[%W]*fat[h]?om",
 					"bfd",
@@ -626,7 +627,7 @@ LFGMM_GLOBAL = {
 			Name = "Stormwind Stockade",
 			Abbreviation = "Stockades",
 			Identifiers = {
-				EN = { 
+				EN = {
 					"stockade[s]?",
 					"stock[s]?",
 				},
@@ -762,7 +763,7 @@ LFGMM_GLOBAL = {
 			Name = "Scarlet Monastery - Library",
 			Abbreviation = "SM LIB",
 			Identifiers = {
-				EN = { 
+				EN = {
 					"smlib[r]?[a]?[r]?[y]?",
 					"lib[r]?[a]?[r]?[y]?",
 				},
@@ -933,6 +934,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					-- Hügel der Klingenhauer / Die Hügel von Razorfen
 					"hu[e]?gel",
+					"hügel"
 				},
 				FR = {
 					-- Souilles de Tranchebauge
@@ -1922,7 +1924,8 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					-- Düsterbruch
-					"du[e]?sterbruch",
+					"du[e]?ster[%W]*bruch",
+					"düster[%W]*bruch",
 					"db",
 				},
 				FR = {
@@ -2439,14 +2442,23 @@ LFGMM_GLOBAL = {
 		{
 			Index = 54,
 			Name = "Hellfire Ramparts",
-			Abbreviation = "HR",
+			Abbreviation = "Ramps",
 			Identifiers = {
 				EN = {
-					"rampart[s]?",
+					"ramp[a]?[r]?[t]?[s]?",
 					"ramp[s]?",
 					"hr"
 				},
-				DE = {},
+				DE = {
+					"höl[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
+					"hoel[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
+					"höl[l]?en[%W]*feuer",
+					"hoel[l]?en[%W]*feuer",
+					"bol[l]werk",
+					"bol[l]w",
+					"hfb",
+					"bw"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2462,11 +2474,14 @@ LFGMM_GLOBAL = {
 			Abbreviation = "BF",
 			Identifiers = {
 				EN = {
-					"blood[%W]*furnace",
+					"blo[o]?d[%W]*furnace",
 					"furnace",
 					"[t]?bf"
 				},
-				DE = {},
+				DE = {
+					"blut[%W]*kes[s]?el",
+					"bk"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2487,7 +2502,15 @@ LFGMM_GLOBAL = {
 					"pen[s]?",
 					"sp"
 				},
-				DE = {},
+				DE = {
+					"sklaven[%W]*unterkünfte",
+					"sklaven[%W]*unterkuenfte",
+					"sklaven[%W]*unterkunft",
+					"sklave[n]?",
+					"unterkünfte",
+					"unterkuenfte",
+					"unterkunft"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2506,7 +2529,11 @@ LFGMM_GLOBAL = {
 	                "under[%W]*bog",
                 	"ub"
 				},
-				DE = {},
+				DE = {
+					"ti[e]?fen[%W]*sumpf",
+					"sumpf",
+					"ts"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2519,7 +2546,7 @@ LFGMM_GLOBAL = {
 		{
 			Index = 58,
 			Name = "Mana-Tombs",
-			Abbreviation = "UB",
+			Abbreviation = "MT",
 			Identifiers = {
 				EN = {
 					"mana[%W]*tomb[s]?",
@@ -2527,7 +2554,10 @@ LFGMM_GLOBAL = {
 					"mana",
 					"mt"
 				},
-				DE = {},
+				DE = {
+					"mana[%W]*gruft",
+					"gruft"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2540,7 +2570,7 @@ LFGMM_GLOBAL = {
 		{
 			Index = 59,
 			Name = "Auchenai Crypts",
-			Abbreviation = "AC",
+			Abbreviation = "Crypts",
 			Identifiers = {
 				EN = {
 					"auchenai[%W]*crypt[a]?[s]?",
@@ -2548,7 +2578,10 @@ LFGMM_GLOBAL = {
 					"auchenai",
 					"ac"
 				},
-				DE = {},
+				DE = {
+					"auchenai[%W]*krypt[a]?",
+					"krypt[a]?"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2561,14 +2594,16 @@ LFGMM_GLOBAL = {
 		{
 			Index = 60,
 			Name = "Sethekk Halls",
-			Abbreviation = "SH",
+			Abbreviation = "Seth",
 			Identifiers = {
 				EN = {
 					"sethek[k]?[%W]*hall[s]?",
 					"sethek[k]?",
 					"sh"
 				},
-				DE = {},
+				DE = {
+					"set[h]?ek[k]?[%W]*hal[l]?e[n]?",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2581,7 +2616,7 @@ LFGMM_GLOBAL = {
 		{
 			Index = 61,
 			Name = "Escape from Durnholde",
-			Abbreviation = "EFD",
+			Abbreviation = "OH",
 			Identifiers = {
 				EN = {
 					"cot[%W]*1",
@@ -2602,11 +2637,10 @@ LFGMM_GLOBAL = {
 		{
 			Index = 62,
 			Name = "The Mechanar",
-			Abbreviation = "MECH",
+			Abbreviation = "Mech",
 			Identifiers = {
 				EN = {
-					"mech[a]?",
-					"mechana[r]?"
+					"mech[a]?[n]?[a]?[r]?"
 				},
 				DE = {},
 				FR = {},
@@ -2624,12 +2658,15 @@ LFGMM_GLOBAL = {
 			Abbreviation = "BM",
 			Identifiers = {
 				EN = {
-					"black[%W]*moras[s]?",
+					"black[%W]*mor[a]?[s]?[s]?",
 					"moras[s]?",
 					"cot[%W]*2",
 					"bm"
 				},
-				DE = {},
+				DE = {
+					"schwarz[e]?[%W]*mor[r]?[a]?[s]?[t]?",
+					"mor[r]?ast",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2642,15 +2679,18 @@ LFGMM_GLOBAL = {
 		{
 			Index = 64,
 			Name = "The Shattered Halls",
-			Abbreviation = "SHH",
+			Abbreviation = "SH",
 			Identifiers = {
 				EN = {
-					"shat[t]?ered[%W]*hal[l]?[s]?",
-					"shat[t]?[%W]*hal[l]?[s]?",
-					"shat[t]?ered",
+					"shat[t]?[e]?[r]?[e]?[d]?[%W]*hal[l]?[s]?",
+					"shat[t]?[e]?[r]?[e]?[d]?",
 					"shh"
 				},
-				DE = {},
+				DE = {
+					"zerschmet[t]?erte[n]?[%W]*hal[l]?[e]?[n]?",
+					"zerschm[.]?[%W]*hal[l]?[e]?[n]?",
+					"zh"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2663,13 +2703,14 @@ LFGMM_GLOBAL = {
 		{
 			Index = 65,
 			Name = "The Botanica",
-			Abbreviation = "BOT",
+			Abbreviation = "Bot",
 			Identifiers = {
 				EN = {
-					"bot[a]?",
-					"botanica"
+					"bot[a]?[n]?[i]?[c]?[a]?",
 				},
-				DE = {},
+				DE = {
+					"botanika"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2685,11 +2726,13 @@ LFGMM_GLOBAL = {
 			Abbreviation = "SL",
 			Identifiers = {
 				EN = {
-					"shadow[%W]*lab[s]?",
+					"shadow[%W]*[l]?[a]?[b]?[s]?",
 					"labs",
 					"sl"
 				},
-				DE = {},
+				DE = {
+					"schat[t]?en[%W]*lab[y]?[r]?[i]?[n]?[t]?[h]?",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2702,14 +2745,18 @@ LFGMM_GLOBAL = {
 		{
 			Index = 67,
 			Name = "The Steamvaults",
-			Abbreviation = "STEAM",
+			Abbreviation = "SV",
 			Identifiers = {
 				EN = {
 					"steam[%W]*vault[s]?",
 					"steam",
 					"vault[s]?"
 				},
-				DE = {},
+				DE = {
+					"dam[p]?f[%W]*kam[m]?[e]?[r]?",
+					"dam[p]?f",
+					"dk"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2722,13 +2769,14 @@ LFGMM_GLOBAL = {
 		{
 			Index = 68,
 			Name = "The Arcatraz",
-			Abbreviation = "ARCA",
+			Abbreviation = "Arc",
 			Identifiers = {
 				EN = {
-					"arca[%W]*traz",
-					"arca"
+					"arca[%W]*[t]?[r]?[a]?[z]?",
 				},
-				DE = {},
+				DE = {
+					"arka[%W]*[t]?[r]?[a]?[z]?",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2744,8 +2792,7 @@ LFGMM_GLOBAL = {
 			Abbreviation = "KZ",
 			Identifiers = {
 				EN = {
-					"kara[%W]*zahn",
-					"kara",
+					"kara[%W]*[z]?[a]?[h]?[n]?",
 					"kz"
 				},
 				DE = {},
@@ -2761,12 +2808,14 @@ LFGMM_GLOBAL = {
 		{
 			Index = 70,
 			Name = "Gruul's Lair",
-			Abbreviation = "GRUUL",
+			Abbreviation = "GL",
 			Identifiers = {
 				EN = {
 					"gru[u]?l[']?[s]?"
 				},
-				DE = {},
+				DE = {
+					"gru[u]?l[s]?[%W]*unterschl[.]?[u]?[p]?[f]?"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2779,13 +2828,16 @@ LFGMM_GLOBAL = {
 		{
 			Index = 71,
 			Name = "Magtheridon's Lair",
-			Abbreviation = "MAG",
+			Abbreviation = "Mag",
 			Identifiers = {
 				EN = {
 					"magtheridon",
 					"mag[s]?"
 				},
-				DE = {},
+				DE = {
+					"magtheridon[s]?[%W]*kam[m]?[e]?[r]?",
+					"mag[s]?[%W]*kam[m]?[e]?[r]?"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2800,7 +2852,7 @@ LFGMM_GLOBAL = {
 		{
 			Dungeons = { 3, 39 },
 			Identifiers = {
-				EN = { 
+				EN = {
 					"dm",
 				},
 				DE = {},

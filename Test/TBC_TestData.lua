@@ -5,7 +5,16 @@ TBC_TESTS = {
       -- EN
       "lfg 1 tank for ramps",
       "lfm ramp",
-      "lfg rampart"
+      "lfg rampart",
+
+      -- DE
+      "lfg höllenfeuer",
+      "lfg 1 tank for hfb /w me",
+      "heiler für bollwerk da?",
+      "ein tank lust auf hoellenfeuer bollwerk?",
+      "lfm 3 dds bollwerk!",
+      "lfm hfb",
+      "lfg bw"
     }
   },
   {
@@ -16,7 +25,12 @@ TBC_TESTS = {
       "lfg furnace",
       "lfm 1 tank for bf",
       "lfm bloodfurnace",
-      "lfm blood furnace"
+      "lfm blood furnace",
+
+      -- DE
+      "lfg blut kessel",
+      "lf 1 tank für blut kesel",
+      "lfg bk"
     }
   },
   {
@@ -26,7 +40,15 @@ TBC_TESTS = {
       "lfg slave",
       "lfg slavepens",
       "lfg slavepen",
-      "lfg slaves"
+      "lfg slaves",
+
+      -- DE
+      "3 dds für sklaven",
+      "heal für unterkünfte, dann go",
+      "lfg sklaven unterkunft",
+      "lfm sklavenunterkuenfte",
+      "lfm sklavenunterkünfte",
+      "heal lfg sklaven unterkünfte"
     }
   },
   {
@@ -34,7 +56,12 @@ TBC_TESTS = {
     TestDefinitions = {
       -- EN
       "lfg 3 dd for underbog",
-      "lfm ub /w me"
+      "lfm ub /w me",
+
+      -- DE
+      "lfg sumpf",
+      "heal lfg tiefensumpf",
+      "1 tank für tiefen sumpf"
     }
   },
   {
@@ -46,7 +73,13 @@ TBC_TESTS = {
       "heal lfg tombs",
       "tank lfg tomb",
       "dd lfg mana tombs",
-      "lfg manatomb"
+      "lfg manatomb",
+
+      -- DE
+      "heal lfg mana",
+      "1 tank für gruft, dann go",
+      "lfg mana gruft",
+      "lfm managruft"
     }
   },
   {
@@ -57,7 +90,12 @@ TBC_TESTS = {
       "lfm 3 dds für auchenai",
       "lfm heal für crypta",
       "lfm tank für crypts",
-      "lfg crypt"
+      "lfg crypt",
+
+      -- DE
+      "lfg auchenaikrypta",
+      "1 heal für krypta",
+      "tank lfg auchenaikrypt"
     }
   },
   {
@@ -66,7 +104,15 @@ TBC_TESTS = {
       -- EN
       "lfg sethekhalls",
       "lfg sethek",
-      "lfm 1 tank for sh"
+      "lfm 1 tank for sh",
+
+      -- DE
+      "lfg setekhallen",
+      "1 tank für setekk halle",
+      "heal lfg setekk hallen",
+      "lfg sethekhallen",
+      "1 tank für sethekk halle",
+      "heal lfg sethekk hallen"
     }
   },
   {
@@ -91,7 +137,8 @@ TBC_TESTS = {
       "lfg mecha",
       "lfm 1 heal for mech",
       "lfm 1 tank for mechana",
-      "dd lfg mechanar"
+      "dd lfg mechanar",
+      "lfg mecha"
     }
   },
   {
@@ -103,7 +150,12 @@ TBC_TESTS = {
       "lfm 1 tank for moras",
       "1 dd for cot2",
       "1 heal for cot 2",
-      "1 tank for bm"
+      "1 tank for bm",
+
+      -- DE
+      "lfg schwarze morast",
+      "1 heal für morrast",
+      "lfm schwarzmorast",
     }
   },
   {
@@ -112,7 +164,13 @@ TBC_TESTS = {
       -- EN
       "lfg shatered hals",
       "lfg shathalls",
-      "lfg shattered"
+      "lfg shattered",
+
+      -- DE
+      "lfg zerschmetterten hallen",
+      "heal lfg zh",
+      "lfg zerschmeterte hale",
+      "lfg zerschm. halle"
     }
   },
   {
@@ -120,7 +178,10 @@ TBC_TESTS = {
     TestDefinitions = {
       -- EN
       "lfg bot",
-      "lfg botanica"
+      "lfg botanica",
+
+      -- DE
+      "lfg botanika"
     }
   },
   {
@@ -129,7 +190,12 @@ TBC_TESTS = {
       -- EN
       "lfg shadow labs",
       "lfg labs",
-      "1 tank for shadowlabs"
+      "1 tank for shadowlabs",
+
+      -- DE
+      "lfg schattenlab",
+      "1 tank für schatenlabyrint",
+      "heal lfg schatten lab."
     }
   },
   {
@@ -142,7 +208,13 @@ TBC_TESTS = {
       "tank lfg steam vault",
       "dd lfg steam vaults",
       "lfm 3 dd vaults",
-      "heal lfg vault"
+      "heal lfg vault",
+
+      -- DE
+      "lfg damfkamer",
+      "1 heal for dampfkammer",
+      "tank lfg dampf",
+      "suche gruppe for dk"
     }
   },
   {
@@ -151,7 +223,12 @@ TBC_TESTS = {
       -- EN
       "lfg arca",
       "heal lfg arcatraz",
-      "1 dd for arca traz"
+      "1 dd for arca traz",
+
+      -- DE
+      "lfg arka",
+      "heal lfg arkatraz",
+      "1 dd für arka traz"
     }
   },
   {
@@ -169,7 +246,12 @@ TBC_TESTS = {
       -- EN
       "lfg gruul's lair",
       "2 heal for grul",
-      "1 tank for grul's lair"
+      "1 tank for grul's lair",
+
+      -- DE
+      "lfg gruuls unterschlupf",
+      "heal lfg gruls unterschl.",
+      "2 tanks für grul"
     }
   },
   {
@@ -178,7 +260,11 @@ TBC_TESTS = {
       -- EN
       "lfg magtheridon",
       "2 heal for mags",
-      "lfg mag /we me"
+      "lfg mag /we me",
+
+      -- DE
+      "lfg mags kammer",
+      "tank lfg magtheridon's kammer"
     }
   }
 }
