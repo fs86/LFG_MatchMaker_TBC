@@ -37,6 +37,7 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_MatchLfmCheckBox,	"LFM", "Get notifications on LFM messages", LFGMM_DB.SEARCH.LFM.MatchLfm, LFGMM_LfmTab_MatchLfmCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_MatchUnknownCheckBox, "Unknown", "Get notifications when dungeon matches, but LFG/LFM cannot be determined", LFGMM_DB.SEARCH.LFM.MatchUnknown, LFGMM_LfmTab_MatchUnknownCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_AutoStopCheckBox, "Stop search when group is full", "Automatically stop search when the group is full", LFGMM_DB.SEARCH.LFM.AutoStop, LFGMM_LfmTab_AutoStopCheckBox_OnClick);
+	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_IgnoreBoostsCheckBox, "Ignore Boosts", "Ignore boost requests", LFGMM_DB.SEARCH.LFM.IgnoreBoosts, LFGMM_LfmTab_IgnoreBoostsCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_EnableBroadcastCheckBox, "Broadcast in LFG channel", "Periodically send LFM messages to LookingForGroup channel", LFGMM_DB.SEARCH.LFM.Broadcast, LFGMM_LfmTab_EnableBroadcastCheckBox_OnClick);
 
 	LFGMM_LfmTab_BroadcastMessageTemplateInputBox:SetScript("OnTextChanged", LFGMM_LfmTab_UpdateBroadcastMessage);
@@ -115,6 +116,7 @@ function LFGMM_LfmTab_Refresh()
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_MatchLfmCheckBox, false);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_MatchUnknownCheckBox, false);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_AutoStopCheckBox, false);
+		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_IgnoreBoostsCheckBox, false);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_EnableBroadcastCheckBox, false);
 		LFGMM_LfmTab_StartAnimateSearchText();
 
@@ -130,6 +132,7 @@ function LFGMM_LfmTab_Refresh()
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_MatchLfmCheckBox, true);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_MatchUnknownCheckBox, true);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_EnableBroadcastCheckBox, true);
+		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_IgnoreBoostsCheckBox, true);
 
 		if (dungeonSize and groupSize >= dungeonSize) then
 			LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_AutoStopCheckBox, false);
@@ -375,6 +378,10 @@ end
 
 function LFGMM_LfmTab_AutoStopCheckBox_OnClick()
 	LFGMM_DB.SEARCH.LFM.AutoStop = LFGMM_LfmTab_AutoStopCheckBox:GetChecked();
+end
+
+function LFGMM_LfmTab_IgnoreBoostsCheckBox_OnClick()
+	LFGMM_DB.SEARCH.LFM.IgnoreBoosts = LFGMM_LfmTab_IgnoreBoostsCheckBox:GetChecked();
 end
 
 

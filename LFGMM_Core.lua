@@ -267,6 +267,13 @@ function LFGMM_Core_GetGroupMembers()
 end
 
 
+function LFGMM_Core_IsMatch(normalizedMessage, identifier)
+	return (string.find(normalizedMessage, "^"     .. identifier .. "[%W]+") ~= nil or
+			string.find(normalizedMessage, "^"     .. identifier .. "$"    ) ~= nil or
+			string.find(normalizedMessage, "[%W]+" .. identifier .. "[%W]+") ~= nil or
+			string.find(normalizedMessage, "[%W]+" .. identifier .. "$"    ) ~= nil);
+end
+
 function LFGMM_Core_FindSearchMatch()
 	-- Return if stopped
 	if (not LFGMM_DB.SEARCH.LFG.Running and not LFGMM_DB.SEARCH.LFM.Running) then
@@ -560,6 +567,19 @@ function LFGMM_Core_EventHandler(self, event, ...)
 
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
 
+			-- Ignore dungeon matches with boost identifiers
+			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
+				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
+			then
+				for lng in pairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS) do
+					for _,boostIdentifier in ipairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS[lng]) do
+						if LFGMM_Core_IsMatch(message, boostIdentifier) then
+							return;
+						end
+					end
+				end
+			end
+
 			-- Find dungeon matches
 			for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
 				local matched = false;
@@ -567,11 +587,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 				for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 					if (dungeon.Identifiers[languageCode] ~= nil) then
 						for _,identifier in ipairs(dungeon.Identifiers[languageCode]) do
-							if (string.find(message, "^"     .. identifier .. "[%W]+") ~= nil or
-								string.find(message, "^"     .. identifier .. "$"    ) ~= nil or
-								string.find(message, "[%W]+" .. identifier .. "[%W]+") ~= nil or
-								string.find(message, "[%W]+" .. identifier .. "$"    ) ~= nil)
-							then
+							if LFGMM_Core_IsMatch(message, identifier) then
 								matched = true;
 								break;
 							end
@@ -587,11 +603,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 						if (dungeon.NotIdentifiers[languageCode] ~= nil) then
 							for _,notIdentifier in ipairs(dungeon.NotIdentifiers[languageCode]) do
-								if (string.find(message, "^"     .. notIdentifier .. "[%W]+") ~= nil or
-									string.find(message, "^"     .. notIdentifier .. "$"    ) ~= nil or
-									string.find(message, "[%W]+" .. notIdentifier .. "[%W]+") ~= nil or
-									string.find(message, "[%W]+" .. notIdentifier .. "$"    ) ~= nil)
-								then
+								if LFGMM_Core_IsMatch(message, notIdentifier) then
 									matched = false;
 									break;
 								end
@@ -620,11 +632,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 				for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 					if (dungeonsFallback.Identifiers[languageCode] ~= nil) then
 						for _,identifier in ipairs(dungeonsFallback.Identifiers[languageCode]) do
-							if (string.find(message, "^"     .. identifier .. "[%W]+") ~= nil or
-								string.find(message, "^"     .. identifier .. "$"    ) ~= nil or
-								string.find(message, "[%W]+" .. identifier .. "[%W]+") ~= nil or
-								string.find(message, "[%W]+" .. identifier .. "$"    ) ~= nil)
-							then
+							if LFGMM_Core_IsMatch(message, identifier) then
 								matched = true;
 								break;
 							end
@@ -840,7 +848,6 @@ function LFGMM_Core_EventHandler(self, event, ...)
 	end
 end
 
-
 -- OnHide party invite
 local PARTY_INVITE_OnHide = StaticPopupDialogs["PARTY_INVITE"].OnHide;
 StaticPopupDialogs["PARTY_INVITE"].OnHide = function(self)
@@ -869,7 +876,7 @@ LFGMM_MainWindow:SetScript("OnEvent", LFGMM_Core_EventHandler);
 SLASH_LFGMM1 = "/lfgmm";
 SLASH_LFGMM2 = "/lfgmatchmaker";
 SLASH_LFGMM3 = "/matchmaker";
-SlashCmdList["LFGMM"] = function() 
+SlashCmdList["LFGMM"] = function()
 	LFGMM_Core_MainWindow_ToggleShow();
 end
 

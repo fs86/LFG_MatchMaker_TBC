@@ -79,6 +79,7 @@ function LFGMM_Load()
 					MatchLfg = false,
 					MatchUnknown = true,
 					AutoStop = true,
+					IgnoreBoosts = false,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "{L} {C} LFG {A}",
@@ -89,6 +90,7 @@ function LFGMM_Load()
 					MatchLfm = false,
 					MatchUnknown = true,
 					AutoStop = true,
+					IgnoreBoosts = false,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -458,6 +460,18 @@ LFGMM_GLOBAL = {
 		},
 		-- ES = {},
 		-- RU = {},
+	},
+	BOOST_IDENTIFIERS = {
+		EN = {
+			"bo[o]?st"
+		},
+		DE = {
+			"bo[o]?ste"
+		},
+		FR = {},
+		ES = {},
+		RU = {}
+
 	},
 	DUNGEONS = {
 		{
