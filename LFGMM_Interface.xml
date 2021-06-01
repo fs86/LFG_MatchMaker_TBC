@@ -248,10 +248,18 @@
 						</Anchors>
 					</CheckButton>
 
+					<CheckButton name="LFGMM_LfgTab_IgnoreBoostsCheckBox" inherits="ChatConfigCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="CENTER">
+								<Offset x="-150" y="-65" />
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
 					<CheckButton name="LFGMM_LfgTab_AutoStopCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-105" y="-65" />
+								<Offset x="-40" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -384,10 +392,18 @@
 						</Anchors>
 					</CheckButton>
 					
+					<CheckButton name="LFGMM_LfmTab_IgnoreBoostsCheckBox" inherits="ChatConfigCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="CENTER">
+								<Offset x="-150" y="-65" />
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
 					<CheckButton name="LFGMM_LfmTab_AutoStopCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-100" y="-65" />
+								<Offset x="-40" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
