@@ -466,7 +466,8 @@ LFGMM_GLOBAL = {
 			"bo[o]?st"
 		},
 		DE = {
-			"bo[o]?ste"
+			"bo[o]?ste",
+			"zi[e]?he[n]?"
 		},
 		FR = {},
 		ES = {},
