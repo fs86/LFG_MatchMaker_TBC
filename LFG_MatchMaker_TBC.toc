@@ -22,7 +22,7 @@
 
 ## Title: LFG Match Maker TBC
 ## Interface: 20501
-## Version: 1.0.0
+## Version: 1.0.1
 ## Author: L.I.R.
 ## Notes: This is a fork to support TBC classic
 ## SavedVariablesPerCharacter: LFGMM_DB
