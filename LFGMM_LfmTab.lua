@@ -150,6 +150,13 @@ function LFGMM_LfmTab_Refresh()
 end
 
 function LFGMM_LfmTab_AddOnDropDown_OnInitialize(self)
+	local createItem = function(addOn, description)
+		local item = UIDropDownMenu_CreateInfo();
+		item.arg1 = addOn;
+		item.text = description
+		item.keepShownOnClick = false;
+	end
+
 	local item1 = UIDropDownMenu_CreateInfo();
 	item1.arg1 = "VANILLA";
 	item1.text = "Vanilla";
