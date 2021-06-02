@@ -479,6 +479,7 @@ LFGMM_GLOBAL = {
 			Index = 1,
 			Name = "Ragefire Chasm",
 			Abbreviation = "RFC",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"rage[%W]*fire[%W]*c[h]?asm",
@@ -513,6 +514,7 @@ LFGMM_GLOBAL = {
 			Index = 2,
 			Name = "Wailing Caverns",
 			Abbreviation = "WC",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"wa[i]?ling[%W]*cavern[s]?",
@@ -543,6 +545,7 @@ LFGMM_GLOBAL = {
 			Index = 3,
 			Name = "The Deadmines",
 			Abbreviation = "Deadmines",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"deadm",
@@ -575,6 +578,7 @@ LFGMM_GLOBAL = {
 			Index = 4,
 			Name = "Shadowfang Keep",
 			Abbreviation = "SFK",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"shadow[%W]*fang[%W]*ke[e]?p",
@@ -609,6 +613,7 @@ LFGMM_GLOBAL = {
 			Index = 5,
 			Name = "Blackfathom Deeps",
 			Abbreviation = "BFD",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*fat[h]?om[%W]*de[e]?p[t]?[h]?[s]?",
@@ -641,6 +646,7 @@ LFGMM_GLOBAL = {
 			Index = 6,
 			Name = "Stormwind Stockade",
 			Abbreviation = "Stockades",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"stockade[s]?",
@@ -668,6 +674,7 @@ LFGMM_GLOBAL = {
 			Index = 7,
 			Name = "Scarlet Monastery",
 			Abbreviation = "SM",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"scarlet[%W]*mon[e]?[a]?st[e]?[a]?ry",
@@ -708,6 +715,7 @@ LFGMM_GLOBAL = {
 			Index = 8,
 			Name = "Scarlet Monastery - Graveyard",
 			Abbreviation = "SM GY",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"smg[r]?[a]?[v]?[e]?y[e]?[a]?[r]?[d]?",
@@ -777,6 +785,7 @@ LFGMM_GLOBAL = {
 			Index = 9,
 			Name = "Scarlet Monastery - Library",
 			Abbreviation = "SM LIB",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"smlib[r]?[a]?[r]?[y]?",
@@ -816,6 +825,7 @@ LFGMM_GLOBAL = {
 			Index = 10,
 			Name = "Scarlet Monastery - Armory",
 			Abbreviation = "SM ARM",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"smarmo[u]?ry",
@@ -859,6 +869,7 @@ LFGMM_GLOBAL = {
 			Index = 11,
 			Name = "Scarlet Monastery - Cathedral",
 			Abbreviation = "SM CATH",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"smcat[h]?[e]?[d]?[r]?[a]?[l]?",
@@ -895,6 +906,7 @@ LFGMM_GLOBAL = {
 			Index = 12,
 			Name = "Gnomeregan",
 			Abbreviation = "Gnomeregan",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"g[e]?no[r]?m[e]?[r]?[e]?[a]?g[e]?[r]?an",
@@ -913,6 +925,7 @@ LFGMM_GLOBAL = {
 			Index = 13,
 			Name = "Razorfen Kraul",
 			Abbreviation = "RFK",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"razo[rn]?[%W]*fen[%W]*kraul",
@@ -941,6 +954,7 @@ LFGMM_GLOBAL = {
 			Index = 14,
 			Name = "Razorfen Downs",
 			Abbreviation = "RFD",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"razo[rn]?[%W]*fen[%W]*down[s]?",
@@ -970,6 +984,7 @@ LFGMM_GLOBAL = {
 			Index = 15,
 			Name = "Uldaman",
 			Abbreviation = "Uldaman",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"uldaman",
@@ -988,6 +1003,7 @@ LFGMM_GLOBAL = {
 			Index = 16,
 			Name = "Zul'Farrak",
 			Abbreviation = "ZF",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"zul[l]?[%W]*far[r]?ak[k]?",
@@ -1013,6 +1029,7 @@ LFGMM_GLOBAL = {
 			Index = 17,
 			Name = "Maraudon",
 			Abbreviation = "Mara",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?",
@@ -1031,6 +1048,7 @@ LFGMM_GLOBAL = {
 			Index = 18,
 			Name = "Maraudon - Orange",
 			Abbreviation = "Mara Orange",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+orange",
@@ -1058,6 +1076,7 @@ LFGMM_GLOBAL = {
 			Index = 19,
 			Name = "Maraudon - Purple",
 			Abbreviation = "Mara Purple",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+purple",
@@ -1085,6 +1104,7 @@ LFGMM_GLOBAL = {
 			Index = 20,
 			Name = "Maraudon - Inner",
 			Abbreviation = "Mara Inner",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+inner",
@@ -1121,6 +1141,7 @@ LFGMM_GLOBAL = {
 			Index = 21,
 			Name = "Temple of Atal'Hakkar",
 			Abbreviation = "ST",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"atal[%W]*hak[k]?ar",
@@ -1164,6 +1185,7 @@ LFGMM_GLOBAL = {
 			Index = 22,
 			Name = "Blackrock Depths",
 			Abbreviation = "BRD",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s",
@@ -1195,6 +1217,7 @@ LFGMM_GLOBAL = {
 			Index = 23,
 			Name = "Blackrock Depths - Quest Run",
 			Abbreviation = "BRD Quest Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+quest[s]?",
@@ -1236,6 +1259,7 @@ LFGMM_GLOBAL = {
 			Index = 24,
 			Name = "Blackrock Depths - Attunement Run",
 			Abbreviation = "BRD Attunement Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+at[t]?un[e]?ment",
@@ -1291,6 +1315,7 @@ LFGMM_GLOBAL = {
 			Index = 25,
 			Name = "Blackrock Depths - Arena Run",
 			Abbreviation = "BRD Arena Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+arena",
@@ -1345,6 +1370,7 @@ LFGMM_GLOBAL = {
 			Index = 26,
 			Name = "Blackrock Depths - Angerforge Run",
 			Abbreviation = "BRD Angerforge Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+anger[f]?[g]?[o]?[r]?[g]?[e]?",
@@ -1406,6 +1432,7 @@ LFGMM_GLOBAL = {
 			Index = 27,
 			Name = "Blackrock Depths - Golem Run",
 			Abbreviation = "BRD Golem Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+golem[l]?[o]?[r]?[d]?",
@@ -1449,6 +1476,7 @@ LFGMM_GLOBAL = {
 			Index = 28,
 			Name = "Blackrock Depths - Prison Run",
 			Abbreviation = "BRD Prison Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+prison",
@@ -1491,6 +1519,7 @@ LFGMM_GLOBAL = {
 			Index = 29,
 			Name = "Blackrock Depths - Vault Run",
 			Abbreviation = "BRD Vault Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+vault",
@@ -1533,6 +1562,7 @@ LFGMM_GLOBAL = {
 			Index = 30,
 			Name = "Blackrock Depths - Lava Run",
 			Abbreviation = "BRD Lava Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+lava",
@@ -1575,6 +1605,7 @@ LFGMM_GLOBAL = {
 			Index = 31,
 			Name = "Blackrock Depths - Emperor Run",
 			Abbreviation = "BRD Emperor Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+emp[r]?[e]?[r]?[o]?[r]?",
@@ -1637,6 +1668,7 @@ LFGMM_GLOBAL = {
 			Index = 32,
 			Name = "Blackrock Depths - Princess Run",
 			Abbreviation = "BRD Princess Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+princes[s]?",
@@ -1708,6 +1740,7 @@ LFGMM_GLOBAL = {
 			Index = 33,
 			Name = "Lower Blackrock Spire",
 			Abbreviation = "LBRS",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"lower[%W]*black[%W]*rock[%W]*spire",
@@ -1741,6 +1774,7 @@ LFGMM_GLOBAL = {
 			Index = 34,
 			Name = "Upper Blackrock Spire",
 			Abbreviation = "UBRS",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"up[p]?er[%W]*black[%W]*rock[%W]*spire",
@@ -1779,6 +1813,7 @@ LFGMM_GLOBAL = {
 			Index = 35,
 			Name = "Scholomance",
 			Abbreviation = "Scholo",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"s[c]?[h]?ol[o]?[l]?[o]?man[c]?[s]?e",
@@ -1799,6 +1834,7 @@ LFGMM_GLOBAL = {
 			Index = 36,
 			Name = "Stratholme",
 			Abbreviation = "Strat",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?",
@@ -1819,6 +1855,7 @@ LFGMM_GLOBAL = {
 			Index = 37,
 			Name = "Stratholme - Living Side",
 			Abbreviation = "Strat Living",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?[a]?liv[ei]?[n]?[g]?",
@@ -1870,6 +1907,7 @@ LFGMM_GLOBAL = {
 			Index = 38,
 			Name = "Stratholme - Undead Side",
 			Abbreviation = "Strat Undead",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?u[n]?d[e]?[a]?[d]?",
@@ -1932,6 +1970,7 @@ LFGMM_GLOBAL = {
 			Index = 39,
 			Name = "Dire Maul",
 			Abbreviation = "DM",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"dire[%W]*maul",
@@ -1963,6 +2002,7 @@ LFGMM_GLOBAL = {
 			Index = 40,
 			Name = "Dire Maul - East",
 			Abbreviation = "DM East",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"d[i]?me",
@@ -2026,6 +2066,7 @@ LFGMM_GLOBAL = {
 			Index = 41,
 			Name = "Dire Maul - West",
 			Abbreviation = "DM West",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"d[i]?mw",
@@ -2086,6 +2127,7 @@ LFGMM_GLOBAL = {
 			Index = 42,
 			Name = "Dire Maul - North",
 			Abbreviation = "DM North",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"d[i]?mn",
@@ -2144,6 +2186,7 @@ LFGMM_GLOBAL = {
 			Index = 43,
 			Name = "Dire Maul - Tribute Run",
 			Abbreviation = "DM Tribute Run",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"d[i]?mt",
@@ -2202,6 +2245,7 @@ LFGMM_GLOBAL = {
 			Index = 44,
 			Name = "Molten Core",
 			Abbreviation = "MC",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"molten[%W]*core",
@@ -2239,6 +2283,7 @@ LFGMM_GLOBAL = {
 			Index = 45,
 			Name = "Onyxia's Lair",
 			Abbreviation = "Onyxia",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ony[i]?[x]?[iy]?[e]?[a]?",
@@ -2279,6 +2324,7 @@ LFGMM_GLOBAL = {
 			Index = 46,
 			Name = "Blackwing Lair",
 			Abbreviation = "BWL",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"blackwing[%W]*lair",
@@ -2303,6 +2349,7 @@ LFGMM_GLOBAL = {
 			Index = 47,
 			Name = "Zul'Gurub",
 			Abbreviation = "ZG",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"zul[l]?[%W]*g[u]?rub",
@@ -2321,6 +2368,7 @@ LFGMM_GLOBAL = {
 			Index = 48,
 			Name = "Ruins of Ahn'Qiraj",
 			Abbreviation = "AQ20",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"ruin[s]?[%W]*[o]?[f]?[%W]*ahn[%W]*qiraj",
@@ -2342,6 +2390,7 @@ LFGMM_GLOBAL = {
 			Index = 49,
 			Name = "Temple of Ahn'Qiraj",
 			Abbreviation = "AQ40",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"temple[%W]*[o]?[f]?[%W]*ahn[%W]*qiraj",
@@ -2363,6 +2412,7 @@ LFGMM_GLOBAL = {
 			Index = 50,
 			Name = "Naxxramas",
 			Abbreviation = "Naxx",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"naxx[a]?ramas",
@@ -2381,6 +2431,7 @@ LFGMM_GLOBAL = {
 			Index = 51,
 			Name = "Warsong Gulch",
 			Abbreviation = "WSG",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"war[%W]*song[%W]*gulch",
@@ -2410,6 +2461,7 @@ LFGMM_GLOBAL = {
 			Index = 52,
 			Name = "Alterac Valley",
 			Abbreviation = "AV",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"alterac[%W]*val[l]?ey",
@@ -2439,6 +2491,7 @@ LFGMM_GLOBAL = {
 			Index = 53,
 			Name = "Arathi Basin",
 			Abbreviation = "AB",
+			AddOn = "VANILLA",
 			Identifiers = {
 				EN = {
 					"arat[h]?i[%W]*basin",
@@ -2458,6 +2511,7 @@ LFGMM_GLOBAL = {
 			Index = 54,
 			Name = "Hellfire Ramparts",
 			Abbreviation = "Ramps",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"ramp[a]?[r]?[t]?[s]?",
@@ -2487,6 +2541,7 @@ LFGMM_GLOBAL = {
 			Index = 55,
 			Name = "The Blood Furnace",
 			Abbreviation = "BF",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"blo[o]?d[%W]*furnace",
@@ -2510,6 +2565,7 @@ LFGMM_GLOBAL = {
 			Index = 56,
 			Name = "The Slave Pens",
 			Abbreviation = "SP",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"slave[s]?[%W]*pen[s]?",
@@ -2539,6 +2595,7 @@ LFGMM_GLOBAL = {
 			Index = 57,
 			Name = "The Underbog",
 			Abbreviation = "UB",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 	                "under[%W]*bog",
@@ -2562,6 +2619,7 @@ LFGMM_GLOBAL = {
 			Index = 58,
 			Name = "Mana-Tombs",
 			Abbreviation = "MT",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"mana[%W]*tomb[s]?",
@@ -2586,6 +2644,7 @@ LFGMM_GLOBAL = {
 			Index = 59,
 			Name = "Auchenai Crypts",
 			Abbreviation = "Crypts",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"auchenai[%W]*crypt[a]?[s]?",
@@ -2610,6 +2669,7 @@ LFGMM_GLOBAL = {
 			Index = 60,
 			Name = "Sethekk Halls",
 			Abbreviation = "Seth",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"sethek[k]?[%W]*hall[s]?",
@@ -2632,6 +2692,7 @@ LFGMM_GLOBAL = {
 			Index = 61,
 			Name = "Escape from Durnholde",
 			Abbreviation = "OH",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"cot[%W]*1",
@@ -2653,6 +2714,7 @@ LFGMM_GLOBAL = {
 			Index = 62,
 			Name = "The Mechanar",
 			Abbreviation = "Mech",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"mech[a]?[n]?[a]?[r]?"
@@ -2671,6 +2733,7 @@ LFGMM_GLOBAL = {
 			Index = 63,
 			Name = "Black Morass",
 			Abbreviation = "BM",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"black[%W]*mor[a]?[s]?[s]?",
@@ -2695,6 +2758,7 @@ LFGMM_GLOBAL = {
 			Index = 64,
 			Name = "The Shattered Halls",
 			Abbreviation = "SH",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"shat[t]?[e]?[r]?[e]?[d]?[%W]*hal[l]?[s]?",
@@ -2719,6 +2783,7 @@ LFGMM_GLOBAL = {
 			Index = 65,
 			Name = "The Botanica",
 			Abbreviation = "Bot",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"bot[a]?[n]?[i]?[c]?[a]?",
@@ -2739,6 +2804,7 @@ LFGMM_GLOBAL = {
 			Index = 66,
 			Name = "Shadow Labyrinth",
 			Abbreviation = "SL",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"shadow[%W]*[l]?[a]?[b]?[s]?",
@@ -2761,6 +2827,7 @@ LFGMM_GLOBAL = {
 			Index = 67,
 			Name = "The Steamvaults",
 			Abbreviation = "SV",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"steam[%W]*vault[s]?",
@@ -2785,6 +2852,7 @@ LFGMM_GLOBAL = {
 			Index = 68,
 			Name = "The Arcatraz",
 			Abbreviation = "Arc",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"arca[%W]*[t]?[r]?[a]?[z]?",
@@ -2805,6 +2873,7 @@ LFGMM_GLOBAL = {
 			Index = 69,
 			Name = "Karazahn",
 			Abbreviation = "KZ",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"kara[%W]*[z]?[a]?[h]?[n]?",
@@ -2824,6 +2893,7 @@ LFGMM_GLOBAL = {
 			Index = 70,
 			Name = "Gruul's Lair",
 			Abbreviation = "GL",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"gru[u]?l[']?[s]?"
@@ -2844,6 +2914,7 @@ LFGMM_GLOBAL = {
 			Index = 71,
 			Name = "Magtheridon's Lair",
 			Abbreviation = "Mag",
+			AddOn = "TBC",
 			Identifiers = {
 				EN = {
 					"magtheridon",
