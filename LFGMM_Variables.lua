@@ -91,6 +91,7 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
+					AddOn = "VANILLA",
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -472,7 +473,20 @@ LFGMM_GLOBAL = {
 		FR = {},
 		ES = {},
 		RU = {}
-
+	},
+	NOT_BOOST_IDENTIFIERS = {
+		EN = {
+			"no[%W]*bo[o]?st",
+			"without[%W]*bo[o]?st",
+			"w/o[%W]*bo[o]?st",
+		},
+		DE = {
+			"kein[%W]*bo[o]st",
+			"ohne[%W]*bo[o]st",
+		},
+		FR = {},
+		ES = {},
+		RU = {}
 	},
 	DUNGEONS = {
 		{

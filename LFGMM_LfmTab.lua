@@ -29,7 +29,8 @@
 function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonDropDown, 200, LFGMM_LfmTab_DungeonDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_AddOnDropDown, 100, LFGMM_LfmTab_AddOnDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonDropDown, 150, LFGMM_LfmTab_DungeonDropDown_OnInitialize);
 
 	LFGMM_LfmTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfmTab_StartStopSearchButton_OnClick);
 
@@ -148,6 +149,17 @@ function LFGMM_LfmTab_Refresh()
 	end
 end
 
+function LFGMM_LfmTab_AddOnDropDown_OnInitialize(self)
+	local item1 = UIDropDownMenu_CreateInfo();
+	item1.arg1 = "VANILLA";
+	item1.text = "Vanilla";
+	UIDropDownMenu_AddButton(item1, 1);
+
+	local item2 = UIDropDownMenu_CreateInfo();
+	item2.arg1 = "TBC";
+	item2.text = "Burning Crusade";
+	UIDropDownMenu_AddButton(item2, 1);
+end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 	local createSingleDungeonItem = function(dungeon)

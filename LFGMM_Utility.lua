@@ -232,12 +232,12 @@ function LFGMM_Utility_ArrayContainsAll(array1, array2)
 end
 
 
-function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted()
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(addOn)
 	local dungeonsList = {};
 	local raidsList = {};
 	local pvpList = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
-		if (dungeon.ParentDungeon == nil and LFGMM_Utility_IsDungeonAvailable(dungeon)) then
+		if (addOn == dungeon.AddOn and dungeon.ParentDungeon == nil and LFGMM_Utility_IsDungeonAvailable(dungeon)) then
 			if (dungeon.Pvp) then
 				table.insert(pvpList, dungeon);
 			elseif (dungeon.Size <= 10) then

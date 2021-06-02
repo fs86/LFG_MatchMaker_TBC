@@ -169,10 +169,18 @@
 
 				<Layers>
 					<Layer>
-						<FontString text="Dungeon(s):" inherits="GameFontNormal">
+						<FontString text="Vanilla Dungeon(s):" inherits="GameFontNormal">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="TOP">
-									<Offset x="0" y="-50" />
+									<Offset x="-80" y="-50" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+
+						<FontString text="TBC Dungeon(s):" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="TOP">
+									<Offset x="80" y="-50" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -206,10 +214,18 @@
 				</Layers>
 				
 				<Frames>
-					<Frame name="LFGMM_LfgTab_DungeonsDropDown" inherits="UIDropDownMenuTemplate">
+					<Frame name="LFGMM_LfgTab_DungeonsDropDown_VANILLA" inherits="UIDropDownMenuTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="TOP">
-								<Offset x="0" y="-80" />
+								<Offset x="-80" y="-80" />
+							</Anchor>
+						</Anchors>
+					</Frame>
+
+					<Frame name="LFGMM_LfgTab_DungeonsDropDown_TBC" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset x="80" y="-80" />
 							</Anchor>
 						</Anchors>
 					</Frame>
@@ -313,10 +329,18 @@
 
 				<Layers>
 					<Layer>
+						<FontString text="AddOn:" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="TOP">
+									<Offset x="-95" y="-50" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+
 						<FontString text="Dungeon:" inherits="GameFontNormal">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="TOP">
-									<Offset x="0" y="-50" />
+									<Offset x="60" y="-50" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -350,10 +374,18 @@
 				</Layers>
 
 				<Frames>
+					<Frame name="LFGMM_LfmTab_AddOnDropDown" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset x="-95" y="-80" />
+							</Anchor>
+						</Anchors>
+					</Frame>
+
 					<Frame name="LFGMM_LfmTab_DungeonDropDown" inherits="UIDropDownMenuTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="TOP">
-								<Offset x="0" y="-80" />
+								<Offset x="60" y="-80" />
 							</Anchor>
 						</Anchors>
 					</Frame>

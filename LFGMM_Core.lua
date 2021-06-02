@@ -228,7 +228,8 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 		LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, removeSelections);
 	end
 	
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText();
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText("VANILLA");
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText("TBC");
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 	
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
@@ -566,9 +567,24 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			end
 
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
+			local notBoostDetected = false;
+
+			-- Check if boost message is okay. If so, skip the next step
+			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
+				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
+			then
+				for lng in pairs(LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS) do
+					for _,notBoostIdentifier in ipairs(LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS[lng]) do
+						if LFGMM_Core_IsMatch(message, notBoostIdentifier) then
+							notBoostDetected = true;
+						end
+					end
+				end
+			end
 
 			-- Ignore dungeon matches with boost identifiers
-			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
+			if notBoostDetected == false and
+				(LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
 				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
 			then
 				for lng in pairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS) do
