@@ -268,10 +268,10 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
 		end
 
 		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
-			if dungeon.Size <= 25 then
-				table.insert(tbcDungeonList, dungeon);
+			if dungeon.Size > 5 then
+				table.insert(tbcRaidList, dungeon);
 			else
-				table.insert(tbcRaidList, dungeon)
+				table.insert(tbcDungeonList, dungeon);
 			end
 		end
 	end
