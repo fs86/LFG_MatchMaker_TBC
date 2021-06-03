@@ -251,12 +251,32 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode)
 	return dungeonsList, raidsList, pvpList;
 end
 
-function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted2(categoryCode)
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {};
+
 	for _, dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
-		if dungeon.Category == categoryCode then
-			
+		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+			table.insert(pvpList, dungeon);
+		end
+
+		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+			if dungeon.Size <= 10 then
+				table.insert(vanillaDungeonsList, dungeon);
+			else
+				table.insert(vanillaRaidList, dungeon);
+			end
+		end
+
+		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+			if dungeon.Size <= 25 then
+				table.insert(tbcDungeonList, dungeon);
+			else
+				table.insert(tbcRaidList, dungeon)
+			end
 		end
 	end
+
+	return vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList;
 end
 
 
