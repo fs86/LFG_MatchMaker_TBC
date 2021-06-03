@@ -251,6 +251,14 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode)
 	return dungeonsList, raidsList, pvpList;
 end
 
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted2(categoryCode)
+	for _, dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
+		if dungeon.Category == categoryCode then
+			
+		end
+	end
+end
+
 
 function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
 	local list = {};
