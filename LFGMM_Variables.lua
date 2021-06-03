@@ -91,7 +91,7 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
-					AddOn = "VANILLA",
+					AddOnCode = "VANILLA",
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -164,6 +164,20 @@ LFGMM_GLOBAL = {
 	TRADE_CHANNEL_AVAILABLE = false,
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
+	ADDONS = {
+		{
+			Code = "TEST",
+			Name = "Test",
+		},
+		{
+			Code = "VANILLA",
+			Name = "Vanilla",
+		},
+		{
+			Code = "TBC",
+			Name = "Burning Crusade",
+		},
+	},
 	LANGUAGES = {
 		{
 			Code = "EN",

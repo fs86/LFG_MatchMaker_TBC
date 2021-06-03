@@ -275,6 +275,28 @@ function LFGMM_Core_IsMatch(normalizedMessage, identifier)
 			string.find(normalizedMessage, "[%W]+" .. identifier .. "$"    ) ~= nil);
 end
 
+function LFGMM_Core_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
+	for lng in pairs(identifierTable) do
+		for _, identifier in ipairs(identifierTable[lng]) do
+			if (LFGMM_Core_IsMatch(normalizedMessage, identifier)) then
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
+function LFGMM_Core_GetAddOnByCode(addOnCode)
+	for _, addOn in ipairs(LFGMM_GLOBAL.ADDONS) do
+		if addOn.Code == addOnCode then
+			return addOn;
+		end
+	end
+
+	return nil;
+end
+
 function LFGMM_Core_FindSearchMatch()
 	-- Return if stopped
 	if (not LFGMM_DB.SEARCH.LFG.Running and not LFGMM_DB.SEARCH.LFM.Running) then
@@ -567,31 +589,17 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			end
 
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
-			local notBoostDetected = false;
 
-			-- Check if boost message is okay. If so, skip the next step
+			 -- Check if message contains a boost offer/request and ignore
+			 -- the message based on the settings in LFG/LFM tab.
 			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
 				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
 			then
-				for lng in pairs(LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS) do
-					for _,notBoostIdentifier in ipairs(LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS[lng]) do
-						if LFGMM_Core_IsMatch(message, notBoostIdentifier) then
-							notBoostDetected = true;
-						end
-					end
-				end
-			end
-
-			-- Ignore dungeon matches with boost identifiers
-			if notBoostDetected == false and
-				(LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
-				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
-			then
-				for lng in pairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS) do
-					for _,boostIdentifier in ipairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS[lng]) do
-						if LFGMM_Core_IsMatch(message, boostIdentifier) then
-							return;
-						end
+				local isNotBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
+				if isNotBoostMatch == false then
+					local isBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
+					if (isBoostMatch) then
+						return;
 					end
 				end
 			end

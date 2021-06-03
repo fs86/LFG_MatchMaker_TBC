@@ -49,7 +49,7 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_BroadcastMessagePreviewSliderHigh:SetText("");
 
 	LFGMM_LfmTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick);
-	
+
 	LFGMM_LfmTab.SearchAnimationLock = false;
 end
 
@@ -72,10 +72,11 @@ function LFGMM_LfmTab_Show()
 	LFGMM_MainWindowTab2:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMLEFT",   135, -17);
 	LFGMM_MainWindowTab3:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMRIGHT", -140, -14);
 	LFGMM_MainWindowTab4:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMRIGHT",  -60, -14);
-	
+
 	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
 
 	LFGMM_LfmTab_Refresh();
+	LFGMM_LfmTab_AddOnDropDown_Validate();
 end
 
 
@@ -96,7 +97,7 @@ function LFGMM_LfmTab_Refresh()
 		LFGMM_LfmTab_BroadcastMessagePreviewSlider:Hide();
 		LFGMM_LfmTab_BroadcastMessageInfoWindow:Hide();
 	end
-	
+
 	local groupSize = table.getn(LFGMM_GLOBAL.GROUP_MEMBERS);
 	local dungeonSize = (LFGMM_DB.SEARCH.LFM.Dungeon ~= nil and LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFM.Dungeon].Size) or nil;
 	if (dungeonSize and groupSize >= dungeonSize) then
@@ -104,7 +105,7 @@ function LFGMM_LfmTab_Refresh()
 	else
 		LFGMM_LfmTab_AutoStopCheckBox:SetChecked(LFGMM_DB.SEARCH.LFM.AutoStop);
 	end
-	
+
 	if (LFGMM_DB.SEARCH.LFM.Running) then
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
 		LFGMM_LfmTab_SearchActiveText:Show();
@@ -150,22 +151,23 @@ function LFGMM_LfmTab_Refresh()
 end
 
 function LFGMM_LfmTab_AddOnDropDown_OnInitialize(self)
-	local createItem = function(addOn, description)
+	local createItem = function(addOnCode, addOnName)
 		local item = UIDropDownMenu_CreateInfo();
-		item.arg1 = addOn;
-		item.text = description
+		item.arg1 = addOnCode;
+		item.text = addOnName;
+		item.isNotRadio = true;
+		item.checked = LFGMM_DB.SEARCH.LFM.AddOnCode == addOnCode
 		item.keepShownOnClick = false;
+		item.func = LFGMM_LfmTab_AddOnDropDown_Item_OnClick;
+		return item
 	end
 
-	local item1 = UIDropDownMenu_CreateInfo();
-	item1.arg1 = "VANILLA";
-	item1.text = "Vanilla";
-	UIDropDownMenu_AddButton(item1, 1);
+	for _, addOn in ipairs(LFGMM_GLOBAL.ADDONS) do
+		UIDropDownMenu_AddButton(createItem(addOn.Code, addOn.Name), 1);
+	end
 
-	local item2 = UIDropDownMenu_CreateInfo();
-	item2.arg1 = "TBC";
-	item2.text = "Burning Crusade";
-	UIDropDownMenu_AddButton(item2, 1);
+	LFGMM_LfmTab_AddOnDropDown_Validate();
+	LFGMM_LfmTab_AddOnDropDown_UpdateText();
 end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
@@ -177,7 +179,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 1);
 	end
-	
+
 	local createMultiDungeonItem = function(dungeon)
 		-- Get available subdungeons
 		local availableSubDungeons = {};
@@ -196,7 +198,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 1);
 	end
-	
+
 	local createSubDungeonItem = function(dungeonIndex, parentDungeonIndex)
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
@@ -206,14 +208,14 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 2);
 	end
-	
+
 	if (level == 1) then
 		-- Get dungeons and raids to list
 		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted();
 
 		if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
 			local buttonIndex = 1;
-			
+
 			if (table.getn(dungeonsList) > 0) then
 				if (table.getn(raidsList) > 0 or table.getn(pvpList) > 0) then
 					-- Dungeons header
@@ -224,7 +226,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 					UIDropDownMenu_AddButton(dungeonsHeader);
 					buttonIndex = buttonIndex + 1;
 				end
-				
+
 				-- Dungeon menu items
 				for _,dungeon in ipairs(dungeonsList) do
 					if (dungeon.ParentDungeon == nil) then
@@ -237,7 +239,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 					end
 				end
 			end
-				
+
 			if (table.getn(raidsList) > 0) then
 				if (table.getn(dungeonsList) > 0 or table.getn(pvpList) > 0) then
 					-- Raids header
@@ -259,7 +261,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 					buttonIndex = buttonIndex + 1;
 				end
 			end
-			
+
 			if (table.getn(pvpList) > 0) then
 				if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
 					-- PvP header
@@ -270,7 +272,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 					UIDropDownMenu_AddButton(pvpHeader);
 					buttonIndex = buttonIndex + 1;
 				end
-				
+
 				-- PvP menu items
 				for _,pvp in ipairs(pvpList) do
 					if (pvp.SubDungeons == nil) then
@@ -281,7 +283,7 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 					buttonIndex = buttonIndex + 1;
 				end
 			end
-			
+
 		else
 			-- No valid dungeons item
 			local noDungeonsItem = UIDropDownMenu_CreateInfo();
@@ -299,29 +301,50 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 			createSubDungeonItem(dungeonIndex, entry.ParentDungeonIndex);
 		end
 	end
-	
+
 	-- Update search selection text
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 end
 
+function LFGMM_LfmTab_AddOnDropDown_Item_OnClick(self, addOnCode)
+	LFGMM_DB.SEARCH.LFM.AddOnCode = addOnCode;
+	LFGMM_LfmTab_AddOnDropDown_UpdateText();
+	LFGMM_LfmTab_Refresh();
+	LFGMM_LfmTab_AddOnDropDown_Validate();
+end
+
+function LFGMM_LfmTab_AddOnDropDown_Validate()
+	if (LFGMM_DB.SEARCH.LFM.AddOnCode == nil or LFGMM_DB.SEARCH.LFM.AddOnCode == "TEST") then
+		-- TODO: Clear dungeon selection
+		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
+	end
+end
+
+function LFGMM_LfmTab_AddOnDropDown_UpdateText()
+	if (LFGMM_DB.SEARCH.LFM.AddOnCode == nil) then
+		UIDropDownMenu_SetText(LFGMM_LfmTab_AddOnDropDown, "<Select AddOn>");
+	else
+		local addOnName = LFGMM_Core_GetAddOnByCode(LFGMM_DB.SEARCH.LFM.AddOnCode).Name
+		UIDropDownMenu_SetText(LFGMM_LfmTab_AddOnDropDown, addOnName);
+	end
+end
 
 function LFGMM_LfmTab_DungeonDropDown_Item_OnClick(self, dungeonIndex)
 	-- Set dungeon
 	LFGMM_DB.SEARCH.LFM.Dungeon = dungeonIndex;
-	
+
 	-- Update broadcast message
 	LFGMM_LfmTab_UpdateBroadcastMessage();
-	
+
 	-- Update dungeon dropdown text
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
-	
+
 	-- Close drop down menus
 	CloseDropDownMenus();
-	
+
 	-- Refresh
 	LFGMM_LfmTab_Refresh();
 end
-
 
 function LFGMM_LfmTab_DungeonDropDown_UpdateText()
 	if (LFGMM_DB.SEARCH.LFM.Dungeon == nil) then
@@ -355,7 +378,7 @@ function LFGMM_LfmTab_StartStopSearchButton_OnClick()
 		else
 			LFGMM_GLOBAL.AUTOSTOP_AVAILABLE = true;
 		end
-	
+
 		-- Start search
 		LFGMM_DB.SEARCH.LFM.Running = true;
 		LFGMM_MainWindowTab1:Hide();
@@ -373,7 +396,7 @@ function LFGMM_LfmTab_StartStopSearchButton_OnClick()
 		-- Search for group match after 2 seconds
 		C_Timer.After(2, LFGMM_Core_FindSearchMatch);
 	end
-	
+
 	-- Refresh
 	LFGMM_LfmTab_Refresh();
 	LFGMM_MinimapButton_Refresh();
@@ -421,7 +444,7 @@ function LFGMM_LfmTab_UpdateBroadcastMessage()
 	local dungeonText = "<dungeon>";
 	local abbreviationText = "<dungeon>";
 	local lookingForNumberText = "<number>";
-	
+
 	-- Get dungeon
 	if (LFGMM_DB.SEARCH.LFM.Dungeon ~= nil) then
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFM.Dungeon];
@@ -458,7 +481,7 @@ function LFGMM_LfmTab_BroadcastMessagePreview_Refresh()
 	local text = LFGMM_DB.SEARCH.LFM.BroadcastMessage;
 	local textLength = string.len(text);
 	local maxLength = 40;
-	
+
 	if (textLength > maxLength) then
 		LFGMM_LfmTab_BroadcastMessagePreviewSlider:SetMinMaxValues(1, textLength - maxLength + 1);
 		local sliderPosition = LFGMM_LfmTab_BroadcastMessagePreviewSlider:GetValue();
@@ -468,7 +491,7 @@ function LFGMM_LfmTab_BroadcastMessagePreview_Refresh()
 		LFGMM_LfmTab_BroadcastMessagePreviewSlider:SetValue(1);
 		LFGMM_LfmTab_BroadcastMessagePreviewSlider:Hide();
 	end
-	
+
 	LFGMM_LfmTab_BroadcastMessagePreview:SetText(text);
 end
 
@@ -477,7 +500,7 @@ function LFGMM_LfmTab_StartAnimateSearchText()
 	-- Ensure lock
 	if (not LFGMM_LfgTab.SearchAnimationLock) then
 		LFGMM_LfgTab.SearchAnimationLock = true;
-		
+
 		-- Start animation
 		LFGMM_LfmTab_AnimateSearchingText();
 	end
