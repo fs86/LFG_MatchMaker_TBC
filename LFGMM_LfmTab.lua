@@ -171,6 +171,10 @@ function LFGMM_LfmTab_AddOnDropDown_OnInitialize(self)
 end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
+	LFGMM_LfmTab_DungeonDropDown_Initialize(level)
+end
+
+function LFGMM_LfmTab_DungeonDropDown_Initialize(level)
 	local createSingleDungeonItem = function(dungeon)
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.keepShownOnClick = false;
