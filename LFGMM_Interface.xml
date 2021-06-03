@@ -329,7 +329,7 @@
 
 				<Layers>
 					<Layer>
-						<FontString text="AddOn:" inherits="GameFontNormal">
+						<FontString text="Category:" inherits="GameFontNormal">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="TOP">
 									<Offset x="-95" y="-50" />
@@ -374,7 +374,7 @@
 				</Layers>
 
 				<Frames>
-					<Frame name="LFGMM_LfmTab_AddOnDropDown" inherits="UIDropDownMenuTemplate">
+					<Frame name="LFGMM_LfmTab_CategoryDropDown" inherits="UIDropDownMenuTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="TOP">
 								<Offset x="-95" y="-80" />

@@ -228,8 +228,8 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 		LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, removeSelections);
 	end
 	
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText("VANILLA");
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText("TBC");
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 	
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
@@ -287,10 +287,10 @@ function LFGMM_Core_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
 	return false;
 end
 
-function LFGMM_Core_GetAddOnByCode(addOnCode)
-	for _, addOn in ipairs(LFGMM_GLOBAL.ADDONS) do
-		if addOn.Code == addOnCode then
-			return addOn;
+function LFGMM_Core_GetCategoryByCode(categoryCode)
+	for _, category in ipairs(LFGMM_GLOBAL.CATEGORIES) do
+		if category.Code == categoryCode then
+			return category;
 		end
 	end
 

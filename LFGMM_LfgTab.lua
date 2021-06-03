@@ -151,15 +151,15 @@ end
 
 function LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize(self, level)
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
-		LFGMM_LfgTab_DungeonsDropDown_VANILLA, level, "VANILLA");
+		LFGMM_LfgTab_DungeonsDropDown_VANILLA, level, LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize(self, level)
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
-		LFGMM_LfgTab_DungeonsDropDown_TBC, level, "TBC");
+		LFGMM_LfgTab_DungeonsDropDown_TBC, level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
 end
 
-function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, addOn)
+function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, categoryCode)
 	local updateMenuItem = function(menuItem, isChecked, isRadio)
 		if (isChecked) then
 			_G[menuItem:GetName()].checked = true;
@@ -194,7 +194,7 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ad
 				LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, dungeonIndex);
 			end
 
-			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(addOn);
+			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 1);
 	end
@@ -234,7 +234,7 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ad
 				LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, dungeon.Index, availableSubDungeons);
 			end
 
-			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(addOn);
+			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 1);
 
@@ -302,14 +302,14 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ad
 				end
 			end
 
-			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(addOn);
+			LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 2);
 	end
 
 	if (level == 1) then
 		-- Get dungeons and raids to list
-		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(addOn);
+		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode);
 
 		if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
 			-- Clear selections menu item
@@ -317,9 +317,9 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ad
 			clearItem.text = "<Clear selection>";
 			clearItem.justifyH = "CENTER";
 			clearItem.notCheckable = true;
-			clearItem.func = LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick;
+			--clearItem.func = LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick;
 
-			clearItem.func = addOn == "VANILLA" and
+			clearItem.func = categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and
 				LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick or
 				LFGMM_LfgTab_DungeonsDropDown_TBC_ClearSelections_OnClick
 
@@ -416,7 +416,7 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ad
 	end
 
 	-- Update search selection text
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(addOn);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode);
 end
 
 
@@ -425,7 +425,7 @@ function LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick()
 	for index = #LFGMM_DB.SEARCH.LFG.Dungeons, 1, -1 do
 		local dungeonIndex = LFGMM_DB.SEARCH.LFG.Dungeons[index];
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		if dungeon.AddOn == "VANILLA" then
+		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
 			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index)
 		end
 	end
@@ -434,7 +434,7 @@ function LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick()
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 
 	-- Update search selection text
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText("VANILLA");
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
 
 	-- Refresh
 	LFGMM_LfgTab_Refresh();
@@ -445,7 +445,7 @@ function LFGMM_LfgTab_DungeonsDropDown_TBC_ClearSelections_OnClick()
 	for index = #LFGMM_DB.SEARCH.LFG.Dungeons, 1, -1 do
 		local dungeonIndex = LFGMM_DB.SEARCH.LFG.Dungeons[index];
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		if dungeon.AddOn == "TBC" then
+		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
 			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index)
 		end
 	end
@@ -461,31 +461,34 @@ function LFGMM_LfgTab_DungeonsDropDown_TBC_ClearSelections_OnClick()
 end
 
 
-function LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(addOn)
+function LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode)
 	-- Update broadcast message
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 
 	-- Update dungeons dropdown text
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(addOn);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode);
 
 	-- Refresh
 	LFGMM_LfgTab_Refresh();
 end
 
 
-function LFGMM_LfgTab_DungeonsDropDown_UpdateText(addOn)
+function LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode)
 	local numDungeons = 0;
 	for _, dungeonIndex in ipairs(LFGMM_DB.SEARCH.LFG.Dungeons) do
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		if (dungeon.AddOn == addOn) then
+		if (dungeon.Category == categoryCode) then
 			numDungeons = numDungeons + 1
 		end
 	end
 
-	local dropDown = addOn == "VANILLA" and LFGMM_LfgTab_DungeonsDropDown_VANILLA or LFGMM_LfgTab_DungeonsDropDown_TBC
+	local dropDown = categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and
+		LFGMM_LfgTab_DungeonsDropDown_VANILLA or
+		LFGMM_LfgTab_DungeonsDropDown_TBC
+
 	if (numDungeons == 1) then
 		UIDropDownMenu_SetText(dropDown, LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFG.Dungeons[1]].Name);
-	elseif( numDungeons > 1) then
+	elseif (numDungeons > 1) then
 		UIDropDownMenu_SetText(dropDown, tostring(numDungeons) .. " dungeons selected");
 	else
 		UIDropDownMenu_SetText(dropDown, "<Select dungeon(s)>");

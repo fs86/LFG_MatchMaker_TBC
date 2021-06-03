@@ -29,7 +29,7 @@
 function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_AddOnDropDown, 100, LFGMM_LfmTab_AddOnDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 100, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonDropDown, 150, LFGMM_LfmTab_DungeonDropDown_OnInitialize);
 
 	LFGMM_LfmTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfmTab_StartStopSearchButton_OnClick);
@@ -76,7 +76,7 @@ function LFGMM_LfmTab_Show()
 	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
 
 	LFGMM_LfmTab_Refresh();
-	LFGMM_LfmTab_AddOnDropDown_Validate();
+	LFGMM_LfmTab_CategoryDropDown_Validate();
 end
 
 
@@ -150,24 +150,24 @@ function LFGMM_LfmTab_Refresh()
 	end
 end
 
-function LFGMM_LfmTab_AddOnDropDown_OnInitialize(self)
-	local createItem = function(addOnCode, addOnName)
+function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
+	local createItem = function(categoryCode, categoryName)
 		local item = UIDropDownMenu_CreateInfo();
-		item.arg1 = addOnCode;
-		item.text = addOnName;
+		item.arg1 = categoryCode;
+		item.text = categoryName;
 		item.isNotRadio = true;
-		item.checked = LFGMM_DB.SEARCH.LFM.AddOnCode == addOnCode
+		item.checked = LFGMM_DB.SEARCH.LFM.CategoryCode == categoryCode
 		item.keepShownOnClick = false;
-		item.func = LFGMM_LfmTab_AddOnDropDown_Item_OnClick;
+		item.func = LFGMM_LfmTab_CategoryDropDown_Item_OnClick;
 		return item
 	end
 
-	for _, addOn in ipairs(LFGMM_GLOBAL.ADDONS) do
-		UIDropDownMenu_AddButton(createItem(addOn.Code, addOn.Name), 1);
+	for _, category in ipairs(LFGMM_GLOBAL.CATEGORIES) do
+		UIDropDownMenu_AddButton(createItem(category.Code, category.Name), 1);
 	end
 
-	LFGMM_LfmTab_AddOnDropDown_Validate();
-	LFGMM_LfmTab_AddOnDropDown_UpdateText();
+	LFGMM_LfmTab_CategoryDropDown_Validate();
+	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
@@ -310,26 +310,26 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize(level)
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 end
 
-function LFGMM_LfmTab_AddOnDropDown_Item_OnClick(self, addOnCode)
-	LFGMM_DB.SEARCH.LFM.AddOnCode = addOnCode;
-	LFGMM_LfmTab_AddOnDropDown_UpdateText();
+function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
+	LFGMM_DB.SEARCH.LFM.CategoryCode = categoryCode;
+	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 	LFGMM_LfmTab_Refresh();
-	LFGMM_LfmTab_AddOnDropDown_Validate();
+	LFGMM_LfmTab_CategoryDropDown_Validate();
 end
 
-function LFGMM_LfmTab_AddOnDropDown_Validate()
-	if (LFGMM_DB.SEARCH.LFM.AddOnCode == nil or LFGMM_DB.SEARCH.LFM.AddOnCode == "TEST") then
+function LFGMM_LfmTab_CategoryDropDown_Validate()
+	if (LFGMM_DB.SEARCH.LFM.CategoryCode == nil or LFGMM_DB.SEARCH.LFM.CategoryCode == "TEST") then
 		-- TODO: Clear dungeon selection
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
 	end
 end
 
-function LFGMM_LfmTab_AddOnDropDown_UpdateText()
-	if (LFGMM_DB.SEARCH.LFM.AddOnCode == nil) then
-		UIDropDownMenu_SetText(LFGMM_LfmTab_AddOnDropDown, "<Select AddOn>");
+function LFGMM_LfmTab_CategoryDropDown_UpdateText()
+	if (LFGMM_DB.SEARCH.LFM.CategoryCode == nil) then
+		UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, "<Select category>");
 	else
-		local addOnName = LFGMM_Core_GetAddOnByCode(LFGMM_DB.SEARCH.LFM.AddOnCode).Name
-		UIDropDownMenu_SetText(LFGMM_LfmTab_AddOnDropDown, addOnName);
+		local categoryName = LFGMM_Core_GetCategoryByCode(LFGMM_DB.SEARCH.LFM.CategoryCode).Name
+		UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, categoryName);
 	end
 end
 
