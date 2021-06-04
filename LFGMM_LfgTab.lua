@@ -24,9 +24,11 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- LFG TAB
 ------------------------------------------------------------------------------------------------------------------------
-
+local dungeonsAndRaids = nil;
 
 function LFGMM_LfgTab_Initialize()
+	dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+
 	LFGMM_LfgTab_SearchActiveText.StringAnimation = "";
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_VANILLA, 130, LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize);
@@ -150,16 +152,18 @@ end
 
 
 function LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize(self, level)
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA];
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
-		LFGMM_LfgTab_DungeonsDropDown_VANILLA, level, LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA, dungeonMap);
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize(self, level)
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC];
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
-		LFGMM_LfgTab_DungeonsDropDown_TBC, level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC, dungeonMap);
 end
 
-function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, categoryCode)
+function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode, dungeonMap)
 	local updateMenuItem = function(menuItem, isChecked, isRadio)
 		if (isChecked) then
 			_G[menuItem:GetName()].checked = true;
@@ -317,11 +321,10 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ca
 			clearItem.text = "<Clear selection>";
 			clearItem.justifyH = "CENTER";
 			clearItem.notCheckable = true;
-			--clearItem.func = LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick;
 
-			clearItem.func = categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and
-				LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick or
-				LFGMM_LfgTab_DungeonsDropDown_TBC_ClearSelections_OnClick
+			clearItem.func = function()
+				LFGMM_LfgTab_DungeonsDropDown_ClearSelection_OnClick(categoryCode);
+			end
 
 			UIDropDownMenu_AddButton(clearItem);
 
@@ -419,13 +422,12 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(dropDown, level, ca
 	LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode);
 end
 
-
-function LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick()
+function LFGMM_LfgTab_DungeonsDropDown_ClearSelection_OnClick(categoryCode)
 	-- Clear dungeons
 	for index = #LFGMM_DB.SEARCH.LFG.Dungeons, 1, -1 do
 		local dungeonIndex = LFGMM_DB.SEARCH.LFG.Dungeons[index];
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+		if dungeon.Category == categoryCode then
 			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index)
 		end
 	end
@@ -434,32 +436,11 @@ function LFGMM_LfgTab_DungeonsDropDown_VANILLA_ClearSelections_OnClick()
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 
 	-- Update search selection text
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode);
 
 	-- Refresh
 	LFGMM_LfgTab_Refresh();
 end
-
-function LFGMM_LfgTab_DungeonsDropDown_TBC_ClearSelections_OnClick()
-	-- Clear dungeons
-	for index = #LFGMM_DB.SEARCH.LFG.Dungeons, 1, -1 do
-		local dungeonIndex = LFGMM_DB.SEARCH.LFG.Dungeons[index];
-		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
-			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index)
-		end
-	end
-
-	-- Update LFG broadcast preview message
-	LFGMM_LfgTab_UpdateBroadcastMessage();
-
-	-- Update search selection text
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText("TBC");
-
-	-- Refresh
-	LFGMM_LfgTab_Refresh();
-end
-
 
 function LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode)
 	-- Update broadcast message
@@ -475,10 +456,13 @@ end
 
 function LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode)
 	local numDungeons = 0;
+	local lastClickedDungeonName = nil;
+
 	for _, dungeonIndex in ipairs(LFGMM_DB.SEARCH.LFG.Dungeons) do
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
 		if (dungeon.Category == categoryCode) then
-			numDungeons = numDungeons + 1
+			numDungeons = numDungeons + 1;
+			lastClickedDungeonName = dungeon.Name;
 		end
 	end
 
@@ -487,7 +471,7 @@ function LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode)
 		LFGMM_LfgTab_DungeonsDropDown_TBC
 
 	if (numDungeons == 1) then
-		UIDropDownMenu_SetText(dropDown, LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFG.Dungeons[1]].Name);
+		UIDropDownMenu_SetText(dropDown, lastClickedDungeonName);
 	elseif (numDungeons > 1) then
 		UIDropDownMenu_SetText(dropDown, tostring(numDungeons) .. " dungeons selected");
 	else

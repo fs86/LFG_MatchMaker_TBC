@@ -173,39 +173,24 @@ function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 end
 
-function LFGMM_LfmTab_GetDungeonListForSelectedCategory()
-	if LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
-		return vanillaDungeonsList, vanillaRaidList;
-	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
-		return tbcDungeonList, tbcRaidList;
-	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
-		return pvpList;
-	else
-		return nil;
-	end
-end
+-- function LFGMM_LfmTab_GetDungeonListForSelectedCategory()
+-- 	if LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+-- 		return vanillaDungeonsList, vanillaRaidList;
+-- 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+-- 		return tbcDungeonList, tbcRaidList;
+-- 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+-- 		return pvpList;
+-- 	else
+-- 		return nil;
+-- 	end
+-- end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
-	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level);
+	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
+	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap);
 end
 
-function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
-	if LFGMM_DB.SEARCH.LFM.CategoryCode == nil or dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode] == nil then
-		return
-	end
-
-	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
-
-	if #dungeonMap == 0 then
-		-- No valid dungeons item
-		local noDungeonsItem = UIDropDownMenu_CreateInfo();
-		noDungeonsItem.text = "No available dungeons";
-		noDungeonsItem.disabled = true;
-		noDungeonsItem.notCheckable = true;
-		UIDropDownMenu_AddButton(noDungeonsItem);
-		return;
-	end
-
+function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap)
 	local createSingleDungeonItem = function(dungeon)
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.keepShownOnClick = false;
@@ -242,6 +227,16 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 		item.checked = LFGMM_DB.SEARCH.LFM.Dungeon == dungeon.Index or LFGMM_DB.SEARCH.LFM.Dungeon == parentDungeonIndex;
 		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 2);
+	end
+
+	if dungeonMap == nil or #dungeonMap == 0 then
+		-- No valid dungeons item
+		local noDungeonsItem = UIDropDownMenu_CreateInfo();
+		noDungeonsItem.text = "No available dungeons";
+		noDungeonsItem.disabled = true;
+		noDungeonsItem.notCheckable = true;
+		UIDropDownMenu_AddButton(noDungeonsItem);
+		return;
 	end
 
 	local displayHeaders = #dungeonMap > 1;
