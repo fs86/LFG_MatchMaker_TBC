@@ -172,10 +172,10 @@ LFGMM_GLOBAL = {
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
 	CATEGORIES = {
-		{
-			Code = "TEST",
-			Name = "Test",
-		},
+		-- {
+		-- 	Code = "TEST",
+		-- 	Name = "Test",
+		-- },
 		{
 			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Name = "Vanilla Dungeons",

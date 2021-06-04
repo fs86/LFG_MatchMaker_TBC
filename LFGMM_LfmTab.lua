@@ -25,9 +25,11 @@
 -- LFM TAB
 ------------------------------------------------------------------------------------------------------------------------
 --local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {}
-local dungeonAndRaids = nil;
+local dungeonsAndRaids = nil;
 
 function LFGMM_LfmTab_Initialize()
+	dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 100, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
@@ -52,17 +54,6 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick);
 
 	LFGMM_LfmTab.SearchAnimationLock = false;
-
-	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST();
-	-- dungeonAndRaidList[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA] = vanillaDungeonsList;
-	-- dungeonAndRaidList[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC] = 
-
-	dungeonAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
-
-	print(dungeonAndRaids["VANILLA_DUNGEONS"][1].Header)
-	print(dungeonAndRaids.TBC_DUNGEONS[1].Header)
-	print(#dungeonAndRaids.PVP)
-
 end
 
 
@@ -188,7 +179,9 @@ function LFGMM_LfmTab_GetDungeonListForSelectedCategory()
 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
 		return tbcDungeonList, tbcRaidList;
 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
-		return pvpList
+		return pvpList;
+	else
+		return nil;
 	end
 end
 
@@ -197,13 +190,11 @@ function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 end
 
 function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
-	if LFGMM_DB.SEARCH.LFM.CategoryCode == nil then
+	if LFGMM_DB.SEARCH.LFM.CategoryCode == nil or dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode] == nil then
 		return
 	end
 
-	print(dungeonAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode])
-
-	local dungeonMap = dungeonAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
+	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
 
 	if #dungeonMap == 0 then
 		-- No valid dungeons item
@@ -256,26 +247,35 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 	local displayHeaders = #dungeonMap > 1;
 	local buttonIndex = 1;
 
-	for _, entry in dungeonMap do
-		if displayHeaders then
-			local dungeonsHeader = UIDropDownMenu_CreateInfo();
-			dungeonsHeader.text = entry.Header;
-			dungeonsHeader.isTitle = true;
-			dungeonsHeader.notCheckable = true;
-			UIDropDownMenu_AddButton(dungeonsHeader);
-			buttonIndex = buttonIndex + 1;
-		end
-
-		-- Dungeon menu items
-		for _, dungeon in ipairs(entry.List) do
-			if (dungeon.ParentDungeon == nil) then
-				if (dungeon.SubDungeons == nil) then
-					createSingleDungeonItem(dungeon);
-				else
-					createMultiDungeonItem(dungeon, buttonIndex);
-				end
+	if level == 1 then
+		for _, entry in ipairs(dungeonMap) do
+			if displayHeaders then
+				local dungeonsHeader = UIDropDownMenu_CreateInfo();
+				dungeonsHeader.text = entry.Header;
+				dungeonsHeader.isTitle = true;
+				dungeonsHeader.notCheckable = true;
+				UIDropDownMenu_AddButton(dungeonsHeader);
 				buttonIndex = buttonIndex + 1;
 			end
+	
+			-- Dungeon menu items
+			for _, dungeon in ipairs(entry.List) do
+				if (dungeon.ParentDungeon == nil) then
+					if (dungeon.SubDungeons == nil) then
+						createSingleDungeonItem(dungeon);
+					else
+						createMultiDungeonItem(dungeon, buttonIndex);
+					end
+					buttonIndex = buttonIndex + 1;
+				end
+			end
+		end
+	elseif level == 2 then
+		local entry = UIDROPDOWNMENU_MENU_VALUE;
+
+		-- Sub dungeon menu items
+		for _,dungeonIndex in ipairs(entry.DungeonIndexes) do
+			createSubDungeonItem(dungeonIndex, entry.ParentDungeonIndex);
 		end
 	end
 
@@ -378,8 +378,10 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 end
 
 function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
+	LFGMM_DB.SEARCH.LFM.Dungeon = nil;
 	LFGMM_DB.SEARCH.LFM.CategoryCode = categoryCode;
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
+	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 	LFGMM_LfmTab_Refresh();
 	LFGMM_LfmTab_CategoryDropDown_Validate();
 end
@@ -395,8 +397,10 @@ function LFGMM_LfmTab_CategoryDropDown_UpdateText()
 	if (LFGMM_DB.SEARCH.LFM.CategoryCode == nil) then
 		UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, "<Select category>");
 	else
-		local categoryName = LFGMM_Core_GetCategoryByCode(LFGMM_DB.SEARCH.LFM.CategoryCode).Name
-		UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, categoryName);
+		local category = LFGMM_Core_GetCategoryByCode(LFGMM_DB.SEARCH.LFM.CategoryCode);
+		if category ~= nil then
+			UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, category.Name);
+		end
 	end
 end
 

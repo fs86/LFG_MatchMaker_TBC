@@ -198,7 +198,6 @@ function LFGMM_Utility_ArrayContains(array, value)
 	return false;
 end
 
-
 function LFGMM_Utility_ArrayContainsAny(array1, array2)
 	for _,arrayValue1 in ipairs(array1) do
 		for _,arrayValue2 in ipairs(array2) do
