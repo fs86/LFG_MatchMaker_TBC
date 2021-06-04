@@ -279,6 +279,39 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
 	return vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList;
 end
 
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsMap()
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST();
+
+	return {
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA] = {
+			{
+				Header = "Dungeons",
+				List = vanillaDungeonsList
+			},
+			{
+				Header = "Raids",
+				List = vanillaRaidList
+			}
+		},
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC] = {
+			{
+				Header = "Dungeons",
+				List = tbcDungeonList
+			},
+			{
+				Header = "Raids",
+				List = tbcRaidList
+			}
+		},
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.PVP] = {
+			{
+				Header = "PvP",
+				List = pvpList
+			}
+		}
+	};
+end
+
 
 function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
 	local list = {};
@@ -305,9 +338,9 @@ end
 
 
 function LFGMM_Utility_IsDungeonAvailable(dungeon)
-	if (LFGMM_DB.SETTINGS.HidePvp and dungeon.Pvp) then
-		return false;
-	elseif (LFGMM_DB.SETTINGS.HideRaids and dungeon.Size > 10 and not dungeon.Pvp) then
+	-- if (LFGMM_DB.SETTINGS.HidePvp and dungeon.Pvp) then
+	-- 	return false;
+	if (LFGMM_DB.SETTINGS.HideRaids and dungeon.Size > 10 and not dungeon.Pvp) then
 		return false;
 	elseif (LFGMM_DB.SETTINGS.HideLowLevel and LFGMM_GLOBAL.PLAYER_LEVEL > dungeon.MaxLevel) then
 		return false;

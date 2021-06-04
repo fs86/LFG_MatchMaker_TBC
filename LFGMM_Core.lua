@@ -596,7 +596,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
 			then
 				local isNotBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
-				if isNotBoostMatch == false then
+				if not isNotBoostMatch then
 					local isBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
 					if (isBoostMatch) then
 						return;

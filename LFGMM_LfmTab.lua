@@ -24,7 +24,8 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- LFM TAB
 ------------------------------------------------------------------------------------------------------------------------
-
+--local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {}
+local dungeonAndRaids = nil;
 
 function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
@@ -51,6 +52,17 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick);
 
 	LFGMM_LfmTab.SearchAnimationLock = false;
+
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST();
+	-- dungeonAndRaidList[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA] = vanillaDungeonsList;
+	-- dungeonAndRaidList[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC] = 
+
+	dungeonAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+
+	print(#dungeonAndRaids.VANILLA_DUNGEONS[1].Header)
+	print(#dungeonAndRaids.TBC_DUNGEONS[1].Header)
+	print(#dungeonAndRaids.PVP)
+
 end
 
 
@@ -170,11 +182,21 @@ function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 end
 
-function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
-	LFGMM_LfmTab_DungeonDropDown_Initialize(level)
+function LFGMM_LfmTab_GetDungeonListForSelectedCategory()
+	if LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+		return vanillaDungeonsList, vanillaRaidList;
+	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		return tbcDungeonList, tbcRaidList;
+	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+		return pvpList
+	end
 end
 
-function LFGMM_LfmTab_DungeonDropDown_Initialize(level)
+function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
+	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
+end
+
+function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 	local createSingleDungeonItem = function(dungeon)
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.keepShownOnClick = false;
@@ -266,27 +288,27 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize(level)
 				end
 			end
 
-			if (table.getn(pvpList) > 0) then
-				if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
-					-- PvP header
-					local pvpHeader = UIDropDownMenu_CreateInfo();
-					pvpHeader.text = "PvP";
-					pvpHeader.isTitle = true;
-					pvpHeader.notCheckable = true;
-					UIDropDownMenu_AddButton(pvpHeader);
-					buttonIndex = buttonIndex + 1;
-				end
+			-- if (table.getn(pvpList) > 0) then
+			-- 	if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
+			-- 		-- PvP header
+			-- 		local pvpHeader = UIDropDownMenu_CreateInfo();
+			-- 		pvpHeader.text = "PvP";
+			-- 		pvpHeader.isTitle = true;
+			-- 		pvpHeader.notCheckable = true;
+			-- 		UIDropDownMenu_AddButton(pvpHeader);
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
 
-				-- PvP menu items
-				for _,pvp in ipairs(pvpList) do
-					if (pvp.SubDungeons == nil) then
-						createSingleDungeonItem(pvp);
-					else
-						createMultiDungeonItem(pvp, buttonIndex);
-					end
-					buttonIndex = buttonIndex + 1;
-				end
-			end
+			-- 	-- PvP menu items
+			-- 	for _,pvp in ipairs(pvpList) do
+			-- 		if (pvp.SubDungeons == nil) then
+			-- 			createSingleDungeonItem(pvp);
+			-- 		else
+			-- 			createMultiDungeonItem(pvp, buttonIndex);
+			-- 		end
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
+			-- end
 
 		else
 			-- No valid dungeons item
