@@ -245,7 +245,6 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 	end
 
 	local displayHeaders = #dungeonMap > 1;
-	local buttonIndex = 1;
 
 	if level == 1 then
 		for _, entry in ipairs(dungeonMap) do
@@ -255,7 +254,6 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 				dungeonsHeader.isTitle = true;
 				dungeonsHeader.notCheckable = true;
 				UIDropDownMenu_AddButton(dungeonsHeader);
-				buttonIndex = buttonIndex + 1;
 			end
 	
 			-- Dungeon menu items
@@ -264,9 +262,8 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level)
 					if (dungeon.SubDungeons == nil) then
 						createSingleDungeonItem(dungeon);
 					else
-						createMultiDungeonItem(dungeon, buttonIndex);
+						createMultiDungeonItem(dungeon);
 					end
-					buttonIndex = buttonIndex + 1;
 				end
 			end
 		end
@@ -382,6 +379,7 @@ function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
 	LFGMM_DB.SEARCH.LFM.CategoryCode = categoryCode;
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_UpdateBroadcastMessage();
 	LFGMM_LfmTab_Refresh();
 	LFGMM_LfmTab_CategoryDropDown_Validate();
 end
