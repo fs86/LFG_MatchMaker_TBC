@@ -27,10 +27,15 @@
 
 
 function LFGMM_ListTab_Initialize()
-	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown, 125, LFGMM_ListTab_DungeonsDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_VANILLA, 120, LFGMM_ListTab_DungeonsDropDown_VANILLA_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_TBC, 120, nil);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_PVP, 120, nil);
+
+	LFGMM_Utility_InitializeCheckbox(LFGMM_ListTab_IncludeUnknownCheckBox, "Include unknown", "Include requests that cannot be matched", LFGMM_DB.LIST.ShowUnknownDungeons, LFGMM_ListTab_IncludeUnknownCheckBox_OnClick);
+
 	LFGMM_ListTab_DungeonsDropDown_UpdateText();
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_MessageTypeDropDown, 135, LFGMM_ListTab_MessageTypeDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_MessageTypeDropDown, 120, LFGMM_ListTab_MessageTypeDropDown_OnInitialize);
 	LFGMM_ListTab_MessageTypeDropDown_UpdateText();
 
 	UIDropDownMenu_Initialize(LFGMM_ListTab_ContextMenuDropDown, LFGMM_ListTab_ContextMenuDropDown_OnInitialize, "MENU");
@@ -47,6 +52,34 @@ function LFGMM_ListTab_Initialize()
 	
 	LFGMM_ListTab_ConfirmForgetAll_YesButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_YesButton_OnClick);
 	LFGMM_ListTab_ConfirmForgetAll_NoButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_NoButton_OnClick);
+
+	local vLine = LFGMM_ListTab_SettingsContainer:CreateLine();
+	vLine:SetColorTexture(1, .8, 0, .9);
+	vLine:SetStartPoint("TOP", 10, 10);
+	vLine:SetEndPoint("BOTTOM", 10, 10);
+	vLine:SetThickness(1);
+	vLine:Show();
+
+	local hLineTop = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineTop:SetColorTexture(1, .8, 0, .9);
+	hLineTop:SetStartPoint("TOP", 10, 10);
+	hLineTop:SetEndPoint("TOP", 6, 10);
+	hLineTop:SetThickness(1);
+	hLineTop:Show();
+
+	local hLineBottom = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineBottom:SetColorTexture(1, .8, 0, .9);
+	hLineBottom:SetStartPoint("BOTTOM", 10, 10);
+	hLineBottom:SetEndPoint("BOTTOM", 6, 10);
+	hLineBottom:SetThickness(1);
+	hLineBottom:Show();
+
+	local hLineMiddle = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineMiddle:SetColorTexture(1, .8, 0, .9);
+	hLineMiddle:SetStartPoint("CENTER", 10, -17);
+	hLineMiddle:SetEndPoint("CENTER", 14, -17);
+	hLineMiddle:SetThickness(1);
+	hLineMiddle:Show();
 end
 
 
@@ -239,8 +272,12 @@ function LFGMM_ListTab_Refresh()
 	end
 end
 
+function LFGMM_ListTab_IncludeUnknownCheckBox_OnClick(self)
+	LFGMM_DB.LIST.ShowUnknownDungeons = LFGMM_ListTab_IncludeUnknownCheckBox:GetChecked();
+end
 
-function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
+
+function LFGMM_ListTab_DungeonsDropDown_VANILLA_OnInitialize(self, level)
 	local createSingleDungeonItem = function(dungeon)
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.keepShownOnClick = true;
@@ -480,7 +517,7 @@ function LFGMM_ListTab_DungeonsDropDown_UpdateText()
 		text = "None";
 	end
 
-	UIDropDownMenu_SetText(LFGMM_ListTab_DungeonsDropDown, text);
+	UIDropDownMenu_SetText(LFGMM_ListTab_DungeonsDropDown_VANILLA, text);
 end
 
 
