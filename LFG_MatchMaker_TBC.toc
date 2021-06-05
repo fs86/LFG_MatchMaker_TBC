@@ -22,9 +22,9 @@
 
 ## Title: LFG Match Maker TBC
 ## Interface: 20501
-## Version: 1.0.1
+## Version: 1.0.2
 ## Author: L.I.R.
-## Notes: This is a fork to support TBC classic
+## Notes: TBC Version of LFG MatchMaker
 ## SavedVariablesPerCharacter: LFGMM_DB
 
 LFGMM_FrameBackdrops.lua

@@ -143,7 +143,7 @@
 			<Anchor point="CENTER"/>
 		</Anchors>
 
-		<Size x="400" y="410" />
+		<Size x="400" y="460" />
 		
 		<Layers>
 			<Layer>
@@ -184,11 +184,19 @@
 								</Anchor>
 							</Anchors>
 						</FontString>
+
+						<FontString text="PvP:" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="TOP">
+									<Offset x="0" y="-110" />
+								</Anchor>
+							</Anchors>
+						</FontString>
 						
 						<FontString name="LFGMM_LfgTab_SearchActiveText" hidden="true" inherits="GameFontHighlight">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativePoint="CENTER">
-									<Offset x="-30" y="65" />
+									<Offset x="-30" y="35" />
 								</Anchor>
 							</Anchors>
 
@@ -198,7 +206,7 @@
 						<FontString name="LFGMM_LfgTab_MatchOnText" text="Match on:" inherits="GameFontNormal">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="CENTER">
-									<Offset x="-110" y="-35" />
+									<Offset x="-110" y="-65" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -206,7 +214,7 @@
 						<FontString name="LFGMM_LfgTab_BroadcastMessagePreview" hidden="true" inherits="GameFontHighlight">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="CENTER">
-									<Offset x="0" y="-152" />
+									<Offset x="0" y="-182" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -229,11 +237,19 @@
 							</Anchor>
 						</Anchors>
 					</Frame>
+
+					<Frame name="LFGMM_LfgTab_DungeonsDropDown_PVP" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset x="0" y="-140" />
+							</Anchor>
+						</Anchors>
+					</Frame>
 					
 					<Button name="LFGMM_LfgTab_StartStopSearchButton" text="Start search" inherits="UIPanelButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="0" />
+								<Offset x="0" y="-30" />
 							</Anchor>
 						</Anchors>
 
@@ -243,7 +259,7 @@
 					<CheckButton name="LFGMM_LfgTab_MatchLfgCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-50" y="-35" />
+								<Offset x="-50" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -251,7 +267,7 @@
 					<CheckButton name="LFGMM_LfgTab_MatchLfmCheckBox" disabled="true" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="10" y="-35" />
+								<Offset x="10" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -259,7 +275,7 @@
 					<CheckButton name="LFGMM_LfgTab_MatchUnknownCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="70" y="-35" />
+								<Offset x="70" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -267,7 +283,7 @@
 					<CheckButton name="LFGMM_LfgTab_IgnoreBoostsCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-150" y="-65" />
+								<Offset x="-150" y="-95" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -275,7 +291,7 @@
 					<CheckButton name="LFGMM_LfgTab_AutoStopCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-40" y="-65" />
+								<Offset x="-40" y="-95" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -283,7 +299,7 @@
 					<CheckButton name="LFGMM_LfgTab_EnableBroadcastCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-80" y="-95" />
+								<Offset x="-80" y="-125" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -291,7 +307,7 @@
 					<EditBox name="LFGMM_LfgTab_BroadcastMessageTemplateInputBox" hidden="true" autoFocus="false" letters="255" inherits="InputBoxTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="-125" />
+								<Offset x="0" y="-155" />
 							</Anchor>
 						</Anchors>
 
@@ -301,7 +317,7 @@
 					<Button name="LFGMM_LfgTab_BroadcastMessageInfoButton" hidden="true" text="?" inherits="UIPanelButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="150" y="-125" />
+								<Offset x="150" y="-155" />
 							</Anchor>
 						</Anchors>
 
@@ -311,7 +327,7 @@
 					<Slider name="LFGMM_LfgTab_BroadcastMessagePreviewSlider" hidden="true" inherits="OptionsSliderTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="-175" />
+								<Offset x="0" y="-205" />
 							</Anchor>
 						</Anchors>
 
@@ -348,7 +364,7 @@
 						<FontString name="LFGMM_LfmTab_SearchActiveText" hidden="true" inherits="GameFontHighlight">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativePoint="CENTER">
-									<Offset x="-30" y="65" />
+									<Offset x="-30" y="35" />
 								</Anchor>
 							</Anchors>
 
@@ -358,7 +374,7 @@
 						<FontString name="LFGMM_LfmTab_MatchOnText" text="Match on:" inherits="GameFontNormal">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="CENTER">
-									<Offset x="-110" y="-35" />
+									<Offset x="-110" y="-65" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -366,7 +382,7 @@
 						<FontString name="LFGMM_LfmTab_BroadcastMessagePreview" hidden="true" inherits="GameFontHighlight">
 							<Anchors>
 								<Anchor point="CENTER" relativePoint="CENTER">
-									<Offset x="0" y="-152" />
+									<Offset x="0" y="-182" />
 								</Anchor>
 							</Anchors>
 						</FontString>
@@ -393,7 +409,7 @@
 					<Button name="LFGMM_LfmTab_StartStopSearchButton" text="Start search" inherits="UIPanelButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="0" />
+								<Offset x="0" y="-30" />
 							</Anchor>
 						</Anchors>
 
@@ -403,7 +419,7 @@
 					<CheckButton name="LFGMM_LfmTab_MatchLfgCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-50" y="-35" />
+								<Offset x="-50" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -411,7 +427,7 @@
 					<CheckButton name="LFGMM_LfmTab_MatchLfmCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="10" y="-35" />
+								<Offset x="10" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -419,7 +435,7 @@
 					<CheckButton name="LFGMM_LfmTab_MatchUnknownCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="70" y="-35" />
+								<Offset x="70" y="-65" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -427,7 +443,7 @@
 					<CheckButton name="LFGMM_LfmTab_IgnoreBoostsCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-150" y="-65" />
+								<Offset x="-150" y="-95" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -435,7 +451,7 @@
 					<CheckButton name="LFGMM_LfmTab_AutoStopCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-40" y="-65" />
+								<Offset x="-40" y="-95" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -443,7 +459,7 @@
 					<CheckButton name="LFGMM_LfmTab_EnableBroadcastCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="-80" y="-95" />
+								<Offset x="-80" y="-125" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
@@ -451,7 +467,7 @@
 					<EditBox name="LFGMM_LfmTab_BroadcastMessageTemplateInputBox" hidden="true" autoFocus="false" letters="255" inherits="InputBoxTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="-125" />
+								<Offset x="0" y="-155" />
 							</Anchor>
 						</Anchors>
 
@@ -461,7 +477,7 @@
 					<Button name="LFGMM_LfmTab_BroadcastMessageInfoButton" hidden="true" text="?" inherits="UIPanelButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="150" y="-125" />
+								<Offset x="150" y="-155" />
 							</Anchor>
 						</Anchors>
 
@@ -471,7 +487,7 @@
 					<Slider name="LFGMM_LfmTab_BroadcastMessagePreviewSlider" hidden="true" inherits="OptionsSliderTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
-								<Offset x="0" y="-175" />
+								<Offset x="0" y="-205" />
 							</Anchor>
 						</Anchors>
 
@@ -753,18 +769,10 @@
 						</Anchors>
 					</CheckButton>
 
-					<CheckButton name="LFGMM_SettingsTab_HidePvpCheckBox" inherits="ChatConfigCheckButtonTemplate">
-						<Anchors>
-							<Anchor point="LEFT" relativePoint="TOPLEFT">
-								<Offset x="20" y="-150" />
-							</Anchor>
-						</Anchors>
-					</CheckButton>
-
 					<CheckButton name="LFGMM_SettingsTab_HideRaidsCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="LEFT" relativePoint="TOPLEFT">
-								<Offset x="20" y="-175" />
+								<Offset x="20" y="-150" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>

@@ -254,24 +254,26 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
 	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {};
 
 	for _, dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
-		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
-			table.insert(pvpList, dungeon);
-		end
-
-		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
-			if dungeon.Size <= 10 then
-				table.insert(vanillaDungeonsList, dungeon);
-			else
-				table.insert(vanillaRaidList, dungeon);
+		if LFGMM_Utility_IsDungeonAvailable(dungeon) then
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+				table.insert(pvpList, dungeon);
 			end
-		end
-
-		if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
-			if dungeon.Size > 5 then
-				table.insert(tbcRaidList, dungeon);
-			else
-				table.insert(tbcDungeonList, dungeon);
+	
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+				if dungeon.Size <= 10 then
+					table.insert(vanillaDungeonsList, dungeon);
+				else
+					table.insert(vanillaRaidList, dungeon);
+				end
 			end
+	
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+				if dungeon.Size > 5 then
+					table.insert(tbcRaidList, dungeon);
+				else
+					table.insert(tbcDungeonList, dungeon);
+				end
+			end			
 		end
 	end
 
@@ -337,10 +339,10 @@ end
 
 
 function LFGMM_Utility_IsDungeonAvailable(dungeon)
-	-- if (LFGMM_DB.SETTINGS.HidePvp and dungeon.Pvp) then
-	-- 	return false;
-	if (LFGMM_DB.SETTINGS.HideRaids and dungeon.Size > 10 and not dungeon.Pvp) then
-		return false;
+	if LFGMM_DB.SETTINGS.HideRaids and
+		((dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and dungeon.Size > 10) or
+		(dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC and dungeon.Size > 5)) then
+			return false;
 	elseif (LFGMM_DB.SETTINGS.HideLowLevel and LFGMM_GLOBAL.PLAYER_LEVEL > dungeon.MaxLevel) then
 		return false;
 	elseif (LFGMM_DB.SETTINGS.HideHighLevel and LFGMM_GLOBAL.PLAYER_LEVEL < dungeon.MinLevel) then

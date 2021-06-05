@@ -56,7 +56,6 @@ function LFGMM_Load()
 				ShowMinimapButton = true,
 				HideLowLevel = false,
 				HideHighLevel = false,
-				HidePvp = false,
 				HideRaids = false,
 				MinimapLibDBSettings = {},
 				IdentifierLanguages = { "EN" },

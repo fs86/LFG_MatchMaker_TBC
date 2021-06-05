@@ -25,11 +25,7 @@
 -- LFM TAB
 ------------------------------------------------------------------------------------------------------------------------
 --local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {}
-local dungeonsAndRaids = nil;
-
 function LFGMM_LfmTab_Initialize()
-	dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
-
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 100, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
@@ -173,19 +169,8 @@ function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 end
 
--- function LFGMM_LfmTab_GetDungeonListForSelectedCategory()
--- 	if LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
--- 		return vanillaDungeonsList, vanillaRaidList;
--- 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
--- 		return tbcDungeonList, tbcRaidList;
--- 	elseif LFGMM_DB.SEARCH.LFM.CategoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
--- 		return pvpList;
--- 	else
--- 		return nil;
--- 	end
--- end
-
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
 	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
 	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap);
 end
@@ -239,11 +224,10 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap)
 		return;
 	end
 
-	local displayHeaders = #dungeonMap > 1;
-
 	if level == 1 then
 		for _, entry in ipairs(dungeonMap) do
-			if displayHeaders then
+			-- Dungeon headers
+			if #dungeonMap > 1 and #entry.List > 0 then
 				local dungeonsHeader = UIDropDownMenu_CreateInfo();
 				dungeonsHeader.text = entry.Header;
 				dungeonsHeader.isTitle = true;

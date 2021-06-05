@@ -24,15 +24,13 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- LFG TAB
 ------------------------------------------------------------------------------------------------------------------------
-local dungeonsAndRaids = nil;
 
 function LFGMM_LfgTab_Initialize()
-	dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
-
 	LFGMM_LfgTab_SearchActiveText.StringAnimation = "";
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_VANILLA, 130, LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize);
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_TBC, 130, LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_PVP, 130, LFGMM_LfgTab_DungeonsDropDown_PVP_OnInitialize);
 
 	LFGMM_LfgTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfgTab_StartStopSearchButton_OnClick);
 
@@ -152,15 +150,28 @@ end
 
 
 function LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
 	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA];
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
 		level, LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA, dungeonMap);
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
 	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC];
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
 		level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC, dungeonMap);
+end
+
+function LFGMM_LfgTab_DungeonsDropDown_PVP_OnInitialize(self, level)
+	-- local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+	-- local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC];
+	-- LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
+	-- 	level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC, dungeonMap);
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.PVP];
+	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.PVP, dungeonMap);
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode, dungeonMap)
@@ -311,11 +322,23 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 		UIDropDownMenu_AddButton(item, 2);
 	end
 
+	if dungeonMap == nil or #dungeonMap == 0 then
+		-- No valid dungeons item
+		local noDungeonsItem = UIDropDownMenu_CreateInfo();
+		noDungeonsItem.text = "No available dungeons";
+		noDungeonsItem.disabled = true;
+		noDungeonsItem.notCheckable = true;
+		UIDropDownMenu_AddButton(noDungeonsItem);
+		return;
+	end
+
+	local displayHeaders = #dungeonMap > 1;
+
 	if (level == 1) then
 		-- Get dungeons and raids to list
 		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode);
 
-		if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
+		if #dungeonMap > 0 then
 			-- Clear selections menu item
 			local clearItem = UIDropDownMenu_CreateInfo();
 			clearItem.text = "<Clear selection>";
@@ -330,19 +353,18 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 
 			local buttonIndex = 2;
 
-			if (table.getn(dungeonsList) > 0) then
-				if (table.getn(raidsList) > 0 or table.getn(pvpList) > 0) then
-					-- Dungeons header
+			for _, entry in ipairs(dungeonMap) do
+				-- Dungeon headers
+				if #dungeonMap > 1 and #entry.List > 0 then
 					local dungeonsHeader = UIDropDownMenu_CreateInfo();
-					dungeonsHeader.text = "Dungeon";
+					dungeonsHeader.text = entry.Header;
 					dungeonsHeader.isTitle = true;
 					dungeonsHeader.notCheckable = true;
 					UIDropDownMenu_AddButton(dungeonsHeader);
-					buttonIndex = buttonIndex + 1;
 				end
 
 				-- Dungeon menu items
-				for _,dungeon in ipairs(dungeonsList) do
+				for _, dungeon in ipairs(entry.List) do
 					if (dungeon.ParentDungeon == nil) then
 						if (dungeon.SubDungeons == nil) then
 							createSingleDungeonItem(dungeon);
@@ -354,57 +376,83 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 				end
 			end
 
-			if (table.getn(raidsList) > 0) then
-				if (table.getn(dungeonsList) > 0 or table.getn(pvpList) > 0) then
-					-- Raids header
-					local raidsHeader = UIDropDownMenu_CreateInfo();
-					raidsHeader.text = "Raid";
-					raidsHeader.isTitle = true;
-					raidsHeader.notCheckable = true;
-					UIDropDownMenu_AddButton(raidsHeader);
-					buttonIndex = buttonIndex + 1;
-				end
+			----------------------------------------------------------------------------
 
-				-- Raid menu items
-				for _,raid in ipairs(raidsList) do
-					if (raid.SubDungeons == nil) then
-						createSingleDungeonItem(raid);
-					else
-						createMultiDungeonItem(raid, buttonIndex);
-					end
-					buttonIndex = buttonIndex + 1;
-				end
-			end
+			-- if (table.getn(dungeonsList) > 0) then
+			-- 	if (table.getn(raidsList) > 0 or table.getn(pvpList) > 0) then
+			-- 		-- Dungeons header
+			-- 		local dungeonsHeader = UIDropDownMenu_CreateInfo();
+			-- 		dungeonsHeader.text = "Dungeon";
+			-- 		dungeonsHeader.isTitle = true;
+			-- 		dungeonsHeader.notCheckable = true;
+			-- 		UIDropDownMenu_AddButton(dungeonsHeader);
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
 
-			if (table.getn(pvpList) > 0) then
-				if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
-					-- PvP header
-					local pvpHeader = UIDropDownMenu_CreateInfo();
-					pvpHeader.text = "PvP";
-					pvpHeader.isTitle = true;
-					pvpHeader.notCheckable = true;
-					UIDropDownMenu_AddButton(pvpHeader);
-					buttonIndex = buttonIndex + 1;
-				end
+			-- 	-- Dungeon menu items
+			-- 	for _, dungeon in ipairs(dungeonsList) do
+			-- 		if (dungeon.ParentDungeon == nil) then
+			-- 			if (dungeon.SubDungeons == nil) then
+			-- 				createSingleDungeonItem(dungeon);
+			-- 			else
+			-- 				createMultiDungeonItem(dungeon, buttonIndex);
+			-- 			end
+			-- 			buttonIndex = buttonIndex + 1;
+			-- 		end
+			-- 	end
+			-- end
 
-				-- PvP menu items
-				for _,pvp in ipairs(pvpList) do
-					if (pvp.SubDungeons == nil) then
-						createSingleDungeonItem(pvp);
-					else
-						createMultiDungeonItem(pvp, buttonIndex);
-					end
-					buttonIndex = buttonIndex + 1;
-				end
-			end
+			-- if (table.getn(raidsList) > 0) then
+			-- 	if (table.getn(dungeonsList) > 0 or table.getn(pvpList) > 0) then
+			-- 		-- Raids header
+			-- 		local raidsHeader = UIDropDownMenu_CreateInfo();
+			-- 		raidsHeader.text = "Raid";
+			-- 		raidsHeader.isTitle = true;
+			-- 		raidsHeader.notCheckable = true;
+			-- 		UIDropDownMenu_AddButton(raidsHeader);
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
 
-		else
-			-- No available dungeons item
-			local noDungeonsItem = UIDropDownMenu_CreateInfo();
-			noDungeonsItem.text = "No available dungeons";
-			noDungeonsItem.disabled = true;
-			noDungeonsItem.notCheckable = true;
-			UIDropDownMenu_AddButton(noDungeonsItem);
+			-- 	-- Raid menu items
+			-- 	for _,raid in ipairs(raidsList) do
+			-- 		if (raid.SubDungeons == nil) then
+			-- 			createSingleDungeonItem(raid);
+			-- 		else
+			-- 			createMultiDungeonItem(raid, buttonIndex);
+			-- 		end
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
+			-- end
+
+			-- if (table.getn(pvpList) > 0) then
+			-- 	if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
+			-- 		-- PvP header
+			-- 		local pvpHeader = UIDropDownMenu_CreateInfo();
+			-- 		pvpHeader.text = "PvP";
+			-- 		pvpHeader.isTitle = true;
+			-- 		pvpHeader.notCheckable = true;
+			-- 		UIDropDownMenu_AddButton(pvpHeader);
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
+
+			-- 	-- PvP menu items
+			-- 	for _,pvp in ipairs(pvpList) do
+			-- 		if (pvp.SubDungeons == nil) then
+			-- 			createSingleDungeonItem(pvp);
+			-- 		else
+			-- 			createMultiDungeonItem(pvp, buttonIndex);
+			-- 		end
+			-- 		buttonIndex = buttonIndex + 1;
+			-- 	end
+			--end
+
+		-- else
+		-- 	-- No available dungeons item
+		-- 	local noDungeonsItem = UIDropDownMenu_CreateInfo();
+		-- 	noDungeonsItem.text = "No available dungeons";
+		-- 	noDungeonsItem.disabled = true;
+		-- 	noDungeonsItem.notCheckable = true;
+		-- 	UIDropDownMenu_AddButton(noDungeonsItem);
 		end
 
 	elseif (level == 2) then
@@ -466,9 +514,14 @@ function LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode)
 		end
 	end
 
-	local dropDown = categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and
-		LFGMM_LfgTab_DungeonsDropDown_VANILLA or
-		LFGMM_LfgTab_DungeonsDropDown_TBC
+	local dropDown = nil;
+	if categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+		dropDown = LFGMM_LfgTab_DungeonsDropDown_VANILLA;
+	elseif categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		dropDown = LFGMM_LfgTab_DungeonsDropDown_TBC;
+	elseif categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+		dropDown = LFGMM_LfgTab_DungeonsDropDown_PVP;
+	end
 
 	if (numDungeons == 1) then
 		UIDropDownMenu_SetText(dropDown, lastClickedDungeonName);

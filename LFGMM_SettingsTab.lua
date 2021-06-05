@@ -31,7 +31,6 @@ function LFGMM_SettingsTab_Initialize()
 	LFGMM_Utility_InitializeCheckbox(LFGMM_SettingsTab_ShowQuestLogButtonCheckBox, "Show questlog button", "Show button to open LFG MatchMaker attached to the questlog window", LFGMM_DB.SETTINGS.ShowQuestLogButton, LFGMM_SettingsTab_ShowQuestLogButtonCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_SettingsTab_HideLowLevelCheckBox, "Hide low-level", "Hide low-level dungeons from dungeon selectors", LFGMM_DB.SETTINGS.HideLowLevel, LFGMM_SettingsTab_HideLowLevelCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_SettingsTab_HideHighLevelCheckBox, "Hide high-level", "Hide high-level dungeons from dungeon selectors", LFGMM_DB.SETTINGS.HideHighLevel, LFGMM_SettingsTab_HideHighLevelCheckBox_OnClick);
-	LFGMM_Utility_InitializeCheckbox(LFGMM_SettingsTab_HidePvpCheckBox, "Hide PvP", "Hide PvP from dungeon selectors", LFGMM_DB.SETTINGS.HidePvp, LFGMM_SettingsTab_HidePvpCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_SettingsTab_HideRaidsCheckBox, "Hide raids", "Hide raids from dungeon selectors", LFGMM_DB.SETTINGS.HideRaids, LFGMM_SettingsTab_HideRaidsCheckBox_OnClick);
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_SettingsTab_ChannelsDropDown, 130, LFGMM_SettingsTab_ChannelsDropDown_OnInitialize);
@@ -226,12 +225,6 @@ end
 
 function LFGMM_SettingsTab_HideHighLevelCheckBox_OnClick()
 	LFGMM_DB.SETTINGS.HideHighLevel = LFGMM_SettingsTab_HideHighLevelCheckBox:GetChecked();
-	LFGMM_Core_RemoveUnavailableDungeonsFromSelections();
-end
-
-
-function LFGMM_SettingsTab_HidePvpCheckBox_OnClick()
-	LFGMM_DB.SETTINGS.HidePvp = LFGMM_SettingsTab_HidePvpCheckBox:GetChecked();
 	LFGMM_Core_RemoveUnavailableDungeonsFromSelections();
 end
 
