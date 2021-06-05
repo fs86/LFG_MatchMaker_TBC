@@ -2614,13 +2614,10 @@ LFGMM_GLOBAL = {
 					"sp"
 				},
 				DE = {
-					"sklaven[%W]*unterkünfte",
-					"sklaven[%W]*unterkuenfte",
-					"sklaven[%W]*unterkunft",
+					"sklaven[%W]*unterk",
+					"sklavenunterkuenfte", -- I dont know why the above pattern dosn't capture this one ...
 					"sklave[n]?",
-					"unterkünfte",
-					"unterkuenfte",
-					"unterkunft"
+					"unterk"
 				},
 				FR = {},
 				ES = {},
