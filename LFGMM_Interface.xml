@@ -658,10 +658,10 @@
 					<Slider name="LFGMM_ListTab_ScrollBarSlider" inherits="UIPanelScrollBarTemplate">
 						<Anchors>
 							<Anchor point="TOPRIGHT">
-								<Offset x="-12" y="-83" />
+								<Offset x="-12" y="-147" />
 							</Anchor>
 							<Anchor point="BOTTOMRIGHT">
-								<Offset x="-12" y="23" />
+								<Offset x="-12" y="28" />
 							</Anchor>
 						</Anchors>
 					</Slider>
@@ -1368,7 +1368,7 @@
 	</Frame>
 	
 	<!-- BROADCAST WINDOW -->
-	<Frame name="LFGMM_BroadcastWindow" hidden="true" enableMouse="true" movable="true" frameStrata="HIGH" topLevel="true" parent="UIParent">
+	<Frame name="LFGMM_BroadcastWindow" parent="UIParent" inherits="BackdropTemplate" hidden="true" enableMouse="true" movable="true" frameStrata="HIGH" topLevel="true">
 		<KeyValues>
 			<KeyValue key="backdropInfo" value="FRAME_BACKDROP_DEFAULT_DIALOG" type="global"/>
 		</KeyValues>
@@ -1462,8 +1462,8 @@
 				
 				<FontString name="LFGMM_PopupWindow_ClassText" inherits="GameFontNormal">
 					<Anchors>
-						<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
-							<Offset x="-15" y="-28" />
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+							<Offset x="55" y="-27" />
 						</Anchor>
 					</Anchors>
 				</FontString>
@@ -1521,6 +1521,16 @@
 		</Layers>
 		
 		<Frames>
+			<Button name ="LFGMM_PopupWindow_CloseButton" hidden="false" text="X" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset x="-15" y="-15" />
+					</Anchor>
+				</Anchors>
+
+				<Size x="25" y="25" />
+			</Button>
+
 			<Button name="LFGMM_PopupWindow_IgnoreButton" visible="false" text="Ignore" inherits="UIPanelButtonTemplate">
 				<Anchors>
 					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">

@@ -38,6 +38,7 @@ function LFGMM_PopupWindow_Initialize()
 	LFGMM_PopupWindow_InviteButton:SetScript("OnClick", LFGMM_PopupWindow_InviteButton_OnClick);
 	LFGMM_PopupWindow_RequestInviteButton:SetScript("OnClick", LFGMM_PopupWindow_RequestInviteButton_OnClick);
 	LFGMM_PopupWindow_SkipWaitButton:SetScript("OnClick", LFGMM_PopupWindow_SkipWaitButton_OnClick);
+	LFGMM_PopupWindow_CloseButton:SetScript("OnClick", LFGMM_PopupWindow_CloseButton_OnClick);
 	
 	LFGMM_PopupWindow.UpdateAgeTimerLock = false;
 	LFGMM_PopupWindow.UpdateWaitCountdownLock = false;
@@ -82,6 +83,9 @@ function LFGMM_PopupWindow_ShowForMatch(message)
 	LFGMM_PopupWindow_WaitCountdownText:Hide();
 	LFGMM_PopupWindow_SkipWaitButton:Hide();
 
+	-- Disable
+	LFGMM_PopupWindow_CloseButton:Disable();
+
 	-- Show and refresh
 	LFGMM_PopupWindow:Show();
 	LFGMM_PopupWindow_Refresh();
@@ -110,6 +114,9 @@ function LFGMM_PopupWindow_ShowForInviteRequested(message)
 	LFGMM_PopupWindow_RequestInviteButton:Hide();
 	LFGMM_PopupWindow_InviteButton:Hide();
 
+	-- Disable
+	LFGMM_PopupWindow_CloseButton:Disable();
+
 	-- Show and refresh
 	LFGMM_PopupWindow:Show();
 	LFGMM_PopupWindow_Refresh();
@@ -121,7 +128,6 @@ function LFGMM_PopupWindow_ShowForInviteRequested(message)
 	LFGMM_PopupWindow_StartWaitCountdown();
 end
 
-
 function LFGMM_PopupWindow_ShowForInvited(message)
 	LFGMM_PopupWindow.Type = "INVITE";
 	LFGMM_PopupWindow.Message = message;
@@ -132,6 +138,9 @@ function LFGMM_PopupWindow_ShowForInvited(message)
 	-- Show
 	LFGMM_PopupWindow_WhoButton:Show();
 	LFGMM_PopupWindow_WhisperButton:Show();
+
+	-- Enable
+	LFGMM_PopupWindow_CloseButton:Enable();
 
 	-- Hide
 	LFGMM_PopupWindow_IgnoreButton:Hide();
@@ -259,6 +268,10 @@ end
 
 
 function LFGMM_PopupWindow_SkipWaitButton_OnClick()
+	LFGMM_PopupWindow_Hide();
+end
+
+function LFGMM_PopupWindow_CloseButton_OnClick()
 	LFGMM_PopupWindow_Hide();
 end
 

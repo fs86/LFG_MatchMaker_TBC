@@ -2535,7 +2535,9 @@ LFGMM_GLOBAL = {
 					"arat[h]?i[%W]*basin",
 					"ab",
 				},
-				DE = {},
+				DE = {
+					"arat[h]?i[%W]*be[c]?ken",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2582,12 +2584,12 @@ LFGMM_GLOBAL = {
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"blo[o]?d[%W]*furnace",
+					"blo[o]?d[%W]*furna[n]?ce",
 					"furnace",
 					"[t]?bf"
 				},
 				DE = {
-					"blut[%W]*kes[s]?el",
+					"blut[%W]*kes[s]?[e]?[l]?",
 					"bk"
 				},
 				FR = {},
@@ -2667,7 +2669,9 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"mana[%W]*gruft",
-					"gruft"
+					"mana[%W]*kruft",
+					"gruft",
+					"kruft"
 				},
 				FR = {},
 				ES = {},
@@ -2871,7 +2875,7 @@ LFGMM_GLOBAL = {
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"steam[%W]*vault[s]?",
+					"steam[%W]*va[a]?ult[s]?",
 					"steam",
 					"vault[s]?"
 				},
