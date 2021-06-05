@@ -335,9 +335,6 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 	local displayHeaders = #dungeonMap > 1;
 
 	if (level == 1) then
-		-- Get dungeons and raids to list
-		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode);
-
 		if #dungeonMap > 0 then
 			-- Clear selections menu item
 			local clearItem = UIDropDownMenu_CreateInfo();
@@ -375,84 +372,6 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 					end
 				end
 			end
-
-			----------------------------------------------------------------------------
-
-			-- if (table.getn(dungeonsList) > 0) then
-			-- 	if (table.getn(raidsList) > 0 or table.getn(pvpList) > 0) then
-			-- 		-- Dungeons header
-			-- 		local dungeonsHeader = UIDropDownMenu_CreateInfo();
-			-- 		dungeonsHeader.text = "Dungeon";
-			-- 		dungeonsHeader.isTitle = true;
-			-- 		dungeonsHeader.notCheckable = true;
-			-- 		UIDropDownMenu_AddButton(dungeonsHeader);
-			-- 		buttonIndex = buttonIndex + 1;
-			-- 	end
-
-			-- 	-- Dungeon menu items
-			-- 	for _, dungeon in ipairs(dungeonsList) do
-			-- 		if (dungeon.ParentDungeon == nil) then
-			-- 			if (dungeon.SubDungeons == nil) then
-			-- 				createSingleDungeonItem(dungeon);
-			-- 			else
-			-- 				createMultiDungeonItem(dungeon, buttonIndex);
-			-- 			end
-			-- 			buttonIndex = buttonIndex + 1;
-			-- 		end
-			-- 	end
-			-- end
-
-			-- if (table.getn(raidsList) > 0) then
-			-- 	if (table.getn(dungeonsList) > 0 or table.getn(pvpList) > 0) then
-			-- 		-- Raids header
-			-- 		local raidsHeader = UIDropDownMenu_CreateInfo();
-			-- 		raidsHeader.text = "Raid";
-			-- 		raidsHeader.isTitle = true;
-			-- 		raidsHeader.notCheckable = true;
-			-- 		UIDropDownMenu_AddButton(raidsHeader);
-			-- 		buttonIndex = buttonIndex + 1;
-			-- 	end
-
-			-- 	-- Raid menu items
-			-- 	for _,raid in ipairs(raidsList) do
-			-- 		if (raid.SubDungeons == nil) then
-			-- 			createSingleDungeonItem(raid);
-			-- 		else
-			-- 			createMultiDungeonItem(raid, buttonIndex);
-			-- 		end
-			-- 		buttonIndex = buttonIndex + 1;
-			-- 	end
-			-- end
-
-			-- if (table.getn(pvpList) > 0) then
-			-- 	if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
-			-- 		-- PvP header
-			-- 		local pvpHeader = UIDropDownMenu_CreateInfo();
-			-- 		pvpHeader.text = "PvP";
-			-- 		pvpHeader.isTitle = true;
-			-- 		pvpHeader.notCheckable = true;
-			-- 		UIDropDownMenu_AddButton(pvpHeader);
-			-- 		buttonIndex = buttonIndex + 1;
-			-- 	end
-
-			-- 	-- PvP menu items
-			-- 	for _,pvp in ipairs(pvpList) do
-			-- 		if (pvp.SubDungeons == nil) then
-			-- 			createSingleDungeonItem(pvp);
-			-- 		else
-			-- 			createMultiDungeonItem(pvp, buttonIndex);
-			-- 		end
-			-- 		buttonIndex = buttonIndex + 1;
-			-- 	end
-			--end
-
-		-- else
-		-- 	-- No available dungeons item
-		-- 	local noDungeonsItem = UIDropDownMenu_CreateInfo();
-		-- 	noDungeonsItem.text = "No available dungeons";
-		-- 	noDungeonsItem.disabled = true;
-		-- 	noDungeonsItem.notCheckable = true;
-		-- 	UIDropDownMenu_AddButton(noDungeonsItem);
 		end
 
 	elseif (level == 2) then
