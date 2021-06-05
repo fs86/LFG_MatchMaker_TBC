@@ -2738,7 +2738,9 @@ LFGMM_GLOBAL = {
 					"hil[l]?s[%W]*brad",
 					"efd"
 				},
-				DE = {},
+				DE = {
+					"hdz[%W]*1"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2782,6 +2784,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					"schwarz[e]?[%W]*mor[r]?[a]?[s]?[t]?",
 					"mor[r]?ast",
+					"hdz[%W]*2"
 				},
 				FR = {},
 				ES = {},
