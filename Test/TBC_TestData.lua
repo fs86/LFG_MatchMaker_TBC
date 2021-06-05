@@ -191,6 +191,7 @@ TBC_TESTS = {
       "lfg shadow labs",
       "lfg labs",
       "1 tank for shadowlabs",
+      "mage LFG shadowlaby",
 
       -- DE
       "lfg schattenlab",

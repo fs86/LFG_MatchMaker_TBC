@@ -568,7 +568,7 @@
 					<Frame name="LFGMM_ListTab_MessageTypeDropDown" inherits="UIDropDownMenuTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
-								<Offset x="200" y="-32" />
+								<Offset x="203" y="-32" />
 							</Anchor>
 						</Anchors>
 					</Frame>
@@ -576,7 +576,7 @@
 					<CheckButton name="LFGMM_ListTab_IncludeUnknownCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="TOP">
-								<Offset x="27" y="-103" />
+								<Offset x="30" y="-103" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>

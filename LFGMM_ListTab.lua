@@ -77,7 +77,7 @@ function LFGMM_ListTab_Initialize()
 	local hLineMiddle = LFGMM_ListTab_SettingsContainer:CreateLine();
 	hLineMiddle:SetColorTexture(1, .8, 0, .9);
 	hLineMiddle:SetStartPoint("CENTER", 10, -17);
-	hLineMiddle:SetEndPoint("CENTER", 14, -17);
+	hLineMiddle:SetEndPoint("CENTER", 16, -17);
 	hLineMiddle:SetThickness(1);
 	hLineMiddle:Show();
 end

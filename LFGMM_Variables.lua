@@ -2609,6 +2609,7 @@ LFGMM_GLOBAL = {
 			Identifiers = {
 				EN = {
 					"slave[s]?[%W]*pen[s]?",
+					"slave[s]?[%W]*pan[t]?[s]?", -- :D
 					"slave[s]?",
 					"pen[s]?",
 					"sp"
@@ -2636,6 +2637,7 @@ LFGMM_GLOBAL = {
 			Identifiers = {
 				EN = {
 	                "under[%W]*bog",
+					"under",
                 	"ub"
 				},
 				DE = {
@@ -2693,6 +2695,7 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"auchenai[%W]*krypt[a]?",
+					"auchenei[%W]*krypt[a]?",
 					"krypt[a]?"
 				},
 				FR = {},
@@ -2849,7 +2852,8 @@ LFGMM_GLOBAL = {
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"shadow[%W]*[l]?[a]?[b]?[s]?",
+					"shad[d]?ow[%W]*[l]?[a]?[b]?[s]?",
+					"shad[d]?ow[%W]*[l]?[a]?[b]?[y]?",
 					"labs",
 					"sl"
 				},
@@ -2877,8 +2881,8 @@ LFGMM_GLOBAL = {
 					"vault[s]?"
 				},
 				DE = {
-					"dam[p]?f[%W]*kam[m]?[e]?[r]?",
-					"dam[p]?f",
+					"dam[m]?[p]?f[%W]*kam[m]?[e]?[r]?",
+					"dam[m]?[p]?f",
 					"dk"
 				},
 				FR = {},
