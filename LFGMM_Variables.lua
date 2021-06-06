@@ -560,7 +560,7 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					-- Die Höhlen des Wehklagens
-					"hö[h]?len[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
+					"ho[h]?len[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"ho[e]?hlen[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"hdw",
 				},
@@ -1001,7 +1001,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					-- Hügel der Klingenhauer / Die Hügel von Razorfen
 					"hu[e]?gel",
-					"hügel"
+					"hugel"
 				},
 				FR = {
 					-- Souilles de Tranchebauge
@@ -2017,7 +2017,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					-- Düsterbruch
 					"du[e]?ster[%W]*bruch",
-					"düster[%W]*bruch",
+					"duster[%W]*bruch",
 					"db",
 				},
 				FR = {
@@ -2559,9 +2559,9 @@ LFGMM_GLOBAL = {
 					"hr"
 				},
 				DE = {
-					"höl[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
-					"hoel[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
-					"höl[l]?en[%W]*feuer",
+					"hol[l]?en[%W]*feuer[%W]*bol[l]?[w]?[e]?[r]?[k]?",
+					"hoel[l]?en[%W]*feuer[%W]*bol[l]?[w]?[e]?[r]?[k]?",
+					"hol[l]?en[%W]*feuer",
 					"hoel[l]?en[%W]*feuer",
 					"bol[l]werk",
 					"bol[l]w",
@@ -2615,8 +2615,8 @@ LFGMM_GLOBAL = {
 					"sp"
 				},
 				DE = {
-					"sklaven[%W]*unterk",
-					"sklavenunterkuenfte", -- I dont know why the above pattern dosn't capture this one ...
+					"sklaven[%W]*unterkunfte",
+					-- "sklavenunterkuenfte", -- I dont know why the above pattern dosn't capture this one ...
 					"sklave[n]?",
 					"unterk"
 				},
@@ -2859,6 +2859,7 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"schat[t]?en[%W]*lab[y]?[r]?[i]?[n]?[t]?[h]?",
+					"schab[b]?[y]?"
 				},
 				FR = {},
 				ES = {},

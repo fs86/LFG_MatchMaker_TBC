@@ -230,12 +230,15 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 	
 	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
 	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 	
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
 end
 
 
