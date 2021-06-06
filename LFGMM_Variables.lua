@@ -56,7 +56,6 @@ function LFGMM_Load()
 				ShowMinimapButton = true,
 				HideLowLevel = false,
 				HideHighLevel = false,
-				HidePvp = false,
 				HideRaids = false,
 				MinimapLibDBSettings = {},
 				IdentifierLanguages = { "EN" },
@@ -91,6 +90,7 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
+					CategoryCode = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -146,6 +146,13 @@ end
 -- GLOBAL VARIABLES
 ------------------------------------------------------------------------------------------------------------------------
 
+LFGMM_KEYS = {
+	DUNGEON_CATEGORIES = {
+		VANILLA = "VANILLA_DUNGEONS",
+		TBC = "TBC_DUNGEONS",
+		PVP = "PVP",
+	}
+}
 
 LFGMM_GLOBAL = {
 	READY = false,
@@ -163,6 +170,24 @@ LFGMM_GLOBAL = {
 	TRADE_CHANNEL_AVAILABLE = false,
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
+	CATEGORIES = {
+		-- {
+		-- 	Code = "TEST",
+		-- 	Name = "Test",
+		-- },
+		{
+			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+			Name = "Vanilla Dungeons",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+			Name = "Burning Crusade Dungeons",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
+			Name = "PvP",
+		}
+	},
 	LANGUAGES = {
 		{
 			Code = "EN",
@@ -472,13 +497,27 @@ LFGMM_GLOBAL = {
 		FR = {},
 		ES = {},
 		RU = {}
-
+	},
+	NOT_BOOST_IDENTIFIERS = {
+		EN = {
+			"no[%W]*bo[o]?st",
+			"without[%W]*bo[o]?st",
+			"w/o[%W]*bo[o]?st",
+		},
+		DE = {
+			"kein[%W]*bo[o]st",
+			"ohne[%W]*bo[o]st",
+		},
+		FR = {},
+		ES = {},
+		RU = {}
 	},
 	DUNGEONS = {
 		{
 			Index = 1,
 			Name = "Ragefire Chasm",
 			Abbreviation = "RFC",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"rage[%W]*fire[%W]*c[h]?asm",
@@ -513,6 +552,7 @@ LFGMM_GLOBAL = {
 			Index = 2,
 			Name = "Wailing Caverns",
 			Abbreviation = "WC",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"wa[i]?ling[%W]*cavern[s]?",
@@ -520,7 +560,7 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					-- Die Höhlen des Wehklagens
-					"hö[h]?len[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
+					"ho[h]?len[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"ho[e]?hlen[%W]*[d]?[e]?[s]?[%W]*we[h]?klagen[s]?",
 					"hdw",
 				},
@@ -543,6 +583,7 @@ LFGMM_GLOBAL = {
 			Index = 3,
 			Name = "The Deadmines",
 			Abbreviation = "Deadmines",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"deadm",
@@ -575,6 +616,7 @@ LFGMM_GLOBAL = {
 			Index = 4,
 			Name = "Shadowfang Keep",
 			Abbreviation = "SFK",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"shadow[%W]*fang[%W]*ke[e]?p",
@@ -609,6 +651,7 @@ LFGMM_GLOBAL = {
 			Index = 5,
 			Name = "Blackfathom Deeps",
 			Abbreviation = "BFD",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*fat[h]?om[%W]*de[e]?p[t]?[h]?[s]?",
@@ -641,6 +684,7 @@ LFGMM_GLOBAL = {
 			Index = 6,
 			Name = "Stormwind Stockade",
 			Abbreviation = "Stockades",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"stockade[s]?",
@@ -668,6 +712,7 @@ LFGMM_GLOBAL = {
 			Index = 7,
 			Name = "Scarlet Monastery",
 			Abbreviation = "SM",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"scarlet[%W]*mon[e]?[a]?st[e]?[a]?ry",
@@ -708,6 +753,7 @@ LFGMM_GLOBAL = {
 			Index = 8,
 			Name = "Scarlet Monastery - Graveyard",
 			Abbreviation = "SM GY",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"smg[r]?[a]?[v]?[e]?y[e]?[a]?[r]?[d]?",
@@ -777,6 +823,7 @@ LFGMM_GLOBAL = {
 			Index = 9,
 			Name = "Scarlet Monastery - Library",
 			Abbreviation = "SM LIB",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"smlib[r]?[a]?[r]?[y]?",
@@ -816,6 +863,7 @@ LFGMM_GLOBAL = {
 			Index = 10,
 			Name = "Scarlet Monastery - Armory",
 			Abbreviation = "SM ARM",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"smarmo[u]?ry",
@@ -859,6 +907,7 @@ LFGMM_GLOBAL = {
 			Index = 11,
 			Name = "Scarlet Monastery - Cathedral",
 			Abbreviation = "SM CATH",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"smcat[h]?[e]?[d]?[r]?[a]?[l]?",
@@ -895,6 +944,7 @@ LFGMM_GLOBAL = {
 			Index = 12,
 			Name = "Gnomeregan",
 			Abbreviation = "Gnomeregan",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"g[e]?no[r]?m[e]?[r]?[e]?[a]?g[e]?[r]?an",
@@ -913,6 +963,7 @@ LFGMM_GLOBAL = {
 			Index = 13,
 			Name = "Razorfen Kraul",
 			Abbreviation = "RFK",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"razo[rn]?[%W]*fen[%W]*kraul",
@@ -941,6 +992,7 @@ LFGMM_GLOBAL = {
 			Index = 14,
 			Name = "Razorfen Downs",
 			Abbreviation = "RFD",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"razo[rn]?[%W]*fen[%W]*down[s]?",
@@ -949,7 +1001,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					-- Hügel der Klingenhauer / Die Hügel von Razorfen
 					"hu[e]?gel",
-					"hügel"
+					"hugel"
 				},
 				FR = {
 					-- Souilles de Tranchebauge
@@ -970,6 +1022,7 @@ LFGMM_GLOBAL = {
 			Index = 15,
 			Name = "Uldaman",
 			Abbreviation = "Uldaman",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"uldaman",
@@ -988,6 +1041,7 @@ LFGMM_GLOBAL = {
 			Index = 16,
 			Name = "Zul'Farrak",
 			Abbreviation = "ZF",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"zul[l]?[%W]*far[r]?ak[k]?",
@@ -1013,6 +1067,7 @@ LFGMM_GLOBAL = {
 			Index = 17,
 			Name = "Maraudon",
 			Abbreviation = "Mara",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?",
@@ -1031,6 +1086,7 @@ LFGMM_GLOBAL = {
 			Index = 18,
 			Name = "Maraudon - Orange",
 			Abbreviation = "Mara Orange",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+orange",
@@ -1058,6 +1114,7 @@ LFGMM_GLOBAL = {
 			Index = 19,
 			Name = "Maraudon - Purple",
 			Abbreviation = "Mara Purple",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+purple",
@@ -1085,6 +1142,7 @@ LFGMM_GLOBAL = {
 			Index = 20,
 			Name = "Maraudon - Inner",
 			Abbreviation = "Mara Inner",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ma[r]?[u]?ra[u]?[d]?[ou]?[ou]?[n]?.-[%W]+inner",
@@ -1121,6 +1179,7 @@ LFGMM_GLOBAL = {
 			Index = 21,
 			Name = "Temple of Atal'Hakkar",
 			Abbreviation = "ST",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"atal[%W]*hak[k]?ar",
@@ -1164,6 +1223,7 @@ LFGMM_GLOBAL = {
 			Index = 22,
 			Name = "Blackrock Depths",
 			Abbreviation = "BRD",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s",
@@ -1195,6 +1255,7 @@ LFGMM_GLOBAL = {
 			Index = 23,
 			Name = "Blackrock Depths - Quest Run",
 			Abbreviation = "BRD Quest Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+quest[s]?",
@@ -1236,6 +1297,7 @@ LFGMM_GLOBAL = {
 			Index = 24,
 			Name = "Blackrock Depths - Attunement Run",
 			Abbreviation = "BRD Attunement Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+at[t]?un[e]?ment",
@@ -1291,6 +1353,7 @@ LFGMM_GLOBAL = {
 			Index = 25,
 			Name = "Blackrock Depths - Arena Run",
 			Abbreviation = "BRD Arena Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+arena",
@@ -1345,6 +1408,7 @@ LFGMM_GLOBAL = {
 			Index = 26,
 			Name = "Blackrock Depths - Angerforge Run",
 			Abbreviation = "BRD Angerforge Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+anger[f]?[g]?[o]?[r]?[g]?[e]?",
@@ -1406,6 +1470,7 @@ LFGMM_GLOBAL = {
 			Index = 27,
 			Name = "Blackrock Depths - Golem Run",
 			Abbreviation = "BRD Golem Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+golem[l]?[o]?[r]?[d]?",
@@ -1449,6 +1514,7 @@ LFGMM_GLOBAL = {
 			Index = 28,
 			Name = "Blackrock Depths - Prison Run",
 			Abbreviation = "BRD Prison Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+prison",
@@ -1491,6 +1557,7 @@ LFGMM_GLOBAL = {
 			Index = 29,
 			Name = "Blackrock Depths - Vault Run",
 			Abbreviation = "BRD Vault Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+vault",
@@ -1533,6 +1600,7 @@ LFGMM_GLOBAL = {
 			Index = 30,
 			Name = "Blackrock Depths - Lava Run",
 			Abbreviation = "BRD Lava Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+lava",
@@ -1575,6 +1643,7 @@ LFGMM_GLOBAL = {
 			Index = 31,
 			Name = "Blackrock Depths - Emperor Run",
 			Abbreviation = "BRD Emperor Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+emp[r]?[e]?[r]?[o]?[r]?",
@@ -1637,6 +1706,7 @@ LFGMM_GLOBAL = {
 			Index = 32,
 			Name = "Blackrock Depths - Princess Run",
 			Abbreviation = "BRD Princess Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"black[%W]*rock[%W]*dep[t]?[h]?s.-[%W]+princes[s]?",
@@ -1708,6 +1778,7 @@ LFGMM_GLOBAL = {
 			Index = 33,
 			Name = "Lower Blackrock Spire",
 			Abbreviation = "LBRS",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"lower[%W]*black[%W]*rock[%W]*spire",
@@ -1741,6 +1812,7 @@ LFGMM_GLOBAL = {
 			Index = 34,
 			Name = "Upper Blackrock Spire",
 			Abbreviation = "UBRS",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"up[p]?er[%W]*black[%W]*rock[%W]*spire",
@@ -1779,6 +1851,7 @@ LFGMM_GLOBAL = {
 			Index = 35,
 			Name = "Scholomance",
 			Abbreviation = "Scholo",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"s[c]?[h]?ol[o]?[l]?[o]?man[c]?[s]?e",
@@ -1799,6 +1872,7 @@ LFGMM_GLOBAL = {
 			Index = 36,
 			Name = "Stratholme",
 			Abbreviation = "Strat",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?",
@@ -1819,6 +1893,7 @@ LFGMM_GLOBAL = {
 			Index = 37,
 			Name = "Stratholme - Living Side",
 			Abbreviation = "Strat Living",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?[a]?liv[ei]?[n]?[g]?",
@@ -1870,6 +1945,7 @@ LFGMM_GLOBAL = {
 			Index = 38,
 			Name = "Stratholme - Undead Side",
 			Abbreviation = "Strat Undead",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"st[a]?rat[h]?[o]?[l]?[m]?[e]?u[n]?d[e]?[a]?[d]?",
@@ -1932,6 +2008,7 @@ LFGMM_GLOBAL = {
 			Index = 39,
 			Name = "Dire Maul",
 			Abbreviation = "DM",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"dire[%W]*maul",
@@ -1940,7 +2017,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					-- Düsterbruch
 					"du[e]?ster[%W]*bruch",
-					"düster[%W]*bruch",
+					"duster[%W]*bruch",
 					"db",
 				},
 				FR = {
@@ -1963,6 +2040,7 @@ LFGMM_GLOBAL = {
 			Index = 40,
 			Name = "Dire Maul - East",
 			Abbreviation = "DM East",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"d[i]?me",
@@ -2026,6 +2104,7 @@ LFGMM_GLOBAL = {
 			Index = 41,
 			Name = "Dire Maul - West",
 			Abbreviation = "DM West",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"d[i]?mw",
@@ -2086,6 +2165,7 @@ LFGMM_GLOBAL = {
 			Index = 42,
 			Name = "Dire Maul - North",
 			Abbreviation = "DM North",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"d[i]?mn",
@@ -2144,6 +2224,7 @@ LFGMM_GLOBAL = {
 			Index = 43,
 			Name = "Dire Maul - Tribute Run",
 			Abbreviation = "DM Tribute Run",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"d[i]?mt",
@@ -2202,6 +2283,7 @@ LFGMM_GLOBAL = {
 			Index = 44,
 			Name = "Molten Core",
 			Abbreviation = "MC",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"molten[%W]*core",
@@ -2239,6 +2321,7 @@ LFGMM_GLOBAL = {
 			Index = 45,
 			Name = "Onyxia's Lair",
 			Abbreviation = "Onyxia",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ony[i]?[x]?[iy]?[e]?[a]?",
@@ -2279,6 +2362,7 @@ LFGMM_GLOBAL = {
 			Index = 46,
 			Name = "Blackwing Lair",
 			Abbreviation = "BWL",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"blackwing[%W]*lair",
@@ -2303,6 +2387,7 @@ LFGMM_GLOBAL = {
 			Index = 47,
 			Name = "Zul'Gurub",
 			Abbreviation = "ZG",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"zul[l]?[%W]*g[u]?rub",
@@ -2321,6 +2406,7 @@ LFGMM_GLOBAL = {
 			Index = 48,
 			Name = "Ruins of Ahn'Qiraj",
 			Abbreviation = "AQ20",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"ruin[s]?[%W]*[o]?[f]?[%W]*ahn[%W]*qiraj",
@@ -2342,6 +2428,7 @@ LFGMM_GLOBAL = {
 			Index = 49,
 			Name = "Temple of Ahn'Qiraj",
 			Abbreviation = "AQ40",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"temple[%W]*[o]?[f]?[%W]*ahn[%W]*qiraj",
@@ -2363,6 +2450,7 @@ LFGMM_GLOBAL = {
 			Index = 50,
 			Name = "Naxxramas",
 			Abbreviation = "Naxx",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Identifiers = {
 				EN = {
 					"naxx[a]?ramas",
@@ -2381,6 +2469,7 @@ LFGMM_GLOBAL = {
 			Index = 51,
 			Name = "Warsong Gulch",
 			Abbreviation = "WSG",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {
 				EN = {
 					"war[%W]*song[%W]*gulch",
@@ -2410,6 +2499,7 @@ LFGMM_GLOBAL = {
 			Index = 52,
 			Name = "Alterac Valley",
 			Abbreviation = "AV",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {
 				EN = {
 					"alterac[%W]*val[l]?ey",
@@ -2439,12 +2529,15 @@ LFGMM_GLOBAL = {
 			Index = 53,
 			Name = "Arathi Basin",
 			Abbreviation = "AB",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {
 				EN = {
 					"arat[h]?i[%W]*basin",
 					"ab",
 				},
-				DE = {},
+				DE = {
+					"arat[h]?i[%W]*be[c]?ken",
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2458,6 +2551,7 @@ LFGMM_GLOBAL = {
 			Index = 54,
 			Name = "Hellfire Ramparts",
 			Abbreviation = "Ramps",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"ramp[a]?[r]?[t]?[s]?",
@@ -2465,9 +2559,9 @@ LFGMM_GLOBAL = {
 					"hr"
 				},
 				DE = {
-					"höl[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
-					"hoel[l]?en[%W]*feuer[%W]*boll[w]?[e]?[r]?[k]?",
-					"höl[l]?en[%W]*feuer",
+					"hol[l]?en[%W]*feuer[%W]*bol[l]?[w]?[e]?[r]?[k]?",
+					"hoel[l]?en[%W]*feuer[%W]*bol[l]?[w]?[e]?[r]?[k]?",
+					"hol[l]?en[%W]*feuer",
 					"hoel[l]?en[%W]*feuer",
 					"bol[l]werk",
 					"bol[l]w",
@@ -2487,14 +2581,15 @@ LFGMM_GLOBAL = {
 			Index = 55,
 			Name = "The Blood Furnace",
 			Abbreviation = "BF",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"blo[o]?d[%W]*furnace",
+					"blo[o]?d[%W]*furna[n]?ce",
 					"furnace",
 					"[t]?bf"
 				},
 				DE = {
-					"blut[%W]*kes[s]?el",
+					"blut[%W]*kes[s]?[e]?[l]?",
 					"bk"
 				},
 				FR = {},
@@ -2510,21 +2605,20 @@ LFGMM_GLOBAL = {
 			Index = 56,
 			Name = "The Slave Pens",
 			Abbreviation = "SP",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"slave[s]?[%W]*pen[s]?",
+					"slave[s]?[%W]*pan[t]?[s]?", -- :D
 					"slave[s]?",
 					"pen[s]?",
 					"sp"
 				},
 				DE = {
-					"sklaven[%W]*unterkünfte",
-					"sklaven[%W]*unterkuenfte",
-					"sklaven[%W]*unterkunft",
+					"sklaven[%W]*unterkunfte",
+					-- "sklavenunterkuenfte", -- I dont know why the above pattern dosn't capture this one ...
 					"sklave[n]?",
-					"unterkünfte",
-					"unterkuenfte",
-					"unterkunft"
+					"unterk"
 				},
 				FR = {},
 				ES = {},
@@ -2539,9 +2633,11 @@ LFGMM_GLOBAL = {
 			Index = 57,
 			Name = "The Underbog",
 			Abbreviation = "UB",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 	                "under[%W]*bog",
+					"under",
                 	"ub"
 				},
 				DE = {
@@ -2562,6 +2658,7 @@ LFGMM_GLOBAL = {
 			Index = 58,
 			Name = "Mana-Tombs",
 			Abbreviation = "MT",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"mana[%W]*tomb[s]?",
@@ -2571,7 +2668,9 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"mana[%W]*gruft",
-					"gruft"
+					"mana[%W]*kruft",
+					"gruft",
+					"kruft"
 				},
 				FR = {},
 				ES = {},
@@ -2586,6 +2685,7 @@ LFGMM_GLOBAL = {
 			Index = 59,
 			Name = "Auchenai Crypts",
 			Abbreviation = "Crypts",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"auchenai[%W]*crypt[a]?[s]?",
@@ -2595,6 +2695,7 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"auchenai[%W]*krypt[a]?",
+					"auchenei[%W]*krypt[a]?",
 					"krypt[a]?"
 				},
 				FR = {},
@@ -2610,6 +2711,7 @@ LFGMM_GLOBAL = {
 			Index = 60,
 			Name = "Sethekk Halls",
 			Abbreviation = "Seth",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"sethek[k]?[%W]*hall[s]?",
@@ -2632,6 +2734,7 @@ LFGMM_GLOBAL = {
 			Index = 61,
 			Name = "Escape from Durnholde",
 			Abbreviation = "OH",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"cot[%W]*1",
@@ -2639,7 +2742,9 @@ LFGMM_GLOBAL = {
 					"hil[l]?s[%W]*brad",
 					"efd"
 				},
-				DE = {},
+				DE = {
+					"hdz[%W]*1"
+				},
 				FR = {},
 				ES = {},
 				RU = {},
@@ -2653,6 +2758,7 @@ LFGMM_GLOBAL = {
 			Index = 62,
 			Name = "The Mechanar",
 			Abbreviation = "Mech",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"mech[a]?[n]?[a]?[r]?"
@@ -2671,6 +2777,7 @@ LFGMM_GLOBAL = {
 			Index = 63,
 			Name = "Black Morass",
 			Abbreviation = "BM",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"black[%W]*mor[a]?[s]?[s]?",
@@ -2681,6 +2788,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					"schwarz[e]?[%W]*mor[r]?[a]?[s]?[t]?",
 					"mor[r]?ast",
+					"hdz[%W]*2"
 				},
 				FR = {},
 				ES = {},
@@ -2695,6 +2803,7 @@ LFGMM_GLOBAL = {
 			Index = 64,
 			Name = "The Shattered Halls",
 			Abbreviation = "SH",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"shat[t]?[e]?[r]?[e]?[d]?[%W]*hal[l]?[s]?",
@@ -2719,6 +2828,7 @@ LFGMM_GLOBAL = {
 			Index = 65,
 			Name = "The Botanica",
 			Abbreviation = "Bot",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"bot[a]?[n]?[i]?[c]?[a]?",
@@ -2739,14 +2849,17 @@ LFGMM_GLOBAL = {
 			Index = 66,
 			Name = "Shadow Labyrinth",
 			Abbreviation = "SL",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"shadow[%W]*[l]?[a]?[b]?[s]?",
+					"shad[d]?ow[%W]*[l]?[a]?[b]?[s]?",
+					"shad[d]?ow[%W]*[l]?[a]?[b]?[y]?",
 					"labs",
 					"sl"
 				},
 				DE = {
 					"schat[t]?en[%W]*lab[y]?[r]?[i]?[n]?[t]?[h]?",
+					"schab[b]?[y]?"
 				},
 				FR = {},
 				ES = {},
@@ -2761,15 +2874,16 @@ LFGMM_GLOBAL = {
 			Index = 67,
 			Name = "The Steamvaults",
 			Abbreviation = "SV",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"steam[%W]*vault[s]?",
+					"steam[%W]*va[a]?ult[s]?",
 					"steam",
 					"vault[s]?"
 				},
 				DE = {
-					"dam[p]?f[%W]*kam[m]?[e]?[r]?",
-					"dam[p]?f",
+					"dam[m]?[p]?f[%W]*kam[m]?[e]?[r]?",
+					"dam[m]?[p]?f",
 					"dk"
 				},
 				FR = {},
@@ -2785,6 +2899,7 @@ LFGMM_GLOBAL = {
 			Index = 68,
 			Name = "The Arcatraz",
 			Abbreviation = "Arc",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"arca[%W]*[t]?[r]?[a]?[z]?",
@@ -2805,6 +2920,7 @@ LFGMM_GLOBAL = {
 			Index = 69,
 			Name = "Karazahn",
 			Abbreviation = "KZ",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"kara[%W]*[z]?[a]?[h]?[n]?",
@@ -2824,6 +2940,7 @@ LFGMM_GLOBAL = {
 			Index = 70,
 			Name = "Gruul's Lair",
 			Abbreviation = "GL",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"gru[u]?l[']?[s]?"
@@ -2844,6 +2961,7 @@ LFGMM_GLOBAL = {
 			Index = 71,
 			Name = "Magtheridon's Lair",
 			Abbreviation = "Mag",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
 					"magtheridon",

@@ -25,12 +25,18 @@
 -- LIST TAB
 ------------------------------------------------------------------------------------------------------------------------
 
-
 function LFGMM_ListTab_Initialize()
-	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown, 125, LFGMM_ListTab_DungeonsDropDown_OnInitialize);
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_VANILLA, 120, LFGMM_ListTab_DungeonsDropDown_VANILLA_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_TBC, 120, LFGMM_ListTab_DungeonsDropDown_TBC_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_PVP, 120, LFGMM_ListTab_DungeonsDropDown_PVP_OnInitialize);
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_MessageTypeDropDown, 135, LFGMM_ListTab_MessageTypeDropDown_OnInitialize);
+	LFGMM_Utility_InitializeCheckbox(LFGMM_ListTab_IncludeUnknownCheckBox, "Include unknown", "Include requests that cannot be matched", LFGMM_DB.LIST.ShowUnknownDungeons, LFGMM_ListTab_IncludeUnknownCheckBox_OnClick);
+
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
+
+	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_MessageTypeDropDown, 120, LFGMM_ListTab_MessageTypeDropDown_OnInitialize);
 	LFGMM_ListTab_MessageTypeDropDown_UpdateText();
 
 	UIDropDownMenu_Initialize(LFGMM_ListTab_ContextMenuDropDown, LFGMM_ListTab_ContextMenuDropDown_OnInitialize, "MENU");
@@ -44,15 +50,43 @@ function LFGMM_ListTab_Initialize()
 	LFGMM_ListTab_MessageInfoWindow_WhoButton:SetScript("OnClick", LFGMM_ListTab_MessageInfoWindow_WhoButton_OnClick);
 	LFGMM_ListTab_MessageInfoWindow_InviteButton:SetScript("OnClick", LFGMM_ListTab_MessageInfoWindow_InviteButton_OnClick);
 	LFGMM_ListTab_MessageInfoWindow_RequestInviteButton:SetScript("OnClick", LFGMM_ListTab_MessageInfoWindow_RequestInviteButton_OnClick);
-	
+
 	LFGMM_ListTab_ConfirmForgetAll_YesButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_YesButton_OnClick);
 	LFGMM_ListTab_ConfirmForgetAll_NoButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_NoButton_OnClick);
+
+	local vLine = LFGMM_ListTab_SettingsContainer:CreateLine();
+	vLine:SetColorTexture(1, .8, 0, .9);
+	vLine:SetStartPoint("TOP", 10, 10);
+	vLine:SetEndPoint("BOTTOM", 10, 10);
+	vLine:SetThickness(1);
+	vLine:Show();
+
+	local hLineTop = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineTop:SetColorTexture(1, .8, 0, .9);
+	hLineTop:SetStartPoint("TOP", 10, 10);
+	hLineTop:SetEndPoint("TOP", 6, 10);
+	hLineTop:SetThickness(1);
+	hLineTop:Show();
+
+	local hLineBottom = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineBottom:SetColorTexture(1, .8, 0, .9);
+	hLineBottom:SetStartPoint("BOTTOM", 10, 10);
+	hLineBottom:SetEndPoint("BOTTOM", 6, 10);
+	hLineBottom:SetThickness(1);
+	hLineBottom:Show();
+
+	local hLineMiddle = LFGMM_ListTab_SettingsContainer:CreateLine();
+	hLineMiddle:SetColorTexture(1, .8, 0, .9);
+	hLineMiddle:SetStartPoint("CENTER", 10, -17);
+	hLineMiddle:SetEndPoint("CENTER", 16, -17);
+	hLineMiddle:SetThickness(1);
+	hLineMiddle:Show();
 end
 
 
 function LFGMM_ListTab_Show()
 	PanelTemplates_SetTab(LFGMM_MainWindow, 3);
-						
+
 	LFGMM_LfgTab_BroadcastMessageInfoWindow:Hide();
 	LFGMM_LfmTab_BroadcastMessageInfoWindow:Hide();
 	LFGMM_SettingsTab_RequestInviteMessageInfoWindow:Hide();
@@ -63,12 +97,12 @@ function LFGMM_ListTab_Show()
 	LFGMM_LfmTab:Hide();
 	LFGMM_ListTab:Show();
 	LFGMM_SettingsTab:Hide();
-	
+
 	LFGMM_MainWindowTab1:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMLEFT",    60, -14);
 	LFGMM_MainWindowTab2:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMLEFT",   135, -14);
 	LFGMM_MainWindowTab3:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMRIGHT", -140, -17);
 	LFGMM_MainWindowTab4:SetPoint ("CENTER", "LFGMM_MainWindow", "BOTTOMRIGHT",  -60, -14);
-	
+
 	LFGMM_ListTab_Refresh();
 end
 
@@ -86,9 +120,9 @@ function LFGMM_ListTab_Refresh()
 	local filteredMessages = {};
 	for _,message in pairs(LFGMM_GLOBAL.MESSAGES) do
 		local skip = false;
-		
+
 		-- Determine if message should be skipped
-		if ((not LFGMM_DB.LIST.MessageTypes.Unknown and message.Type == "UNKNOWN") or 
+		if ((not LFGMM_DB.LIST.MessageTypes.Unknown and message.Type == "UNKNOWN") or
 			(not LFGMM_DB.LIST.MessageTypes.Lfg and message.Type == "LFG") or
 			(not LFGMM_DB.LIST.MessageTypes.Lfm and message.Type == "LFM"))
 		then
@@ -114,7 +148,7 @@ function LFGMM_ListTab_Refresh()
 						end
 					end
 				end
-				
+
 				if (not subDungeonFound and LFGMM_Utility_ArrayContains(LFGMM_DB.LIST.Dungeons, dungeon.Index)) then
 					dungeonFilterMatched = true;
 					break;
@@ -125,7 +159,7 @@ function LFGMM_ListTab_Refresh()
 				skip = true;
 			end
 		end
-		
+
 		-- Add message
 		if (not skip) then
 			table.insert(filteredMessages, message);
@@ -133,7 +167,7 @@ function LFGMM_ListTab_Refresh()
 			LFGMM_ListTab_MessageInfoWindow_HideForMessage(message);
 		end
 	end
-	
+
 	-- Sort messages
 	table.sort(filteredMessages, function(left, right) return left.SortIndex < right.SortIndex;	end);
 
@@ -162,10 +196,10 @@ function LFGMM_ListTab_Refresh()
 	for index=startEntryIndex,startEntryIndex+6 do
 		if (filteredMessages[index] ~= nil) then
 			local message = filteredMessages[index];
-		
+
 			-- Class
 			getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "ClassIcon"):SetTexCoord(unpack(message.PlayerClass.IconCoordinates));
-		
+
 			-- Player
 			local playerLevel = "";
 			if (message.PlayerLevel ~= nil) then
@@ -186,7 +220,7 @@ function LFGMM_ListTab_Refresh()
 				messageText = messageText .. "...";
 				messageLabel:SetText(messageText);
 			end
-		
+
 			-- Dungeons
 			local dungeonsLabel = getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "Dungeon");
 			if (table.getn(message.Dungeons) == 0) then
@@ -196,7 +230,7 @@ function LFGMM_ListTab_Refresh()
 				local _,dungeonsText = LFGMM_Utility_GetDungeonMessageText(message.Dungeons, ", ", ", ");
 				dungeonsLabel:SetText(dungeonsText);
 				dungeonsLabel:SetTextColor(0, 1, 0);
-				
+
 				if (dungeonsLabel:GetStringWidth() > 280) then
 				while (dungeonsLabel:GetStringWidth() > 280) do
 					dungeonsText = string.sub(dungeonsText, 1, string.len(dungeonsText) - 1);
@@ -206,7 +240,7 @@ function LFGMM_ListTab_Refresh()
 					dungeonsLabel:SetText(dungeonsText);
 				end
 			end
-			
+
 			-- Type
 			local typeLabel = getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "Type");
 			if (message.Type == "LFG") then
@@ -219,14 +253,14 @@ function LFGMM_ListTab_Refresh()
 				typeLabel:SetText("?  ");
 				typeLabel:SetTextColor(1, 0, 0);
 			end
-		
+
 			-- Info button
 			local infoButton = getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "InfoButton");
 			infoButton.Message = message;
-		
+
 			-- Show
 			getglobal("LFGMM_ListTab_Entry" .. entryIndex):Show();
-			
+
 			entryIndex = entryIndex + 1;
 		end
 	end
@@ -239,8 +273,33 @@ function LFGMM_ListTab_Refresh()
 	end
 end
 
+function LFGMM_ListTab_IncludeUnknownCheckBox_OnClick(self)
+	LFGMM_DB.LIST.ShowUnknownDungeons = LFGMM_ListTab_IncludeUnknownCheckBox:GetChecked();
+	LFGMM_ListTab_Refresh();
+end
 
-function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
+function LFGMM_ListTab_DungeonsDropDown_VANILLA_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA];
+	LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA, dungeonMap);
+end
+
+function LFGMM_ListTab_DungeonsDropDown_TBC_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC];
+	LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.TBC, dungeonMap);
+end
+
+function LFGMM_ListTab_DungeonsDropDown_PVP_OnInitialize(self, level)
+	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
+	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.PVP];
+	LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(
+		level, LFGMM_KEYS.DUNGEON_CATEGORIES.PVP, dungeonMap);
+end
+
+function LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(level, categoryCode, dungeonMap)
 	local createSingleDungeonItem = function(dungeon)
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.keepShownOnClick = true;
@@ -253,11 +312,11 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
 				LFGMM_Utility_ArrayRemove(LFGMM_DB.LIST.Dungeons, dungeonIndex);
 			end
 
-			LFGMM_ListTab_DungeonsDropDown_Item_OnClick();
+			LFGMM_ListTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 1);
 	end
-	
+
 	local createMultiDungeonItem = function(dungeon)
 		-- Get available subdungeons
 		local availableSubDungeons = {};
@@ -266,7 +325,7 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
 				table.insert(availableSubDungeons, subDungeonIndex);
 			end
 		end
-	
+
 		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
 		item.hasArrow = true;
 		item.keepShownOnClick = true;
@@ -279,12 +338,12 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
 			else
 				LFGMM_Utility_ArrayRemove(LFGMM_DB.LIST.Dungeons, dungeon.Index);
 			end
-			
-			LFGMM_ListTab_DungeonsDropDown_Item_OnClick();
+
+			LFGMM_ListTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 1);
 	end
-	
+
 	local createSubDungeonItem = function(dungeonIndex)
 		-- Create dungeon menu item
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
@@ -299,110 +358,58 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
 				LFGMM_Utility_ArrayRemove(LFGMM_DB.LIST.Dungeons, dungeon.Index);
 			end
 
-			LFGMM_ListTab_DungeonsDropDown_Item_OnClick();
+			LFGMM_ListTab_DungeonsDropDown_Item_OnClick(categoryCode);
 		end
 		UIDropDownMenu_AddButton(item, 2);
 	end
-	
-	if (level == 1) then
-		-- Get dungeons and raids to list
-		local dungeonsList, raidsList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted();
 
+	if level == 1 then
 		-- Clear selection menu item
 		local clearItem = UIDropDownMenu_CreateInfo();
 		clearItem.text = "<Clear selection>";
 		clearItem.justifyH = "CENTER";
 		clearItem.notCheckable = true;
-		clearItem.func = LFGMM_ListTab_DungeonsDropDown_ClearSelections_OnClick;
+		clearItem.func = function()
+			LFGMM_ListTab_DungeonsDropDown_ClearSelections_OnClick(categoryCode);
+		end
 		UIDropDownMenu_AddButton(clearItem);
-		
+
 		-- Select all menu item
 		local selectAllItem = UIDropDownMenu_CreateInfo();
 		selectAllItem.text = "<Select all>";
 		selectAllItem.justifyH = "CENTER";
 		selectAllItem.notCheckable = true;
-		selectAllItem.func = LFGMM_ListTab_DungeonsDropDown_SelectAll_OnClick;
-		UIDropDownMenu_AddButton(selectAllItem);
-		
-		-- Unknown dungeon menu item
-		local unknownItem = UIDropDownMenu_CreateInfo();
-		unknownItem.text = "Unknown";
-		unknownItem.colorCode = "|c00f00000";
-		unknownItem.keepShownOnClick = true;
-		unknownItem.isNotRadio = true;
-		unknownItem.checked = LFGMM_DB.LIST.ShowUnknownDungeons;
-		unknownItem.func = function(self)
-			LFGMM_DB.LIST.ShowUnknownDungeons = self.checked;
-			LFGMM_ListTab_DungeonsDropDown_Item_OnClick();
+		selectAllItem.func = function()
+			LFGMM_ListTab_DungeonsDropDown_SelectAll_OnClick(categoryCode);
 		end
-		unknownItem.arg1 = { Index = 0 };
-		UIDropDownMenu_AddButton(unknownItem, 1);
+		UIDropDownMenu_AddButton(selectAllItem);
 
-		if (table.getn(dungeonsList) > 0) then
-			if (table.getn(raidsList) > 0 or table.getn(pvpList) > 0) then
-				-- Dungeons header
-				local dungeonsHeader = UIDropDownMenu_CreateInfo();
-				dungeonsHeader.text = "Dungeon";
-				dungeonsHeader.isTitle = true;
-				dungeonsHeader.notCheckable = true;
-				UIDropDownMenu_AddButton(dungeonsHeader);
-			end
+		if #dungeonMap > 0 then
+			for _, entry in ipairs(dungeonMap) do
+				-- Dungeon headers
+				if #dungeonMap > 1 and #entry.List > 0 then
+					local dungeonsHeader = UIDropDownMenu_CreateInfo();
+					dungeonsHeader.text = entry.Header;
+					dungeonsHeader.isTitle = true;
+					dungeonsHeader.notCheckable = true;
+					UIDropDownMenu_AddButton(dungeonsHeader);
+				end
 
-			-- Dungeon menu items
-			for _,dungeon in ipairs(dungeonsList) do
-				if (dungeon.ParentDungeon == nil) then
-					if (dungeon.SubDungeons == nil) then
-						createSingleDungeonItem(dungeon);
-					else
-						createMultiDungeonItem(dungeon);
+				-- Dungeon menu items
+				for _, dungeon in ipairs(entry.List) do
+					if (dungeon.ParentDungeon == nil) then
+						if (dungeon.SubDungeons == nil) then
+							createSingleDungeonItem(dungeon);
+						else
+							createMultiDungeonItem(dungeon);
+						end
 					end
 				end
 			end
 		end
-
-		if (table.getn(raidsList) > 0) then
-			if (table.getn(dungeonsList) > 0 or table.getn(pvpList) > 0) then
-				-- Raids header
-				local raidsHeader = UIDropDownMenu_CreateInfo();
-				raidsHeader.text = "Raid";
-				raidsHeader.isTitle = true;
-				raidsHeader.notCheckable = true;
-				UIDropDownMenu_AddButton(raidsHeader);
-			end
-		
-			-- Raid menu items
-			for _,raid in ipairs(raidsList) do
-				if (raid.SubDungeons == nil) then
-					createSingleDungeonItem(raid);
-				else
-					createMultiDungeonItem(raid);
-				end
-			end
-		end
-		
-		if (table.getn(pvpList) > 0) then
-			if (table.getn(dungeonsList) > 0 or table.getn(raidsList) > 0) then
-				-- PvP header
-				local pvpHeader = UIDropDownMenu_CreateInfo();
-				pvpHeader.text = "PvP";
-				pvpHeader.isTitle = true;
-				pvpHeader.notCheckable = true;
-				UIDropDownMenu_AddButton(pvpHeader);
-			end
-			
-			-- PvP menu items
-			for _,pvp in ipairs(pvpList) do
-				if (pvp.SubDungeons == nil) then
-					createSingleDungeonItem(pvp);
-				else
-					createMultiDungeonItem(pvp, buttonIndex);
-				end
-			end
-		end
-
-	elseif (level == 2) then
+	elseif level == 2 then
 		local entry = UIDROPDOWNMENU_MENU_VALUE;
-		
+
 		-- Sub dungeon menu items
 		for _,dungeonIndex in ipairs(entry.DungeonIndexes) do
 			createSubDungeonItem(dungeonIndex);
@@ -411,76 +418,88 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize(self, level)
 end
 
 
-function LFGMM_ListTab_DungeonsDropDown_SelectAll_OnClick()
+function LFGMM_ListTab_DungeonsDropDown_SelectAll_OnClick(categoryCode)
 	-- Clear dungeons
-	LFGMM_DB.LIST.Dungeons = {};
-	
+	for index = #LFGMM_DB.LIST.Dungeons, 1, -1 do
+		local dungeonIndex = LFGMM_DB.LIST.Dungeons[index];
+		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
+		if dungeon.Category == categoryCode then
+			table.remove(LFGMM_DB.LIST.Dungeons, index);
+		end
+	end
+
 	-- Add all available dungeons
-	local availableDungeons = LFGMM_Utility_GetAllAvailableDungeonsAndRaids();
+	local availableDungeons = LFGMM_Utility_GetAllAvailableDungeonsAndRaids(categoryCode);
 	for _,dungeon in ipairs(availableDungeons) do
 		table.insert(LFGMM_DB.LIST.Dungeons, dungeon.Index);
 	end
-	
-	-- Add unknown dungeons
-	LFGMM_DB.LIST.ShowUnknownDungeons = true;
 
 	-- Update text
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(categoryCode);
 
 	-- Refresh
 	LFGMM_ListTab_Refresh();
 end
 
 
-function LFGMM_ListTab_DungeonsDropDown_ClearSelections_OnClick()
+function LFGMM_ListTab_DungeonsDropDown_ClearSelections_OnClick(categoryCode)
 	-- Clear dungeons
-	LFGMM_DB.LIST.Dungeons = {};
-	LFGMM_DB.LIST.ShowUnknownDungeons = false;
-	
+	for index = #LFGMM_DB.LIST.Dungeons, 1, -1 do
+		local dungeonIndex = LFGMM_DB.LIST.Dungeons[index];
+		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
+		if dungeon.Category == categoryCode then
+			table.remove(LFGMM_DB.LIST.Dungeons, index);
+		end
+	end
+
 	-- Update text
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(categoryCode);
 
 	-- Refresh
 	LFGMM_ListTab_Refresh();
 end
 
 
-function LFGMM_ListTab_DungeonsDropDown_Item_OnClick()
+function LFGMM_ListTab_DungeonsDropDown_Item_OnClick(categoryCode)
 	-- Update text
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
-	
-	-- Refresh 
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(categoryCode);
+
+	-- Refresh
 	LFGMM_ListTab_Refresh();
 end
 
 
-function LFGMM_ListTab_DungeonsDropDown_UpdateText()
-	local numDungeons = table.getn(LFGMM_Utility_GetAllAvailableDungeonsAndRaids());
-	local numSelectedDungeons = table.getn(LFGMM_DB.LIST.Dungeons);
-	
-	local text = "";
-	if (numSelectedDungeons > 0 and numSelectedDungeons >= numDungeons) then
-		text = "All";
-		
-		if (LFGMM_DB.LIST.ShowUnknownDungeons) then
-			text = text .. " + Unknown";
-		end
+function LFGMM_ListTab_DungeonsDropDown_UpdateText(categoryCode)
+	local numDungeons = #LFGMM_Utility_GetAllAvailableDungeonsAndRaids(categoryCode);
 
+	local numSelectedDungeons = 0;
+	for _, selectedDungeonIndex in ipairs(LFGMM_DB.LIST.Dungeons) do
+		local selectedDungeon = LFGMM_GLOBAL.DUNGEONS[selectedDungeonIndex];
+		if (selectedDungeon.Category == categoryCode) then
+			numSelectedDungeons = numSelectedDungeons + 1;
+		end
+	end
+
+	local text = "";
+
+	if numSelectedDungeons > 0 and numSelectedDungeons >= numDungeons then
+		text = "All";
 	elseif (numSelectedDungeons > 0) then
 		text = numSelectedDungeons .. " / " .. numDungeons;
-		
-		if (LFGMM_DB.LIST.ShowUnknownDungeons) then
-			text = text .. " + Unknown";
-		end
-
-	elseif (LFGMM_DB.LIST.ShowUnknownDungeons) then
-		text = "Unknown";
-
 	else
 		text = "None";
 	end
 
-	UIDropDownMenu_SetText(LFGMM_ListTab_DungeonsDropDown, text);
+	local dropDown = nil;
+	if categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+		dropDown = LFGMM_ListTab_DungeonsDropDown_VANILLA;
+	elseif categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		dropDown = LFGMM_ListTab_DungeonsDropDown_TBC;
+	elseif categoryCode == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+		dropDown = LFGMM_ListTab_DungeonsDropDown_PVP;
+	end
+
+	UIDropDownMenu_SetText(dropDown, text);
 end
 
 
@@ -525,10 +544,10 @@ function LFGMM_ListTab_MessageTypeDropDown_Item_OnClick(self, groupType)
 	elseif (groupType == "LFM") then
 		LFGMM_DB.LIST.MessageTypes.Lfm = not LFGMM_DB.LIST.MessageTypes.Lfm;
 	end
-	
+
 	-- Update text
 	LFGMM_ListTab_MessageTypeDropDown_UpdateText();
-	
+
 	-- Refresh
 	LFGMM_ListTab_Refresh();
 end
@@ -599,7 +618,7 @@ function LFGMM_ListTab_ContextMenuDropDown_Item_OnClick(self, operation)
 		LFGMM_GLOBAL.MESSAGES[selectedPlayer] = nil;
 		LFGMM_ListTab_MessageInfoWindow_Hide();
 		LFGMM_ListTab_Refresh();
-		
+
 	elseif (operation == "DEL_ALL") then
 		LFGMM_Core_SetGuiEnabled(false);
 		LFGMM_ListTab_MessageInfoWindow_Hide();
@@ -661,11 +680,11 @@ end
 function LFGMM_ListTab_MessageInfoWindow_Show(message)
 	-- Close drop down
 	CloseDropDownMenus();
-	
+
 	if (LFGMM_ListTab_MessageInfoWindow.Message ~= nil and LFGMM_ListTab_MessageInfoWindow.Message.Player == message.Player) then
 		-- Hide
 		LFGMM_ListTab_MessageInfoWindow_Hide();
-		
+
 	else
 		LFGMM_ListTab_MessageInfoWindow.Message = message;
 
@@ -674,11 +693,11 @@ function LFGMM_ListTab_MessageInfoWindow_Show(message)
 		LFGMM_LfmTab_BroadcastMessageInfoWindow:Hide();
 		LFGMM_SettingsTab_RequestInviteMessageInfoWindow:Hide();
 		LFGMM_SettingsTab_ChannelsDropDownInfoWindow:Hide();
-		
+
 		-- Show and refresh
 		LFGMM_ListTab_MessageInfoWindow:Show();
 		LFGMM_ListTab_MessageInfoWindow_Refresh();
-		
+
 		-- Age
 		LFGMM_ListTab_MessageInfoWindow_StartUpdateAge();
 	end
@@ -702,7 +721,7 @@ function LFGMM_ListTab_MessageInfoWindow_Refresh()
 	-- Class
 	LFGMM_ListTab_MessageInfoWindow_ClassIcon:SetTexCoord(unpack(message.PlayerClass.IconCoordinates));
 	LFGMM_ListTab_MessageInfoWindow_ClassText:SetText(message.PlayerClass.Color .. message.PlayerClass.LocalizedName);
-	
+
 	-- Level
 	local level = message.PlayerLevel or "?";
 	LFGMM_ListTab_MessageInfoWindow_LevelText:SetText(message.PlayerClass.Color .. level);
@@ -719,7 +738,7 @@ function LFGMM_ListTab_MessageInfoWindow_Refresh()
 		LFGMM_ListTab_MessageInfoWindow_WhoButton:Hide();
 	else
 		LFGMM_ListTab_MessageInfoWindow_WhoButton:Show();
-	
+
 		if (LFGMM_GLOBAL.WHO_COOLDOWN > 0) then
 			LFGMM_ListTab_MessageInfoWindow_WhoButton:SetText("Who? (" .. LFGMM_GLOBAL.WHO_COOLDOWN .. ")");
 			LFGMM_ListTab_MessageInfoWindow_WhoButton:Disable();
@@ -730,7 +749,7 @@ function LFGMM_ListTab_MessageInfoWindow_Refresh()
 	end
 
 	local isInParty = LFGMM_Utility_ArrayContains(LFGMM_GLOBAL.GROUP_MEMBERS, message.Player);
-	
+
 	-- Hide/show buttons
 	if (isInParty) then
 		-- Hide buttons
@@ -834,7 +853,7 @@ function LFGMM_ListTab_MessageInfoWindow_StartUpdateAge()
 	-- Set age text
 	local ageText = LFGMM_Utility_GetAgeText(LFGMM_ListTab_MessageInfoWindow.Message.Timestamp);
 	LFGMM_ListTab_MessageInfoWindow_TimeText:SetText("Announced " .. ageText);
-	
+
 	if (not LFGMM_ListTab_MessageInfoWindow.UpdageAgeTimerLock) then
 		LFGMM_ListTab_MessageInfoWindow.UpdageAgeTimerLock = true;
 		LFGMM_ListTab_MessageInfoWindow_UpdateAge();
@@ -848,10 +867,10 @@ function LFGMM_ListTab_MessageInfoWindow_UpdateAge()
 		LFGMM_ListTab_MessageInfoWindow.UpdageAgeTimerLock = false;
 		return;
 	end
-	
+
 	-- Update age text
 	local ageText = LFGMM_Utility_GetAgeText(LFGMM_ListTab_MessageInfoWindow.Message.Timestamp);
 	LFGMM_ListTab_MessageInfoWindow_TimeText:SetText("Announced " .. ageText);
-	
+
 	C_Timer.After(1, LFGMM_ListTab_MessageInfoWindow_UpdateAge);
 end

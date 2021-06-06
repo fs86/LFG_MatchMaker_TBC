@@ -56,7 +56,7 @@ function runTests(dungeons, testData, languages)
             string.find(testDefinition, "[%W]+" .. identifier .. "[%W]+") ~= nil or
             string.find(testDefinition, "[%W]+" .. identifier .. "$") ~= nil)
 
-          if isMatch and hasValue(testResultEntry.MatchesOnDungeons, dungeon.Name) == false then
+          if isMatch and not hasValue(testResultEntry.MatchesOnDungeons, dungeon.Name) then
             table.insert(testResultEntry.MatchesOnDungeons, dungeon.Name)
           end
         end

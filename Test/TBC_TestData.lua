@@ -191,11 +191,13 @@ TBC_TESTS = {
       "lfg shadow labs",
       "lfg labs",
       "1 tank for shadowlabs",
+      "mage LFG shadowlaby",
 
       -- DE
       "lfg schattenlab",
       "1 tank für schatenlabyrint",
-      "heal lfg schatten lab."
+      "heal lfg schatten lab.",
+      "lf 1 heal für schattenlaybrinth"
     }
   },
   {

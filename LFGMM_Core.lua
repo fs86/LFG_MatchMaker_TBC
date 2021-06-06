@@ -228,13 +228,17 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 		LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, removeSelections);
 	end
 	
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText();
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 	
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 
-	LFGMM_ListTab_DungeonsDropDown_UpdateText();
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
+	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
 end
 
 
@@ -272,6 +276,28 @@ function LFGMM_Core_IsMatch(normalizedMessage, identifier)
 			string.find(normalizedMessage, "^"     .. identifier .. "$"    ) ~= nil or
 			string.find(normalizedMessage, "[%W]+" .. identifier .. "[%W]+") ~= nil or
 			string.find(normalizedMessage, "[%W]+" .. identifier .. "$"    ) ~= nil);
+end
+
+function LFGMM_Core_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
+	for lng in pairs(identifierTable) do
+		for _, identifier in ipairs(identifierTable[lng]) do
+			if (LFGMM_Core_IsMatch(normalizedMessage, identifier)) then
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
+function LFGMM_Core_GetCategoryByCode(categoryCode)
+	for _, category in ipairs(LFGMM_GLOBAL.CATEGORIES) do
+		if category.Code == categoryCode then
+			return category;
+		end
+	end
+
+	return nil;
 end
 
 function LFGMM_Core_FindSearchMatch()
@@ -567,15 +593,16 @@ function LFGMM_Core_EventHandler(self, event, ...)
 
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
 
-			-- Ignore dungeon matches with boost identifiers
+			 -- Check if message contains a boost offer/request and ignore
+			 -- the message based on the settings in LFG/LFM tab.
 			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
 				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
 			then
-				for lng in pairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS) do
-					for _,boostIdentifier in ipairs(LFGMM_GLOBAL.BOOST_IDENTIFIERS[lng]) do
-						if LFGMM_Core_IsMatch(message, boostIdentifier) then
-							return;
-						end
+				local isNotBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
+				if not isNotBoostMatch then
+					local isBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
+					if (isBoostMatch) then
+						return;
 					end
 				end
 			end

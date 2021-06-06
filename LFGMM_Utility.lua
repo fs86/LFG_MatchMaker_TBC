@@ -198,7 +198,6 @@ function LFGMM_Utility_ArrayContains(array, value)
 	return false;
 end
 
-
 function LFGMM_Utility_ArrayContainsAny(array1, array2)
 	for _,arrayValue1 in ipairs(array1) do
 		for _,arrayValue2 in ipairs(array2) do
@@ -232,12 +231,12 @@ function LFGMM_Utility_ArrayContainsAll(array1, array2)
 end
 
 
-function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted()
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode)
 	local dungeonsList = {};
 	local raidsList = {};
 	local pvpList = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
-		if (dungeon.ParentDungeon == nil and LFGMM_Utility_IsDungeonAvailable(dungeon)) then
+		if (categoryCode == dungeon.Category and dungeon.ParentDungeon == nil and LFGMM_Utility_IsDungeonAvailable(dungeon)) then
 			if (dungeon.Pvp) then
 				table.insert(pvpList, dungeon);
 			elseif (dungeon.Size <= 10) then
@@ -251,12 +250,77 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted()
 	return dungeonsList, raidsList, pvpList;
 end
 
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {};
 
-function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
+	for _, dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
+		if LFGMM_Utility_IsDungeonAvailable(dungeon) then
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.PVP then
+				table.insert(pvpList, dungeon);
+			end
+	
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA then
+				if dungeon.Size <= 10 then
+					table.insert(vanillaDungeonsList, dungeon);
+				else
+					table.insert(vanillaRaidList, dungeon);
+				end
+			end
+	
+			if dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+				if dungeon.Size > 5 then
+					table.insert(tbcRaidList, dungeon);
+				else
+					table.insert(tbcDungeonList, dungeon);
+				end
+			end			
+		end
+	end
+
+	return vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList;
+end
+
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsMap()
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST();
+
+	return {
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA] = {
+			{
+				Header = "Dungeons",
+				List = vanillaDungeonsList
+			},
+			{
+				Header = "Raids",
+				List = vanillaRaidList
+			}
+		},
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.TBC] = {
+			{
+				Header = "Dungeons",
+				List = tbcDungeonList
+			},
+			{
+				Header = "Raids",
+				List = tbcRaidList
+			}
+		},
+		[LFGMM_KEYS.DUNGEON_CATEGORIES.PVP] = {
+			{
+				Header = "PvP",
+				List = pvpList
+			}
+		}
+	};
+end
+
+
+function LFGMM_Utility_GetAllAvailableDungeonsAndRaids(categoryCode)
 	local list = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
 		if (LFGMM_Utility_IsDungeonAvailable(dungeon)) then
-			table.insert(list, dungeon);
+			if categoryCode == nil or (categoryCode ~= nil and dungeon.Category == categoryCode) then
+				table.insert(list, dungeon);
+			end
 		end
 	end
 
@@ -264,11 +328,13 @@ function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
 end
 
 
-function LFGMM_Utility_GetAllUnavailableDungeonsAndRaids()
+function LFGMM_Utility_GetAllUnavailableDungeonsAndRaids(categoryCode)
 	local list = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
 		if (not LFGMM_Utility_IsDungeonAvailable(dungeon)) then
-			table.insert(list, dungeon);
+			if categoryCode == nil or (categoryCode ~= nil and dungeon.Category == categoryCode) then
+				table.insert(list, dungeon);
+			end
 		end
 	end
 
@@ -277,10 +343,10 @@ end
 
 
 function LFGMM_Utility_IsDungeonAvailable(dungeon)
-	if (LFGMM_DB.SETTINGS.HidePvp and dungeon.Pvp) then
-		return false;
-	elseif (LFGMM_DB.SETTINGS.HideRaids and dungeon.Size > 10 and not dungeon.Pvp) then
-		return false;
+	if LFGMM_DB.SETTINGS.HideRaids and
+		((dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA and dungeon.Size > 10) or
+		(dungeon.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC and dungeon.Size > 5)) then
+			return false;
 	elseif (LFGMM_DB.SETTINGS.HideLowLevel and LFGMM_GLOBAL.PLAYER_LEVEL > dungeon.MaxLevel) then
 		return false;
 	elseif (LFGMM_DB.SETTINGS.HideHighLevel and LFGMM_GLOBAL.PLAYER_LEVEL < dungeon.MinLevel) then
