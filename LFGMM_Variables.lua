@@ -2896,7 +2896,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70e
+			MaxLevel = 70
 		},
 		{
 			Index = 69,
@@ -2915,7 +2915,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 10,
 			MinLevel = 70,
-			MaxLevel = 70e
+			MaxLevel = 70
 		},
 		{
 			Index = 70,
