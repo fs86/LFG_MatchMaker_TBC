@@ -230,27 +230,7 @@ function LFGMM_Utility_ArrayContainsAll(array1, array2)
 	return true;
 end
 
-
-function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted(categoryCode)
-	local dungeonsList = {};
-	local raidsList = {};
-	local pvpList = {};
-	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
-		if (categoryCode == dungeon.Category and dungeon.ParentDungeon == nil and LFGMM_Utility_IsDungeonAvailable(dungeon)) then
-			if (dungeon.Pvp) then
-				table.insert(pvpList, dungeon);
-			elseif (dungeon.Size <= 10) then
-				table.insert(dungeonsList, dungeon);
-			else
-				table.insert(raidsList, dungeon);
-			end
-		end
-	end
-
-	return dungeonsList, raidsList, pvpList;
-end
-
-function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
+function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted()
 	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = {}, {}, {}, {}, {};
 
 	for _, dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
@@ -281,7 +261,7 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST()
 end
 
 function LFGMM_Utility_GetAvailableDungeonsAndRaidsMap()
-	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted_TEST();
+	local vanillaDungeonsList, vanillaRaidList, tbcDungeonList, tbcRaidList, pvpList = LFGMM_Utility_GetAvailableDungeonsAndRaidsSorted();
 
 	return {
 		[LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA] = {

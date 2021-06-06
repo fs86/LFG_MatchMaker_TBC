@@ -2492,8 +2492,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 10,
 			MinLevel = 10,
-			MaxLevel = 60,
-			Pvp = true
+			MaxLevel = 60
 		},
 		{
 			Index = 52,
@@ -2522,8 +2521,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 40,
 			MinLevel = 51,
-			MaxLevel = 60,
-			Pvp = true
+			MaxLevel = 60
 		},
 		{
 			Index = 53,
@@ -2544,8 +2542,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 15,
 			MinLevel = 20,
-			MaxLevel = 60,
-			Pvp = true
+			MaxLevel = 60
 		},
 		{
 			Index = 54,
@@ -2574,8 +2571,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 58,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 55,
@@ -2598,8 +2594,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 59,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 56,
@@ -2626,8 +2621,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 61,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 57,
@@ -2651,8 +2645,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 61,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 58,
@@ -2678,8 +2671,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 63,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 59,
@@ -2704,8 +2696,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 63,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 60,
@@ -2727,8 +2718,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 65,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 61,
@@ -2751,8 +2741,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 65,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 62,
@@ -2770,8 +2759,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 63,
@@ -2796,8 +2784,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 64,
@@ -2821,8 +2808,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 65,
@@ -2842,8 +2828,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 66,
@@ -2867,8 +2852,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 67,
@@ -2892,8 +2876,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 68,
@@ -2913,8 +2896,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 5,
 			MinLevel = 68,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70e
 		},
 		{
 			Index = 69,
@@ -2933,8 +2915,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 10,
 			MinLevel = 70,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70e
 		},
 		{
 			Index = 70,
@@ -2954,8 +2935,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 25,
 			MinLevel = 70,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 		{
 			Index = 71,
@@ -2977,8 +2957,7 @@ LFGMM_GLOBAL = {
 			},
 			Size = 25,
 			MinLevel = 70,
-			MaxLevel = 70,
-			Pvp = false
+			MaxLevel = 70
 		},
 	},
 	DUNGEONS_FALLBACK = {
