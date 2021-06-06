@@ -314,11 +314,13 @@ function LFGMM_Utility_GetAvailableDungeonsAndRaidsMap()
 end
 
 
-function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
+function LFGMM_Utility_GetAllAvailableDungeonsAndRaids(categoryCode)
 	local list = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
 		if (LFGMM_Utility_IsDungeonAvailable(dungeon)) then
-			table.insert(list, dungeon);
+			if categoryCode == nil or (categoryCode ~= nil and dungeon.Category == categoryCode) then
+				table.insert(list, dungeon);
+			end
 		end
 	end
 
@@ -326,11 +328,13 @@ function LFGMM_Utility_GetAllAvailableDungeonsAndRaids()
 end
 
 
-function LFGMM_Utility_GetAllUnavailableDungeonsAndRaids()
+function LFGMM_Utility_GetAllUnavailableDungeonsAndRaids(categoryCode)
 	local list = {};
 	for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
 		if (not LFGMM_Utility_IsDungeonAvailable(dungeon)) then
-			table.insert(list, dungeon);
+			if categoryCode == nil or (categoryCode ~= nil and dungeon.Category == categoryCode) then
+				table.insert(list, dungeon);
+			end
 		end
 	end
 

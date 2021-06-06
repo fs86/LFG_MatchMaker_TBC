@@ -332,8 +332,6 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode
 		return;
 	end
 
-	local displayHeaders = #dungeonMap > 1;
-
 	if (level == 1) then
 		if #dungeonMap > 0 then
 			-- Clear selections menu item
@@ -395,7 +393,7 @@ function LFGMM_LfgTab_DungeonsDropDown_ClearSelection_OnClick(categoryCode)
 		local dungeonIndex = LFGMM_DB.SEARCH.LFG.Dungeons[index];
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
 		if dungeon.Category == categoryCode then
-			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index)
+			table.remove(LFGMM_DB.SEARCH.LFG.Dungeons, index);
 		end
 	end
 
