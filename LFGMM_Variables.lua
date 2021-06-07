@@ -2565,7 +2565,10 @@ LFGMM_GLOBAL = {
 					"hfb",
 					"bw"
 				},
-				FR = {},
+				FR = {
+					-- Remparts des Flammes infernales
+					"remp[a]?[r]?[t]?[s]?"
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2588,7 +2591,12 @@ LFGMM_GLOBAL = {
 					"blut[%W]*kes[s]?[e]?[l]?",
 					"bk"
 				},
-				FR = {},
+				FR = {
+					-- La Fournaise du sang
+					"fournaise[s]?[%W]*du[%W]*sang",
+					"fournaise[s]?[%W]*de[%W]*sang",
+					"fournaise[s]?"
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2611,11 +2619,17 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"sklaven[%W]*unterkunfte",
-					-- "sklavenunterkuenfte", -- I dont know why the above pattern dosn't capture this one ...
 					"sklave[n]?",
 					"unterk"
 				},
-				FR = {},
+				FR = {
+					-- Les enclos aux esclaves
+					"enclo[t]?[s]?[%W]*aux[%W]*esclav[e]?[s]?",
+					"enclo[t]?[s]?[%W]*esclav[e]?[s]?",
+					"enclo[t]?[s]?",
+					"enclo[s]?",
+					"esclav[e]?[s]?"
+				},
 				ES = {},
 				RU = {},
 			},
