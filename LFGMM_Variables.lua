@@ -2560,14 +2560,14 @@ LFGMM_GLOBAL = {
 					"hoel[l]?en[%W]*feuer[%W]*bol[l]?[w]?[e]?[r]?[k]?",
 					"hol[l]?en[%W]*feuer",
 					"hoel[l]?en[%W]*feuer",
-					"bol[l]werk",
-					"bol[l]w",
+					"bol[l]?werk",
+					"bol[l]?w",
 					"hfb",
 					"bw"
 				},
 				FR = {
 					-- Remparts des Flammes infernales
-					"remp[a]?[r]?[t]?[s]?"
+					"remp[a]?[r]?[t]?[s]?",
 				},
 				ES = {},
 				RU = {},
@@ -2595,7 +2595,7 @@ LFGMM_GLOBAL = {
 					-- La Fournaise du sang
 					"fournaise[s]?[%W]*du[%W]*sang",
 					"fournaise[s]?[%W]*de[%W]*sang",
-					"fournaise[s]?"
+					"fournaise[s]?",
 				},
 				ES = {},
 				RU = {},
@@ -2618,9 +2618,9 @@ LFGMM_GLOBAL = {
 					"sp"
 				},
 				DE = {
-					"sklaven[%W]*unterkunfte",
+					"sklaven[%W]*unterku[e]?nfte",
 					"sklave[n]?",
-					"unterk"
+					"unterkunft.*"
 				},
 				FR = {
 					-- Les enclos aux esclaves
@@ -2653,7 +2653,12 @@ LFGMM_GLOBAL = {
 					"sumpf",
 					"ts"
 				},
-				FR = {},
+				FR = {
+					-- La Basse-tourbière
+					"bas[s]?[e]?[%W]*tour[b]?[i]?[e]?[r]?[e]?",
+					"basse",
+					"bt",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2679,7 +2684,12 @@ LFGMM_GLOBAL = {
 					"gruft",
 					"kruft"
 				},
-				FR = {},
+				FR = {
+					-- Tombes-mana
+					"tomb[e]?[s]?[%W]*mana",
+					"tomb[e]?[s]?",
+					"tm"
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2704,7 +2714,12 @@ LFGMM_GLOBAL = {
 					"auchenei[%W]*krypt[a]?",
 					"krypt[a]?"
 				},
-				FR = {},
+				FR = {
+					-- Cryptes Auchenaï
+					"crypt[e]?[s]?[%W]*auch[e]?[n]?[a]?[i]?",
+					"crypt[e]?[s]?",
+					"ca",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2726,7 +2741,12 @@ LFGMM_GLOBAL = {
 				DE = {
 					"set[h]?ek[k]?[%W]*hal[l]?e[n]?",
 				},
-				FR = {},
+				FR = {
+					-- Les salles des Sethekk
+					"sal[l]?[e]?[s]?[%W]*de[%W]*seth[e]?[k]?[k]?",
+					"s[h]?etek[k]?",
+					"ss"
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2749,7 +2769,11 @@ LFGMM_GLOBAL = {
 				DE = {
 					"hdz[%W]*1"
 				},
-				FR = {},
+				FR = {
+					-- Contreforts de Hautebrande d'antan
+					"contre[f]?[o]?[r]?[t]?[s]?",
+					"contre[f]?[o]?[r]?[s]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2767,7 +2791,10 @@ LFGMM_GLOBAL = {
 					"mech[a]?[n]?[a]?[r]?"
 				},
 				DE = {},
-				FR = {},
+				FR = {
+					-- Le Méchanar
+					"meca[n]?[a]?[r]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2792,7 +2819,10 @@ LFGMM_GLOBAL = {
 					"mor[r]?ast",
 					"hdz[%W]*2"
 				},
-				FR = {},
+				FR = {
+					-- Le Noir Marécage
+					"mare[c]?[a]?[g]?[e]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2816,7 +2846,10 @@ LFGMM_GLOBAL = {
 					"zerschm[.]?[%W]*hal[l]?[e]?[n]?",
 					"zh"
 				},
-				FR = {},
+				FR = {
+					-- Les Salles brisées
+					"sal[l]?[e]?[s]?[%W]*brise[e]?[s]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2858,9 +2891,14 @@ LFGMM_GLOBAL = {
 				},
 				DE = {
 					"schat[t]?en[%W]*lab[y]?[r]?[i]?[n]?[t]?[h]?",
+					"schat[t]?en[%W]*la.*",
 					"schab[b]?[y]?"
 				},
-				FR = {},
+				FR = {
+					-- Labyrinthe des ombres
+					"labi[r]?[y]?[n]?[t]?[h]?[e]?",
+					"laby[r]?[i]?[n]?[t]?[h]?[e]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2884,7 +2922,11 @@ LFGMM_GLOBAL = {
 					"dam[m]?[p]?f",
 					"dk"
 				},
-				FR = {},
+				FR = {
+					-- Le Caveau de la vapeur
+					"cav[e]?[a]?[u]?[x]?",
+					"cav[a]?[u]?[x]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2904,7 +2946,11 @@ LFGMM_GLOBAL = {
 				DE = {
 					"arka[%W]*[t]?[r]?[a]?[z]?",
 				},
-				FR = {},
+				FR = {
+					-- L'Arcatraz
+					"l[']?alca[t]?[r]?[a]?[z]?",
+					"l[']?arca[t]?[r]?[a]?[z]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2943,7 +2989,11 @@ LFGMM_GLOBAL = {
 				DE = {
 					"gru[u]?l[s]?[%W]*unterschl[.]?[u]?[p]?[f]?"
 				},
-				FR = {},
+				FR = {
+					-- Repaire de Gruul
+					"repair[e]?[%W]*de[%W]*gru[u]?l",
+					"gru[u]?l[e]?",
+				},
 				ES = {},
 				RU = {},
 			},
@@ -2958,14 +3008,17 @@ LFGMM_GLOBAL = {
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
 			Identifiers = {
 				EN = {
-					"magtheridon",
+					"magthe[r]?[i]?[d]?[o]?[n]?",
 					"mag[s]?"
 				},
 				DE = {
 					"magtheridon[s]?[%W]*kam[m]?[e]?[r]?",
 					"mag[s]?[%W]*kam[m]?[e]?[r]?"
 				},
-				FR = {},
+				FR = {
+					-- Le repaire de Magtheridon
+					"repaid[e]?[%W]*de[%W]*mag[t]?[h]?[e]?[r]?[i]?[d]?[o]?[n]?",
+				},
 				ES = {},
 				RU = {},
 			},

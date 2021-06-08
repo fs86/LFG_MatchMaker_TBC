@@ -147,6 +147,79 @@ function LFGMM_Utility_CreateUniqueDungeonsList()
 	}
 end
 
+function LFGMM_Utility_IsMatch(normalizedMessage, identifier)
+	return (string.find(normalizedMessage, "^"     .. identifier .. "[%W]+") ~= nil or
+			string.find(normalizedMessage, "^"     .. identifier .. "$"    ) ~= nil or
+			string.find(normalizedMessage, "[%W]+" .. identifier .. "[%W]+") ~= nil or
+			string.find(normalizedMessage, "[%W]+" .. identifier .. "$"    ) ~= nil);
+end
+
+function LFGMM_Utility_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
+	for lng in pairs(identifierTable) do
+		for _, identifier in ipairs(identifierTable[lng]) do
+			if (LFGMM_Utility_IsMatch(normalizedMessage, identifier)) then
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
+function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
+	local message = string.lower(chatMessage);
+
+	-- Replace special characters in message to simplify pattern requirements
+	message = string.gsub(message, "á", "a");
+	message = string.gsub(message, "à", "a");
+	message = string.gsub(message, "ä", "a");
+	message = string.gsub(message, "â", "a");
+	message = string.gsub(message, "ã", "a");
+	message = string.gsub(message, "é", "e");
+	message = string.gsub(message, "è", "e");
+	message = string.gsub(message, "ë", "e");
+	message = string.gsub(message, "ê", "e");
+	message = string.gsub(message, "í", "i");
+	message = string.gsub(message, "ì", "i");
+	message = string.gsub(message, "ï", "i");
+	message = string.gsub(message, "î", "i");
+	message = string.gsub(message, "ñ", "n");
+	message = string.gsub(message, "ó", "o");
+	message = string.gsub(message, "ò", "o");
+	message = string.gsub(message, "ö", "o");
+	message = string.gsub(message, "ô", "o");
+	message = string.gsub(message, "õ", "o");
+	message = string.gsub(message, "ú", "u");
+	message = string.gsub(message, "ù", "u");
+	message = string.gsub(message, "ü", "u");
+	message = string.gsub(message, "û", "u");
+	message = string.gsub(message, "ß", "ss");
+	message = string.gsub(message, "œ", "oe");
+	message = string.gsub(message, "ç", "c");
+
+	-- Remove item links to prevent false positive matches from item names
+	message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");
+
+	-- Remove "/w me" and "/w inv" from message before parsing to avoid false positive match for DM - West
+	for _,languageCode in ipairs(identifierLanguages) do
+		if (languageCode == "EN") then
+			message = string.gsub(message, "/w[%W]+me", " ");
+			message = string.gsub(message, "/w[%W]+inv", " ");
+		elseif (languageCode == "DE") then
+			message = string.gsub(message, "/w[%W]+mir", " ");
+			message = string.gsub(message, "/w[%W]+bei", " ");
+		elseif (languageCode == "FR") then
+			message = string.gsub(message, "/w[%W]+moi", " ");
+			message = string.gsub(message, "/w[%W]+pour", " ");
+			message = string.gsub(message, "[%W]+w/moi", " ");
+			message = string.gsub(message, "[%W]+w/pour", " ");
+		elseif (languageCode == "ES") then
+			message = string.gsub(message, "/w[%W]+yo", " ");
+		end
+	end
+
+	return message;
+end
 
 function LFGMM_Utility_ArrayClear(array)
 	for index = 1, table.getn(array) do
