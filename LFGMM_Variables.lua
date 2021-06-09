@@ -2915,6 +2915,7 @@ LFGMM_GLOBAL = {
 				EN = {
 					"steam[%W]*va[a]?ult[s]?",
 					"steam",
+					"sv",
 					"vault[s]?"
 				},
 				DE = {
