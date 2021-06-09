@@ -1531,7 +1531,7 @@
 				<Size x="25" y="25" />
 			</Button>
 
-			<Button name="LFGMM_PopupWindow_IgnoreButton" visible="false" text="Ignore" inherits="UIPanelButtonTemplate">
+			<Button name="LFGMM_PopupWindow_IgnoreButton" visible="false" text="Ignore request" inherits="UIPanelButtonTemplate">
 				<Anchors>
 					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
 						<Offset x="15" y="15" />

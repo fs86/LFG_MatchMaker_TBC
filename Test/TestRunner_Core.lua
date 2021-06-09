@@ -1,4 +1,5 @@
 ---@diagnostic disable: lowercase-global
+require("LFGMM_Utility")
 
 function values(t)
   local i = 0
@@ -40,6 +41,7 @@ function runTests(dungeons, testData, languages)
 
   for test in values(testData) do
     for testDefinition in values(test.TestDefinitions) do
+      local message = LFGMM_Utility_NormalizeChatMessage(testDefinition, { "EN" });
       testDefinitionCount = testDefinitionCount + 1
 
       local testResultEntry = {
@@ -50,13 +52,7 @@ function runTests(dungeons, testData, languages)
 
       for dungeon in values(getNormalizedDungeonArray(dungeons, languages)) do
         for identifier in values(dungeon.Identifiers) do
-          local isMatch = (
-            string.find(testDefinition, "^"     .. identifier .. "[%W]+") ~= nil or
-            string.find(testDefinition, "^"     .. identifier .. "$") ~= nil or
-            string.find(testDefinition, "[%W]+" .. identifier .. "[%W]+") ~= nil or
-            string.find(testDefinition, "[%W]+" .. identifier .. "$") ~= nil)
-
-          if isMatch and not hasValue(testResultEntry.MatchesOnDungeons, dungeon.Name) then
+          if LFGMM_Utility_IsMatch(message, identifier) and not hasValue(testResultEntry.MatchesOnDungeons, dungeon.Name) then
             table.insert(testResultEntry.MatchesOnDungeons, dungeon.Name)
           end
         end

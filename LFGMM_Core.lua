@@ -270,26 +270,6 @@ function LFGMM_Core_GetGroupMembers()
 	LFGMM_GLOBAL.GROUP_MEMBERS = groupMembers;
 end
 
-
-function LFGMM_Core_IsMatch(normalizedMessage, identifier)
-	return (string.find(normalizedMessage, "^"     .. identifier .. "[%W]+") ~= nil or
-			string.find(normalizedMessage, "^"     .. identifier .. "$"    ) ~= nil or
-			string.find(normalizedMessage, "[%W]+" .. identifier .. "[%W]+") ~= nil or
-			string.find(normalizedMessage, "[%W]+" .. identifier .. "$"    ) ~= nil);
-end
-
-function LFGMM_Core_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
-	for lng in pairs(identifierTable) do
-		for _, identifier in ipairs(identifierTable[lng]) do
-			if (LFGMM_Core_IsMatch(normalizedMessage, identifier)) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
-
 function LFGMM_Core_GetCategoryByCode(categoryCode)
 	for _, category in ipairs(LFGMM_GLOBAL.CATEGORIES) do
 		if category.Code == categoryCode then
@@ -535,62 +515,13 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			local player = select(5, ...);
 			local playerGuid = select(12, ...);
 			local messageOrg = select(1, ...);
-			local message = string.lower(messageOrg);
 
 			-- Ignore own messages
 			if (player == LFGMM_GLOBAL.PLAYER_NAME) then
 				return;
 			end
-			
-			-- Replace special characters in message to simplify pattern requirements
-			message = string.gsub(message, "á", "a");
-			message = string.gsub(message, "à", "a");
-			message = string.gsub(message, "ä", "a");
-			message = string.gsub(message, "â", "a");
-			message = string.gsub(message, "ã", "a");
-			message = string.gsub(message, "é", "e");
-			message = string.gsub(message, "è", "e");
-			message = string.gsub(message, "ë", "e");
-			message = string.gsub(message, "ê", "e");
-			message = string.gsub(message, "í", "i");
-			message = string.gsub(message, "ì", "i");
-			message = string.gsub(message, "ï", "i");
-			message = string.gsub(message, "î", "i");
-			message = string.gsub(message, "ñ", "n");
-			message = string.gsub(message, "ó", "o");
-			message = string.gsub(message, "ò", "o");
-			message = string.gsub(message, "ö", "o");
-			message = string.gsub(message, "ô", "o");
-			message = string.gsub(message, "õ", "o");
-			message = string.gsub(message, "ú", "u");
-			message = string.gsub(message, "ù", "u");
-			message = string.gsub(message, "ü", "u");
-			message = string.gsub(message, "û", "u");
-			message = string.gsub(message, "ß", "ss");
-			message = string.gsub(message, "œ", "oe");
-			message = string.gsub(message, "ç", "c");
 
-			-- Remove item links to prevent false positive matches from item names
-			message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");
-
-			-- Remove "/w me" and "/w inv" from message before parsing to avoid false positive match for DM - West
-			for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
-				if (languageCode == "EN") then
-					message = string.gsub(message, "/w[%W]+me", " ");
-					message = string.gsub(message, "/w[%W]+inv", " ");
-				elseif (languageCode == "DE") then
-					message = string.gsub(message, "/w[%W]+mir", " ");
-					message = string.gsub(message, "/w[%W]+bei", " ");
-				elseif (languageCode == "FR") then
-					message = string.gsub(message, "/w[%W]+moi", " ");
-					message = string.gsub(message, "/w[%W]+pour", " ");
-					message = string.gsub(message, "[%W]+w/moi", " ");
-					message = string.gsub(message, "[%W]+w/pour", " ");
-				elseif (languageCode == "ES") then
-					message = string.gsub(message, "/w[%W]+yo", " ");
-				end
-			end
-
+			local message = LFGMM_Utility_NormalizeChatMessage(messageOrg, LFGMM_DB.SETTINGS.IdentifierLanguages);
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
 
 			 -- Check if message contains a boost offer/request and ignore
@@ -598,9 +529,9 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
 				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
 			then
-				local isNotBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
+				local isNotBoostMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
 				if not isNotBoostMatch then
-					local isBoostMatch = LFGMM_Core_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
+					local isBoostMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
 					if (isBoostMatch) then
 						return;
 					end
@@ -614,7 +545,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 				for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 					if (dungeon.Identifiers[languageCode] ~= nil) then
 						for _,identifier in ipairs(dungeon.Identifiers[languageCode]) do
-							if LFGMM_Core_IsMatch(message, identifier) then
+							if LFGMM_Utility_IsMatch(message, identifier) then
 								matched = true;
 								break;
 							end
@@ -630,7 +561,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 						if (dungeon.NotIdentifiers[languageCode] ~= nil) then
 							for _,notIdentifier in ipairs(dungeon.NotIdentifiers[languageCode]) do
-								if LFGMM_Core_IsMatch(message, notIdentifier) then
+								if LFGMM_Utility_IsMatch(message, notIdentifier) then
 									matched = false;
 									break;
 								end
@@ -659,7 +590,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 				for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 					if (dungeonsFallback.Identifiers[languageCode] ~= nil) then
 						for _,identifier in ipairs(dungeonsFallback.Identifiers[languageCode]) do
-							if LFGMM_Core_IsMatch(message, identifier) then
+							if LFGMM_Utility_IsMatch(message, identifier) then
 								matched = true;
 								break;
 							end
