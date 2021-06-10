@@ -280,6 +280,16 @@ function LFGMM_Core_GetCategoryByCode(categoryCode)
 	return nil;
 end
 
+function LFGMM_Core_GetModeByCode(modeCode)
+	for _, mode in ipairs(LFGMM_GLOBAL.MODES) do
+		if mode.Code == modeCode then
+			return mode;
+		end
+	end
+
+	return nil;
+end
+
 function LFGMM_Core_FindSearchMatch()
 	-- Return if stopped
 	if (not LFGMM_DB.SEARCH.LFG.Running and not LFGMM_DB.SEARCH.LFM.Running) then
@@ -517,9 +527,9 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			local messageOrg = select(1, ...);
 
 			-- Ignore own messages
-			if (player == LFGMM_GLOBAL.PLAYER_NAME) then
-				return;
-			end
+			-- if (player == LFGMM_GLOBAL.PLAYER_NAME) then
+			-- 	return;
+			-- end
 
 			local message = LFGMM_Utility_NormalizeChatMessage(messageOrg, LFGMM_DB.SETTINGS.IdentifierLanguages);
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
@@ -535,6 +545,17 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					if (isBoostMatch) then
 						return;
 					end
+				end
+			end
+
+			if (LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
+				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
+				if LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
+					print("NO MATCH: " .. messageOrg);
+					return;
+				elseif LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
+					print("NO MATCH: " .. messageOrg);
+					return;
 				end
 			end
 

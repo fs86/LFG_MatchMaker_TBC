@@ -28,8 +28,9 @@
 function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 100, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 150, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonDropDown, 150, LFGMM_LfmTab_DungeonDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_ModeDropDown, 150, LFGMM_LfmTab_ModeDropDown_OnInitialize);
 
 	LFGMM_LfmTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfmTab_StartStopSearchButton_OnClick);
 
@@ -106,7 +107,9 @@ function LFGMM_LfmTab_Refresh()
 	end
 
 	if (LFGMM_DB.SEARCH.LFM.Running) then
+		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_CategoryDropDown);
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
+		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_ModeDropDown);
 		LFGMM_LfmTab_SearchActiveText:Show();
 		LFGMM_LfmTab_StartStopSearchButton:SetText("Stop searching");
 		LFGMM_LfmTab_BroadcastMessageTemplateInputBox:Disable();
@@ -122,6 +125,7 @@ function LFGMM_LfmTab_Refresh()
 		LFGMM_LfmTab_StartAnimateSearchText();
 
 	else
+		UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_CategoryDropDown);
 		UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_DungeonDropDown);
 		LFGMM_LfmTab_SearchActiveText:Hide();
 		LFGMM_LfmTab_StartStopSearchButton:SetText("Start search");
@@ -134,6 +138,13 @@ function LFGMM_LfmTab_Refresh()
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_MatchUnknownCheckBox, true);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_EnableBroadcastCheckBox, true);
 		LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_IgnoreBoostsCheckBox, true);
+
+		local isHcAvailable = LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC;
+		if isHcAvailable then
+			UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_ModeDropDown)
+		else
+			UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_ModeDropDown);
+		end
 
 		if (dungeonSize and groupSize >= dungeonSize) then
 			LFGMM_Utility_ToggleCheckBoxEnabled(LFGMM_LfmTab_AutoStopCheckBox, false);
@@ -155,7 +166,7 @@ function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
 		item.arg1 = categoryCode;
 		item.text = categoryName;
 		item.isNotRadio = true;
-		item.checked = LFGMM_DB.SEARCH.LFM.CategoryCode == categoryCode
+		item.checked = LFGMM_DB.SEARCH.LFM.Category == categoryCode
 		item.keepShownOnClick = false;
 		item.func = LFGMM_LfmTab_CategoryDropDown_Item_OnClick;
 		return item
@@ -169,9 +180,29 @@ function LFGMM_LfmTab_CategoryDropDown_OnInitialize(self)
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 end
 
+function LFGMM_LfmTab_ModeDropDown_OnInitialize(self)
+	local createItem = function(mode, modeName)
+		local item = UIDropDownMenu_CreateInfo();
+		item.arg1 = mode;
+		item.text = modeName;
+		item.isNotRadio = true;
+		item.checked = LFGMM_DB.SEARCH.LFM.Mode == mode;
+		item.keepShownOnClick = false;
+		item.func = LFGMM_LfmTab_ModeDropDown_Item_OnClick;
+		return item
+	end
+
+	for _, mode in ipairs(LFGMM_GLOBAL.MODES) do
+		UIDropDownMenu_AddButton(createItem(mode.Code, mode.Name), 1);
+	end
+
+	LFGMM_LfmTab_ModeDropDown_UpdateText();
+	LFGMM_LfmTab_UpdateBroadcastMessage();
+end
+
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
 	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
-	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.CategoryCode];
+	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.Category];
 	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap);
 end
 
@@ -261,29 +292,51 @@ end
 
 function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
 	LFGMM_DB.SEARCH.LFM.Dungeon = nil;
-	LFGMM_DB.SEARCH.LFM.CategoryCode = categoryCode;
+	LFGMM_DB.SEARCH.LFM.Category = categoryCode;
+
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_ModeDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 	LFGMM_LfmTab_Refresh();
 	LFGMM_LfmTab_CategoryDropDown_Validate();
 end
 
 function LFGMM_LfmTab_CategoryDropDown_Validate()
-	if (LFGMM_DB.SEARCH.LFM.CategoryCode == nil or LFGMM_DB.SEARCH.LFM.CategoryCode == "TEST") then
+	if (LFGMM_DB.SEARCH.LFM.Category == nil) then
 		-- TODO: Clear dungeon selection
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
 	end
 end
 
 function LFGMM_LfmTab_CategoryDropDown_UpdateText()
-	if (LFGMM_DB.SEARCH.LFM.CategoryCode == nil) then
+	if (LFGMM_DB.SEARCH.LFM.Category == nil) then
 		UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, "<Select category>");
 	else
-		local category = LFGMM_Core_GetCategoryByCode(LFGMM_DB.SEARCH.LFM.CategoryCode);
+		local category = LFGMM_Core_GetCategoryByCode(LFGMM_DB.SEARCH.LFM.Category);
 		if category ~= nil then
 			UIDropDownMenu_SetText(LFGMM_LfmTab_CategoryDropDown, category.Name);
 		end
+	end
+end
+
+function LFGMM_LfmTab_ModeDropDown_Item_OnClick(self, mode)
+	LFGMM_DB.SEARCH.LFM.Mode = LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC and mode or nil
+	LFGMM_LfmTab_ModeDropDown_UpdateText();
+	LFGMM_LfmTab_UpdateBroadcastMessage();
+	LFGMM_LfmTab_Refresh();
+end
+
+function LFGMM_LfmTab_ModeDropDown_UpdateText()
+	if LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		if LFGMM_DB.SEARCH.LFM.Mode == nil then
+			UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, "<select mode>");
+		else
+			local mode = LFGMM_Core_GetModeByCode(LFGMM_DB.SEARCH.LFM.Mode);
+			UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, mode.Name);
+		end
+	else
+		UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, "<N/A>");
 	end
 end
 
@@ -407,6 +460,11 @@ function LFGMM_LfmTab_UpdateBroadcastMessage()
 	if (LFGMM_DB.SEARCH.LFM.Dungeon ~= nil) then
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFM.Dungeon];
 		dungeonText = dungeon.Name;
+
+		if LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
+			dungeonText = dungeonText .. " (" .. LFGMM_DB.SEARCH.LFM.Mode .. ")";
+		end
+
 		abbreviationText = dungeon.Abbreviation;
 
 		-- Get number of players

@@ -90,7 +90,8 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
-					CategoryCode = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Mode = LFGMM_KEYS.DUNGEON_MODES.ALL,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -151,6 +152,11 @@ LFGMM_KEYS = {
 		VANILLA = "VANILLA_DUNGEONS",
 		TBC = "TBC_DUNGEONS",
 		PVP = "PVP",
+	},
+	DUNGEON_MODES = {
+		NHC = "NHC",
+		HC = "HC",
+		ALL = "ALL"
 	}
 }
 
@@ -171,10 +177,6 @@ LFGMM_GLOBAL = {
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
 	CATEGORIES = {
-		-- {
-		-- 	Code = "TEST",
-		-- 	Name = "Test",
-		-- },
 		{
 			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Name = "Vanilla Dungeons",
@@ -186,6 +188,20 @@ LFGMM_GLOBAL = {
 		{
 			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Name = "PvP",
+		}
+	},
+	MODES = {
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.NHC,
+			Name = "Normal",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.HC,
+			Name = "Heroic",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.ALL,
+			Name = "Normal + Heroic",
 		}
 	},
 	LANGUAGES = {
@@ -511,6 +527,12 @@ LFGMM_GLOBAL = {
 		FR = {},
 		ES = {},
 		RU = {}
+	},
+	HC_IDENTIFIERS = {
+		EN = {
+			"hero[i]?[c]?",
+			"hc"
+		}
 	},
 	DUNGEONS = {
 		{
