@@ -233,7 +233,7 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
 	LFGMM_LfgTab_UpdateBroadcastMessage();
 	
-	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_DungeonsDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 
 	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
@@ -545,6 +545,17 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					if (isBoostMatch) then
 						return;
 					end
+				end
+			end
+
+			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
+				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
+				if LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
+					print("NO MATCH: " .. messageOrg);
+					return;
+				elseif LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
+					print("NO MATCH: " .. messageOrg);
+					return;
 				end
 			end
 

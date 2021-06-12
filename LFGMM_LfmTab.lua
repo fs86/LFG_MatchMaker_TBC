@@ -29,7 +29,7 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_SearchActiveText.StringAnimation = "";
 
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_CategoryDropDown, 150, LFGMM_LfmTab_CategoryDropDown_OnInitialize);
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonDropDown, 150, LFGMM_LfmTab_DungeonDropDown_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_DungeonsDropDown, 150, LFGMM_LfmTab_DungeonsDropDown_OnInitialize);
 	LFGMM_Utility_InitializeDropDown(LFGMM_LfmTab_ModeDropDown, 150, LFGMM_LfmTab_ModeDropDown_OnInitialize);
 
 	LFGMM_LfmTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfmTab_StartStopSearchButton_OnClick);
@@ -110,7 +110,7 @@ function LFGMM_LfmTab_Refresh()
 
 	if (LFGMM_DB.SEARCH.LFM.Running) then
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_CategoryDropDown);
-		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
+		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonsDropDown);
 		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_ModeDropDown);
 		LFGMM_LfmTab_SearchActiveText:Show();
 		LFGMM_LfmTab_StartStopSearchButton:SetText("Stop searching");
@@ -128,7 +128,7 @@ function LFGMM_LfmTab_Refresh()
 
 	else
 		UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_CategoryDropDown);
-		UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_DungeonDropDown);
+		UIDropDownMenu_EnableDropDown(LFGMM_LfmTab_DungeonsDropDown);
 		LFGMM_LfmTab_SearchActiveText:Hide();
 		LFGMM_LfmTab_StartStopSearchButton:SetText("Start search");
 		LFGMM_LfmTab_BroadcastMessageTemplateInputBox:Enable();
@@ -205,19 +205,19 @@ function LFGMM_LfmTab_ModeDropDown_OnInitialize(self)
 	LFGMM_LfmTab_ModeDropDown_UpdateText();
 end
 
-function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)
+function LFGMM_LfmTab_DungeonsDropDown_OnInitialize(self, level)
 	local dungeonsAndRaids = LFGMM_Utility_GetAvailableDungeonsAndRaidsMap();
 	local dungeonMap = dungeonsAndRaids[LFGMM_DB.SEARCH.LFM.Category];
-	LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap);
+	LFGMM_LfmTab_DungeonsDropDown_Initialize_Internal(level, dungeonMap);
 end
 
-function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap)
+function LFGMM_LfmTab_DungeonsDropDown_Initialize_Internal(level, dungeonMap)
 	local createSingleDungeonItem = function(dungeon)
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.keepShownOnClick = false;
 		item.isNotRadio = true;
 		item.checked = LFGMM_DB.SEARCH.LFM.Dungeon == dungeon.Index;
-		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
+		item.func = LFGMM_LfmTab_DungeonsDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 1);
 	end
 
@@ -230,23 +230,23 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap)
 			end
 		end
 
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.hasArrow = true;
 		item.keepShownOnClick = false;
 		item.isNotRadio = not LFGMM_Utility_ArrayContains(availableSubDungeons, LFGMM_DB.SEARCH.LFM.Dungeon)
 		item.checked = LFGMM_DB.SEARCH.LFM.Dungeon == dungeon.Index or LFGMM_Utility_ArrayContains(availableSubDungeons, LFGMM_DB.SEARCH.LFM.Dungeon);
 		item.value = { DungeonIndexes = availableSubDungeons, ParentDungeonIndex = dungeon.Index };
-		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
+		item.func = LFGMM_LfmTab_DungeonsDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 1);
 	end
 
 	local createSubDungeonItem = function(dungeonIndex, parentDungeonIndex)
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.keepShownOnClick = false;
 		item.isNotRadio = LFGMM_DB.SEARCH.LFM.Dungeon ~= parentDungeonIndex;
 		item.checked = LFGMM_DB.SEARCH.LFM.Dungeon == dungeon.Index or LFGMM_DB.SEARCH.LFM.Dungeon == parentDungeonIndex;
-		item.func = LFGMM_LfmTab_DungeonDropDown_Item_OnClick;
+		item.func = LFGMM_LfmTab_DungeonsDropDown_Item_OnClick;
 		UIDropDownMenu_AddButton(item, 2);
 	end
 
@@ -292,7 +292,7 @@ function LFGMM_LfmTab_DungeonDropDown_Initialize_Internal(level, dungeonMap)
 	end
 
 	-- Update search selection text
-	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_DungeonsDropDown_UpdateText();
 end
 
 function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
@@ -304,7 +304,7 @@ function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
 	end
 
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
-	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_DungeonsDropDown_UpdateText();
 	LFGMM_LfmTab_ModeDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 	LFGMM_LfmTab_Refresh();
@@ -314,7 +314,7 @@ end
 function LFGMM_LfmTab_CategoryDropDown_Validate()
 	if (LFGMM_DB.SEARCH.LFM.Category == nil) then
 		-- TODO: Clear dungeon selection
-		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonDropDown);
+		UIDropDownMenu_DisableDropDown(LFGMM_LfmTab_DungeonsDropDown);
 	end
 end
 
@@ -341,7 +341,7 @@ function LFGMM_LfmTab_ModeDropDown_UpdateText()
 	UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, mode.Name);
 end
 
-function LFGMM_LfmTab_DungeonDropDown_Item_OnClick(self, dungeonIndex)
+function LFGMM_LfmTab_DungeonsDropDown_Item_OnClick(self, dungeonIndex)
 	-- Set dungeon
 	LFGMM_DB.SEARCH.LFM.Dungeon = dungeonIndex;
 
@@ -349,7 +349,7 @@ function LFGMM_LfmTab_DungeonDropDown_Item_OnClick(self, dungeonIndex)
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 
 	-- Update dungeon dropdown text
-	LFGMM_LfmTab_DungeonDropDown_UpdateText();
+	LFGMM_LfmTab_DungeonsDropDown_UpdateText();
 
 	-- Close drop down menus
 	CloseDropDownMenus();
@@ -358,12 +358,12 @@ function LFGMM_LfmTab_DungeonDropDown_Item_OnClick(self, dungeonIndex)
 	LFGMM_LfmTab_Refresh();
 end
 
-function LFGMM_LfmTab_DungeonDropDown_UpdateText()
+function LFGMM_LfmTab_DungeonsDropDown_UpdateText()
 	if (LFGMM_DB.SEARCH.LFM.Dungeon == nil) then
-		UIDropDownMenu_SetText(LFGMM_LfmTab_DungeonDropDown, "<Select dungeon>");
+		UIDropDownMenu_SetText(LFGMM_LfmTab_DungeonsDropDown, "<Select dungeon>");
 	else
 		local dungeonName = LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFM.Dungeon].Name;
-		UIDropDownMenu_SetText(LFGMM_LfmTab_DungeonDropDown, dungeonName);
+		UIDropDownMenu_SetText(LFGMM_LfmTab_DungeonsDropDown, dungeonName);
 	end
 end
 

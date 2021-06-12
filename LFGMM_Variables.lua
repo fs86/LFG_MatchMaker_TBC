@@ -79,6 +79,8 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
+					Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Mode = LFGMM_KEYS.DUNGEON_MODES.NONE,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "{L} {C} LFG {A}",
