@@ -298,6 +298,10 @@ function LFGMM_LfmTab_CategoryDropDown_Item_OnClick(self, categoryCode)
 	LFGMM_DB.SEARCH.LFM.Dungeon = nil;
 	LFGMM_DB.SEARCH.LFM.Category = categoryCode;
 
+	if LFGMM_DB.SEARCH.LFM.Category ~= LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		LFGMM_DB.SEARCH.LFM.Mode = LFGMM_KEYS.DUNGEON_MODES.NONE;
+	end
+
 	LFGMM_LfmTab_CategoryDropDown_UpdateText();
 	LFGMM_LfmTab_DungeonDropDown_UpdateText();
 	LFGMM_LfmTab_ModeDropDown_UpdateText();
@@ -332,16 +336,8 @@ function LFGMM_LfmTab_ModeDropDown_Item_OnClick(self, mode)
 end
 
 function LFGMM_LfmTab_ModeDropDown_UpdateText()
-	if LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
-		if LFGMM_DB.SEARCH.LFM.Mode == nil then
-			UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, "<select mode>");
-		else
-			local mode = LFGMM_Core_GetModeByCode(LFGMM_DB.SEARCH.LFM.Mode);
-			UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, mode.Name);
-		end
-	else
-		UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, "<N/A>");
-	end
+	local mode = LFGMM_Core_GetModeByCode(LFGMM_DB.SEARCH.LFM.Mode);
+	UIDropDownMenu_SetText(LFGMM_LfmTab_ModeDropDown, mode.Name);
 end
 
 function LFGMM_LfmTab_DungeonDropDown_Item_OnClick(self, dungeonIndex)

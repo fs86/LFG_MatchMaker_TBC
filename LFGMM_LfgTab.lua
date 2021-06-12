@@ -28,9 +28,10 @@
 function LFGMM_LfgTab_Initialize()
 	LFGMM_LfgTab_SearchActiveText.StringAnimation = "";
 
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_VANILLA, 130, LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize);
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_TBC, 130, LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize);
-	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_PVP, 130, LFGMM_LfgTab_DungeonsDropDown_PVP_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_VANILLA, 150, LFGMM_LfgTab_DungeonsDropDown_VANILLA_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_TBC, 150, LFGMM_LfgTab_DungeonsDropDown_TBC_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_DungeonsDropDown_PVP, 150, LFGMM_LfgTab_DungeonsDropDown_PVP_OnInitialize);
+	LFGMM_Utility_InitializeDropDown(LFGMM_LfgTab_ModeDropDown, 150, LFGMM_LfgTab_ModeDropDown_OnInitialize);
 
 	LFGMM_LfgTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfgTab_StartStopSearchButton_OnClick);
 
@@ -172,6 +173,30 @@ function LFGMM_LfgTab_DungeonsDropDown_PVP_OnInitialize(self, level)
 	local dungeonMap = dungeonsAndRaids[LFGMM_KEYS.DUNGEON_CATEGORIES.PVP];
 	LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(
 		level, LFGMM_KEYS.DUNGEON_CATEGORIES.PVP, dungeonMap);
+end
+
+function LFGMM_LfgTab_ModeDropDown_OnInitialize(self)
+	local createItem = function(mode, modeName)
+		local item = UIDropDownMenu_CreateInfo();
+		item.arg1 = mode;
+		item.text = modeName;
+		item.isNotRadio = true;
+		item.checked = LFGMM_DB.SEARCH.LFG.Mode == mode;
+		item.keepShownOnClick = false;
+		item.func = LFGMM_LfgTab_ModeDropDown_Item_OnClick;
+		return item
+	end
+
+	for _, mode in ipairs(LFGMM_GLOBAL.MODES) do
+		UIDropDownMenu_AddButton(createItem(mode.Code, mode.Name), 1);
+	end
+
+	if LFGMM_DB.SEARCH.LFG.Mode == nil then
+		LFGMM_DB.SEARCH.LFG.Mode = LFGMM_KEYS.DUNGEON_MODES.NONE;
+	end
+
+	LFGMM_LfgTab_ModeDropDown_UpdateText();
+	LFGMM_LfgTab_UpdateBroadcastMessage();
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode, dungeonMap)
@@ -418,6 +443,11 @@ function LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode)
 	LFGMM_LfgTab_Refresh();
 end
 
+function LFGMM_LfgTab_ModeDropDown_UpdateText()
+	local mode = LFGMM_Core_GetModeByCode(LFGMM_DB.SEARCH.LFG.Mode);
+	UIDropDownMenu_SetText(LFGMM_LfgTab_ModeDropDown, mode.Name);
+end
+
 
 function LFGMM_LfgTab_DungeonsDropDown_UpdateText(categoryCode)
 	local numDungeons = 0;
@@ -553,6 +583,10 @@ function LFGMM_LfgTab_UpdateBroadcastMessage()
 	message = string.gsub(message, "{[Dd]}", dungeonsText);
 	message = string.gsub(message, "{[Aa]}", abbreviationsText);
 	message = string.sub(message, 1, 255);
+
+	if LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
+		message = message .. " (" .. LFGMM_DB.SEARCH.LFG.Mode .. ")";
+	end
 
 	-- Store broadcast message
 	LFGMM_DB.SEARCH.LFG.BroadcastMessage = message;
