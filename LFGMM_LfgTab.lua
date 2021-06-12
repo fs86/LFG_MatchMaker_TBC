@@ -443,6 +443,13 @@ function LFGMM_LfgTab_DungeonsDropDown_Item_OnClick(categoryCode)
 	LFGMM_LfgTab_Refresh();
 end
 
+function LFGMM_LfgTab_ModeDropDown_Item_OnClick(self, mode)
+	LFGMM_DB.SEARCH.LFG.Mode = mode;
+	LFGMM_LfgTab_ModeDropDown_UpdateText();
+	LFGMM_LfgTab_UpdateBroadcastMessage();
+	LFGMM_LfgTab_Refresh();
+end
+
 function LFGMM_LfgTab_ModeDropDown_UpdateText()
 	local mode = LFGMM_Core_GetModeByCode(LFGMM_DB.SEARCH.LFG.Mode);
 	UIDropDownMenu_SetText(LFGMM_LfgTab_ModeDropDown, mode.Name);
@@ -565,8 +572,9 @@ function LFGMM_LfgTab_UpdateBroadcastMessage()
 
 	-- Get selected dungeons
 	local selectedDungeons = {};
-	local dungeonsText = "<dungeon(s)>";
-	local abbreviationsText = "<dungeon(s)>";
+	local placeHolder = "<dungeon(s)>";
+	local dungeonsText = placeHolder;
+	local abbreviationsText = placeHolder;
 
 	-- Get selected dungeons text
 	if (table.getn(LFGMM_DB.SEARCH.LFG.Dungeons) > 0) then
@@ -584,8 +592,9 @@ function LFGMM_LfgTab_UpdateBroadcastMessage()
 	message = string.gsub(message, "{[Aa]}", abbreviationsText);
 	message = string.sub(message, 1, 255);
 
-	if LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
+	if message ~= nil and message ~= placeHolder and LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
 		message = message .. " (" .. LFGMM_DB.SEARCH.LFG.Mode .. ")";
+		print(message);
 	end
 
 	-- Store broadcast message

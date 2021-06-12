@@ -452,18 +452,15 @@ function LFGMM_LfmTab_UpdateBroadcastMessage()
 	-- Store template
 	LFGMM_DB.SEARCH.LFM.BroadcastMessageTemplate = message;
 
-	local dungeonText = "<dungeon>";
-	local abbreviationText = "<dungeon>";
+	local placeHolder = "<dungeon>";
+	local dungeonText = placeHolder;
+	local abbreviationText = placeHolder;
 	local lookingForNumberText = "<number>";
 
 	-- Get dungeon
 	if (LFGMM_DB.SEARCH.LFM.Dungeon ~= nil) then
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[LFGMM_DB.SEARCH.LFM.Dungeon];
 		dungeonText = dungeon.Name;
-
-		if LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
-			dungeonText = dungeonText .. " (" .. LFGMM_DB.SEARCH.LFM.Mode .. ")";
-		end
 
 		abbreviationText = dungeon.Abbreviation;
 
@@ -480,6 +477,11 @@ function LFGMM_LfmTab_UpdateBroadcastMessage()
 	message = string.gsub(message, "{[Aa]}", abbreviationText);
 	message = string.gsub(message, "{[Nn]}", lookingForNumberText);
 	message = string.sub(message, 1, 255);
+
+	if message ~= nil and message ~= placeHolder and LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
+		message = message .. " (" .. LFGMM_DB.SEARCH.LFM.Mode .. ")";
+		print(message);
+	end
 
 	-- Store message
 	LFGMM_DB.SEARCH.LFM.BroadcastMessage = message;
