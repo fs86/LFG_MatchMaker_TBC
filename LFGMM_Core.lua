@@ -527,12 +527,17 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			local messageOrg = select(1, ...);
 
 			-- Ignore own messages
-			-- if (player == LFGMM_GLOBAL.PLAYER_NAME) then
-			-- 	return;
-			-- end
+			if (player == LFGMM_GLOBAL.PLAYER_NAME) then
+				return;
+			end
 
 			local message = LFGMM_Utility_NormalizeChatMessage(messageOrg, LFGMM_DB.SETTINGS.IdentifierLanguages);
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
+			local showAsLfgMatch, showAsLfmMatch = true, true;
+
+			------------------------------------------------------------------------------------------------------------------------
+			-- TODO: REFACTORING!!!
+			------------------------------------------------------------------------------------------------------------------------
 
 			 -- Check if message contains a boost offer/request and ignore
 			 -- the message based on the settings in LFG/LFM tab.
@@ -551,24 +556,23 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
 				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
 				if LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
-					print("NO MATCH: " .. messageOrg);
-					return;
+					showAsLfgMatch = false;
 				elseif LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
-					print("NO MATCH: " .. messageOrg);
-					return;
+					showAsLfgMatch = false;
 				end
 			end
 
 			if (LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
 				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
 				if LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
-					print("NO MATCH: " .. messageOrg);
-					return;
+					showAsLfmMatch = false;
 				elseif LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
-					print("NO MATCH: " .. messageOrg);
-					return;
+					showAsLfmMatch = false;
 				end
 			end
+
+			------------------------------------------------------------------------------------------------------------------------
+			------------------------------------------------------------------------------------------------------------------------
 
 			-- Find dungeon matches
 			for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
@@ -811,7 +815,9 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					Ignore = {},
 					Invited = false,
 					InviteRequested = false,
-					SortIndex = messageSortIndex
+					SortIndex = messageSortIndex,
+					ShowAsLfgMatch = showAsLfgMatch,
+					ShowAsLfmMatch = showAsLfmMatch
 				};
 				
 				LFGMM_GLOBAL.MESSAGES[player] = newMessage;
