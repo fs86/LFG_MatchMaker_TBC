@@ -196,6 +196,10 @@ function LFGMM_LfmTab_ModeDropDown_OnInitialize(self)
 		UIDropDownMenu_AddButton(createItem(mode.Code, mode.Name), 1);
 	end
 
+	if LFGMM_DB.SEARCH.LFM.Mode == nil then
+		LFGMM_DB.SEARCH.LFM.Mode = LFGMM_KEYS.DUNGEON_MODES.NONE;
+	end
+
 	LFGMM_LfmTab_ModeDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 end

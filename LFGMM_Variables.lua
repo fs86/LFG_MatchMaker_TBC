@@ -91,7 +91,7 @@ function LFGMM_Load()
 					AutoStop = true,
 					IgnoreBoosts = false,
 					Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
-					Mode = LFGMM_KEYS.DUNGEON_MODES.ALL,
+					Mode = LFGMM_KEYS.DUNGEON_MODES.NONE,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -156,7 +156,7 @@ LFGMM_KEYS = {
 	DUNGEON_MODES = {
 		NHC = "NHC",
 		HC = "HC",
-		ALL = "ALL"
+		NONE = "NONE"
 	}
 }
 
@@ -192,16 +192,16 @@ LFGMM_GLOBAL = {
 	},
 	MODES = {
 		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.NONE,
+			Name = "<none>",
+		},
+		{
 			Code = LFGMM_KEYS.DUNGEON_MODES.NHC,
 			Name = "Normal",
 		},
 		{
 			Code = LFGMM_KEYS.DUNGEON_MODES.HC,
 			Name = "Heroic",
-		},
-		{
-			Code = LFGMM_KEYS.DUNGEON_MODES.ALL,
-			Name = "Normal + Heroic",
 		}
 	},
 	LANGUAGES = {
@@ -532,6 +532,9 @@ LFGMM_GLOBAL = {
 		EN = {
 			"hero[i]?[c]?",
 			"hc"
+		},
+		DE = {
+			"hero[i]?[s]?[c]?[h]?"
 		}
 	},
 	DUNGEONS = {
