@@ -51,6 +51,8 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick);
 
 	LFGMM_LfmTab.SearchAnimationLock = false;
+
+	LFGMM_LfmTab_UpdateBroadcastMessage();
 end
 
 
@@ -201,7 +203,6 @@ function LFGMM_LfmTab_ModeDropDown_OnInitialize(self)
 	end
 
 	LFGMM_LfmTab_ModeDropDown_UpdateText();
-	LFGMM_LfmTab_UpdateBroadcastMessage();
 end
 
 function LFGMM_LfmTab_DungeonDropDown_OnInitialize(self, level)

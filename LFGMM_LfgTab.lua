@@ -52,6 +52,8 @@ function LFGMM_LfgTab_Initialize()
 	LFGMM_LfgTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfgTab_BroadcastMessageInfoButton_OnClick);
 
 	LFGMM_LfgTab.SearchAnimationLock = false;
+
+	LFGMM_LfgTab_UpdateBroadcastMessage();
 end
 
 
@@ -196,7 +198,6 @@ function LFGMM_LfgTab_ModeDropDown_OnInitialize(self)
 	end
 
 	LFGMM_LfgTab_ModeDropDown_UpdateText();
-	LFGMM_LfgTab_UpdateBroadcastMessage();
 end
 
 function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, categoryCode, dungeonMap)
