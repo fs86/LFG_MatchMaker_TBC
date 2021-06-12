@@ -595,7 +595,6 @@ function LFGMM_LfgTab_UpdateBroadcastMessage()
 
 	if message ~= nil and message ~= placeHolder and LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC or  LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC then
 		message = message .. " (" .. LFGMM_DB.SEARCH.LFG.Mode .. ")";
-		print(message);
 	end
 
 	-- Store broadcast message
