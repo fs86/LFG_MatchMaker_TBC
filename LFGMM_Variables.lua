@@ -533,11 +533,24 @@ LFGMM_GLOBAL = {
 	HC_IDENTIFIERS = {
 		EN = {
 			"hero[i]?[c]?",
-			"hc"
+			"[%(]?hc[%)]?"
 		},
 		DE = {
 			"hero[i]?[s]?[c]?[h]?"
-		}
+		},
+		FR = {},
+		ES = {},
+		RU = {}
+	},
+	NOT_HC_IDENTIFIERS = {
+		EN = {
+			"non[%W]*hero[i]?[c]?",
+			"[%(]?nh[c]?[%)]?"
+		},
+		DE = {},
+		FR = {},
+		ES = {},
+		RU = {}
 	},
 	DUNGEONS = {
 		{

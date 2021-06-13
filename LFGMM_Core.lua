@@ -28,7 +28,7 @@
 
 function LFGMM_Core_Initialize()
 	tinsert(UISpecialFrames, "LFGMM_MainWindow");
-	
+
 	LFGMM_LfgTab_Initialize();
 	LFGMM_LfmTab_Initialize();
 	LFGMM_ListTab_Initialize();
@@ -36,7 +36,7 @@ function LFGMM_Core_Initialize()
 	LFGMM_PopupWindow_Initialize();
 	LFGMM_MinimapButton_Initialize();
 	LFGMM_BroadcastWindow_Initialize();
-	
+
 	LFGMM_Core_SetInfoWindowLocations();
 
 	if (LFGMM_DB.SETTINGS.ShowQuestLogButton) then
@@ -48,21 +48,21 @@ function LFGMM_Core_Initialize()
 	LFGMM_MainWindow:SetScript("OnDragStop", LFGMM_MainWindow.StopMovingOrSizing);
 	LFGMM_MainWindow:SetScript("OnShow", function() PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN); LFGMM_Core_Refresh(); end);
 	LFGMM_MainWindow:SetScript("OnHide", function() PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE); end);
-	
+
 	LFGMM_MainWindowTab1:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB); LFGMM_LfgTab_Show(); end);
 	LFGMM_MainWindowTab2:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB); LFGMM_LfmTab_Show(); end);
 	LFGMM_MainWindowTab3:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB); LFGMM_ListTab_Show(); end);
 	LFGMM_MainWindowTab4:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB); LFGMM_SettingsTab_Show(); end);
-	
+
 	PanelTemplates_SetNumTabs(LFGMM_MainWindow, 4);
-	
+
 	local groupSize = table.getn(LFGMM_GLOBAL.GROUP_MEMBERS);
 	if (groupSize > 1) then
 		LFGMM_LfmTab_Show();
 	else
 		LFGMM_LfgTab_Show();
 	end
-	
+
 	LFGMM_GLOBAL.READY = true;
 end
 
@@ -90,7 +90,7 @@ function LFGMM_Core_MainWindow_ToggleShow()
 		LFGMM_SettingsTab_ChannelsDropDownInfoWindow:Hide();
 		LFGMM_ListTab_MessageInfoWindow_Hide();
 		LFGMM_ListTab_ConfirmForgetAll:Hide();
-		LFGMM_MainWindow:Show(); 
+		LFGMM_MainWindow:Show();
 		LFGMM_Core_Refresh();
 		LFGMM_Core_SetGuiEnabled(true);
 	end
@@ -166,7 +166,7 @@ function LFGMM_Core_WhoCooldown()
 
 	LFGMM_ListTab_MessageInfoWindow_Refresh();
 	LFGMM_PopupWindow_Refresh();
-	
+
 	if (LFGMM_GLOBAL.WHO_COOLDOWN > 0) then
 		C_Timer.After(1, LFGMM_Core_WhoCooldown);
 	end
@@ -191,7 +191,7 @@ end
 function LFGMM_Core_Invite(message)
 	-- Invite player
 	InviteUnit(message.Player);
-	
+
 	-- Mark as contacted
 	message.Invited = true;
 end
@@ -216,7 +216,7 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 	local removeSelections = {};
 	for _,dungeon in ipairs(LFGMM_Utility_GetAllUnavailableDungeonsAndRaids()) do
 		table.insert(removeSelections, dungeon.Index);
-		
+
 		if (not LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.Dungeon == dungeon.Index) then
 			LFGMM_DB.SEARCH.LFM.Dungeon = nil;
 		end
@@ -227,12 +227,10 @@ function LFGMM_Core_RemoveUnavailableDungeonsFromSelections()
 	if (not LFGMM_DB.SEARCH.LFG.Running) then
 		LFGMM_Utility_ArrayRemove(LFGMM_DB.SEARCH.LFG.Dungeons, removeSelections);
 	end
-	
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
-	LFGMM_LfgTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.PVP);
+
+	LFGMM_LfgTab_DungeonsDropDown_UpdateText();
 	LFGMM_LfgTab_UpdateBroadcastMessage();
-	
+
 	LFGMM_LfmTab_DungeonsDropDown_UpdateText();
 	LFGMM_LfmTab_UpdateBroadcastMessage();
 
@@ -244,7 +242,7 @@ end
 
 function LFGMM_Core_GetGroupMembers()
 	local groupMembers = {};
-	
+
 	-- Raid
 	for index=1, 40 do
 		local playerName = UnitName("raid" .. index);
@@ -316,7 +314,7 @@ function LFGMM_Core_FindSearchMatch()
 	elseif (LFGMM_DB.SEARCH.LFM.Running) then
 		searchDungeonIndexes = { LFGMM_DB.SEARCH.LFM.Dungeon };
 	end
-	
+
 	-- Get max message age
 	local maxMessageAge = time() - (60 * LFGMM_DB.SETTINGS.MaxMessageAge);
 
@@ -327,7 +325,7 @@ function LFGMM_Core_FindSearchMatch()
 		-- Skip ignored
 		if (message.Ignore[message.Type] ~= nil) then
 			skip = true;
-			
+
 		-- Skip old
 		elseif (message.Timestamp < maxMessageAge) then
 			skip = true;
@@ -348,7 +346,7 @@ function LFGMM_Core_FindSearchMatch()
 				skip = true;
 			elseif (message.Type == "UNKNOWN" and not LFGMM_DB.SEARCH.LFG.MatchUnknown) then
 				skip = true;
-			end					
+			end
 
 		-- Skip LFM and/or UNKNOWN match for LFM search
 		elseif (LFGMM_DB.SEARCH.LFM.Running) then
@@ -357,12 +355,12 @@ function LFGMM_Core_FindSearchMatch()
 			elseif (message.Type == "UNKNOWN" and not LFGMM_DB.SEARCH.LFM.MatchUnknown) then
 				skip = true;
 			end
-			
+
 		-- Skip messages from group members
 		elseif (LFGMM_Utility_ArrayContains(LFGMM_GLOBAL.GROUP_MEMBERS, message.Player)) then
 			skip = true;
 		end
-		
+
 		-- Find dungeon match
 		if (not skip) then
 			for _,searchDungeonIndex in ipairs(searchDungeonIndexes) do
@@ -386,7 +384,7 @@ end
 function LFGMM_Core_JoinChannels()
 	LFGMM_GLOBAL.LFG_CHANNEL_NAME = LFGMM_Utility_GetLfgChannelName();
 	JoinTemporaryChannel(LFGMM_GLOBAL.LFG_CHANNEL_NAME);
-	
+
 	LFGMM_GLOBAL.GENERAL_CHANNEL_NAME = LFGMM_Utility_GetGeneralChannelName();
 	if (LFGMM_DB.SETTINGS.UseGeneralChannel) then
 		JoinTemporaryChannel(LFGMM_GLOBAL.GENERAL_CHANNEL_NAME);
@@ -396,15 +394,65 @@ function LFGMM_Core_JoinChannels()
 	if (LFGMM_DB.SETTINGS.UseTradeChannel and LFGMM_GLOBAL.TRADE_CHANNEL_AVAILABLE) then
 		JoinTemporaryChannel(LFGMM_GLOBAL.TRADE_CHANNEL_NAME);
 	end
-	
+
 	LFGMM_SettingsTab_ChannelsDropDown_UpdateText();
 end
 
+function LFGMM_Core_IsHc(message)
+	local nhcFound = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_HC_IDENTIFIERS);
+	if nhcFound then
+		return false;
+	end
+
+	local hcFound = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
+	if hcFound then
+		return true;
+	end
+
+	return false;
+end
+
+function LFGMM_Core_ValidatesAgainstModeFilter(message, lfgOrLfmNode)
+	if lfgOrLfmNode["Running"] and lfgOrLfmNode["Category"] == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC then
+		local isHc = LFGMM_Core_IsHc(message);
+		if lfgOrLfmNode["Mode"] == LFGMM_KEYS.DUNGEON_MODES.HC and not isHc then
+			return false;
+		elseif lfgOrLfmNode["Mode"] == LFGMM_KEYS.DUNGEON_MODES.NHC and isHc then
+			return false;
+		end
+	end
+
+	return true;
+end
+
+function LFGMM_Core_IsBoost(message)
+	local noBoostFound = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
+	if noBoostFound then
+		return false;
+	end
+
+	local boostFound = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
+	if boostFound then
+		return true;
+	end
+
+	return false;
+end
+
+function LFGMM_Core_ValidatesAgainstBoostFilter(message, lfgOrLfmNode)
+	if lfgOrLfmNode["Running"] and lfgOrLfmNode["IgnoreBoosts"] then
+		local isBoost = LFGMM_Core_IsBoost(message);
+		if isBoost then
+			return false;
+		end
+	end
+
+	return true;
+end
 
 ------------------------------------------------------------------------------------------------------------------------
 -- EVENT HANDLER
 ------------------------------------------------------------------------------------------------------------------------
-
 
 function LFGMM_Core_EventHandler(self, event, ...)
 	-- Initialize
@@ -425,33 +473,33 @@ function LFGMM_Core_EventHandler(self, event, ...)
 		C_Timer.After(5, function()
 			LFGMM_Core_JoinChannels();
 		end);
-		
+
 	-- Return if not ready
 	elseif (not LFGMM_GLOBAL.READY) then
 		return;
-	
+
 	-- Zone changed (join channels)
 	elseif (event == "ZONE_CHANGED_NEW_AREA") then
 		C_Timer.After(5, function()
 			LFGMM_Core_JoinChannels();
 		end);
-	
+
 	-- Update player level
 	elseif (event == "PLAYER_LEVEL_UP") then
 		LFGMM_GLOBAL.PLAYER_LEVEL = select(1, ...);
 		LFGMM_LfgTab_UpdateBroadcastMessage();
 		LFGMM_SettingsTab_UpdateRequestInviteMessage();
-		
+
 	-- Show invited popup
 	elseif (event == "PARTY_INVITE_REQUEST") then
 		local player = select(1, ...);
 		local message = LFGMM_GLOBAL.MESSAGES[player];
-		
+
 		if (message ~= nil) then
 			LFGMM_PopupWindow_ShowForInvited(message);
 			LFGMM_PopupWindow_MoveToPartyInviteDialog();
 		end
-		
+
 	-- Parse /who response for player level
 	elseif (event == "CHAT_MSG_SYSTEM") then
 		local message = select(1, ...);
@@ -459,12 +507,12 @@ function LFGMM_Core_EventHandler(self, event, ...)
 
 		if (LFGMM_GLOBAL.MESSAGES[player] ~= nil) then
 			LFGMM_GLOBAL.MESSAGES[player].PlayerLevel = level;
-			
+
 			LFGMM_ListTab_Refresh();
 			LFGMM_ListTab_MessageInfoWindow_Refresh();
 			LFGMM_PopupWindow_Refresh();
 		end
-	
+
 	-- Update group members
 	elseif (event == "GROUP_ROSTER_UPDATE") then
 		LFGMM_Core_GetGroupMembers();
@@ -472,23 +520,23 @@ function LFGMM_Core_EventHandler(self, event, ...)
 		LFGMM_Core_Refresh();
 		LFGMM_LfmTab_UpdateBroadcastMessage();
 		LFGMM_ListTab_MessageInfoWindow_Refresh();
-		
+
 		-- Get group size
 		local groupSize = table.getn(LFGMM_GLOBAL.GROUP_MEMBERS);
-		
+
 		-- Abort LFG if group is joined
 		if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.AutoStop and LFGMM_GLOBAL.AUTOSTOP_AVAILABLE) then
 			if (groupSize > 1) then
 				LFGMM_DB.SEARCH.LFG.Running = false;
 				LFGMM_PopupWindow_Hide();
 				LFGMM_BroadcastWindow_CancelBroadcast();
-				
+
 				LFGMM_MainWindowTab1:Show();
 				LFGMM_MainWindowTab2:Show();
-				
+
 				LFGMM_Core_Refresh();
 				LFGMM_Core_RemoveUnavailableDungeonsFromSelections();
-				
+
 				LFGMM_MinimapButton_Refresh();
 			end
 
@@ -505,7 +553,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 
 				LFGMM_Core_Refresh();
 				LFGMM_Core_RemoveUnavailableDungeonsFromSelections();
-				
+
 				LFGMM_MinimapButton_Refresh();
 			end
 		end
@@ -535,44 +583,13 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			local uniqueDungeonMatches = LFGMM_Utility_CreateUniqueDungeonsList();
 			local showAsLfgMatch, showAsLfmMatch = true, true;
 
-			------------------------------------------------------------------------------------------------------------------------
-			-- TODO: REFACTORING!!!
-			------------------------------------------------------------------------------------------------------------------------
+			-- Boost filter validation
+			showAsLfgMatch = showAsLfgMatch and LFGMM_Core_ValidatesAgainstBoostFilter(message, LFGMM_DB.SEARCH.LFG);
+			showAsLfmMatch = showAsLfmMatch and LFGMM_Core_ValidatesAgainstBoostFilter(message, LFGMM_DB.SEARCH.LFM);
 
-			 -- Check if message contains a boost offer/request and ignore
-			 -- the message based on the settings in LFG/LFM tab.
-			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.IgnoreBoosts) or
-				(LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.IgnoreBoosts)
-			then
-				local isNotBoostMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.NOT_BOOST_IDENTIFIERS);
-				if not isNotBoostMatch then
-					local isBoostMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.BOOST_IDENTIFIERS);
-					if (isBoostMatch) then
-						return;
-					end
-				end
-			end
-
-			if (LFGMM_DB.SEARCH.LFG.Running and LFGMM_DB.SEARCH.LFG.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
-				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
-				if LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
-					showAsLfgMatch = false;
-				elseif LFGMM_DB.SEARCH.LFG.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
-					showAsLfgMatch = false;
-				end
-			end
-
-			if (LFGMM_DB.SEARCH.LFM.Running and LFGMM_DB.SEARCH.LFM.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC) then
-				local isHcMatch = LFGMM_Utility_IsMatchForAnyLanguage(message, LFGMM_GLOBAL.HC_IDENTIFIERS);
-				if LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.HC and not isHcMatch then
-					showAsLfmMatch = false;
-				elseif LFGMM_DB.SEARCH.LFM.Mode == LFGMM_KEYS.DUNGEON_MODES.NHC and isHcMatch then
-					showAsLfmMatch = false;
-				end
-			end
-
-			------------------------------------------------------------------------------------------------------------------------
-			------------------------------------------------------------------------------------------------------------------------
+			-- Mode filter validation
+			showAsLfgMatch = showAsLfgMatch and LFGMM_Core_ValidatesAgainstModeFilter(message, LFGMM_DB.SEARCH.LFG);
+			showAsLfmMatch = showAsLfmMatch and LFGMM_Core_ValidatesAgainstModeFilter(message, LFGMM_DB.SEARCH.LFM);
 
 			-- Find dungeon matches
 			for _,dungeon in ipairs(LFGMM_GLOBAL.DUNGEONS) do
@@ -587,7 +604,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 							end
 						end
 					end
-					
+
 					if (matched) then
 						break;
 					end
@@ -612,17 +629,17 @@ function LFGMM_Core_EventHandler(self, event, ...)
 
 				if (matched) then
 					uniqueDungeonMatches:Add(dungeon);
-					
+
 					if (dungeon.ParentDungeon ~= nil) then
 						uniqueDungeonMatches:Add(LFGMM_GLOBAL.DUNGEONS[dungeon.ParentDungeon]);
 					end
 				end
 			end
-			
+
 			-- Find dungeon fallback matches
 			for _,dungeonsFallback in ipairs(LFGMM_GLOBAL.DUNGEONS_FALLBACK) do
 				local matched = false;
-				
+
 				for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
 					if (dungeonsFallback.Identifiers[languageCode] ~= nil) then
 						for _,identifier in ipairs(dungeonsFallback.Identifiers[languageCode]) do
@@ -632,15 +649,15 @@ function LFGMM_Core_EventHandler(self, event, ...)
 							end
 						end
 					end
-					
+
 					if (matched) then
 						break;
 					end
 				end
-				
+
 				if (matched) then
 					local singleInFallbackMatched = false;
-					
+
 					for _,dungeonIndex in ipairs(dungeonsFallback.Dungeons) do
 						if (uniqueDungeonMatches.List[dungeonIndex] ~= nil) then
 							singleInFallbackMatched = true;
@@ -652,7 +669,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 						for _,dungeonIndex in ipairs(dungeonsFallback.Dungeons) do
 							local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
 							uniqueDungeonMatches:Add(dungeon);
-							
+
 							if (dungeon.ParentDungeon ~= nil) then
 								uniqueDungeonMatches:Add(LFGMM_GLOBAL.DUNGEONS[dungeon.ParentDungeon]);
 							end
@@ -662,12 +679,12 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			end
 
 			-- Remove Deadmines or Dire Maul if both are matched by the "DM" identifier and another dungeon is mentioned, based on level of the other dungeon.
-			if (uniqueDungeonMatches.List[3] ~= nil and 
+			if (uniqueDungeonMatches.List[3] ~= nil and
 				uniqueDungeonMatches.List[39] ~= nil and
-				uniqueDungeonMatches.List[40] == nil and 
-				uniqueDungeonMatches.List[41] == nil and 
-				uniqueDungeonMatches.List[42] == nil and 
-				uniqueDungeonMatches.List[43] == nil) 
+				uniqueDungeonMatches.List[40] == nil and
+				uniqueDungeonMatches.List[41] == nil and
+				uniqueDungeonMatches.List[42] == nil and
+				uniqueDungeonMatches.List[43] == nil)
 			then
 				for _,dungeon in ipairs(uniqueDungeonMatches:GetDungeonList()) do
 					-- Remove Dire Maul as match if low level dungeon is mentioned
@@ -683,13 +700,13 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					end
 				end
 			end
-			
+
 			-- "Any dungeon" match
 			local isAnyDungeonMatch = LFGMM_Utility_ArrayContainsAll(uniqueDungeonMatches:GetIndexList(), LFGMM_GLOBAL.DUNGEONS_FALLBACK[4].Dungeons);
 
 			-- Convert to indexed list
 			local dungeonMatches = uniqueDungeonMatches:GetDungeonList();
-			
+
 			-- Find type of message (LFG / LFM / UNKNOWN)
 			local typeMatch = nil;
 			for _,languageCode in ipairs(LFGMM_DB.SETTINGS.IdentifierLanguages) do
@@ -700,7 +717,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 								typeMatch = identifierCollection.Type;
 							end
 						end
-						
+
 						if (typeMatch ~= nil) then
 							break;
 						end
@@ -711,7 +728,7 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					break;
 				end
 			end
-			
+
 			if (typeMatch == nil) then
 				typeMatch = "UNKNOWN";
 
@@ -742,14 +759,14 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			local messageSortIndex;
 			if (table.getn(dungeonMatches) == 0) then
 				messageSortIndex = -1;
-				
+
 			elseif (isAnyDungeonMatch) then
 				messageSortIndex = 0;
-			
+
 			else
 				table.sort(dungeonMatches, function(left, right) return left.Index < right.Index; end);
 				messageSortIndex = dungeonMatches[1].Index;
-				
+
 				-- Sort by first subdungeon (if present) if first dungeon is a parent
 				if (dungeonMatches[1].SubDungeons ~= nil and table.getn(dungeonMatches) > 1) then
 					if (LFGMM_Utility_ArrayContains(dungeonMatches[1].SubDungeons, dungeonMatches[2].Index)) then
@@ -784,22 +801,33 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			messageOrg = string.gsub(messageOrg, "^%s", "");
 			messageOrg = string.gsub(messageOrg, "%s$", "");
 
+			-- Debug HC filter
+			-- if LFGMM_DB.SEARCH.LFG.Running and typeMatch ~= "UNKNOWN" and not showAsLfgMatch then
+			-- 	print("IGNORE: " .. messageOrg);
+			-- end
+
+			-- if LFGMM_DB.SEARCH.LFM.Running and typeMatch ~= "UNKNOWN" and not showAsLfmMatch then
+			-- 	print("IGNORE: " .. messageOrg);
+			-- end
+
 			-- Update existing message
 			if (LFGMM_GLOBAL.MESSAGES[player] ~= nil) then
 				local savedMessage = LFGMM_GLOBAL.MESSAGES[player];
-				
+
 				-- Ignore message if previous message from player matched dungeons and the new message dont match any
 				if (table.getn(savedMessage.Dungeons) > 0 and table.getn(dungeonMatches) == 0) then
 					return;
 				end
-				
+
 				-- Update message
 				savedMessage.Timestamp = now;
 				savedMessage.Type = typeMatch;
 				savedMessage.Message = messageOrg;
 				savedMessage.Dungeons = dungeonMatches;
 				savedMessage.SortIndex = messageSortIndex;
-				
+				savedMessage.ShowAsLfgMatch = showAsLfgMatch;
+				savedMessage.ShowAsLfmMatch = showAsLfmMatch;
+
 			-- Add new message
 			else
 				local classFile = select(2, GetPlayerInfoByGUID(playerGuid));
@@ -819,10 +847,10 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					ShowAsLfgMatch = showAsLfgMatch,
 					ShowAsLfmMatch = showAsLfmMatch
 				};
-				
+
 				LFGMM_GLOBAL.MESSAGES[player] = newMessage;
 			end
-				
+
 			-- Traverse messages and remove old ones (over 30 minutes)
 			local maxAge = now - (60 * 30);
 			for player,message in pairs(LFGMM_GLOBAL.MESSAGES) do
@@ -830,12 +858,12 @@ function LFGMM_Core_EventHandler(self, event, ...)
 					LFGMM_GLOBAL.MESSAGES[player] = nil;
 				end
 			end
-			
+
 			-- Search for match
 			if (LFGMM_DB.SEARCH.LFG.Running or LFGMM_DB.SEARCH.LFM.Running) then
 				LFGMM_Core_FindSearchMatch();
 			end
-		
+
 			-- Refresh
 			LFGMM_ListTab_Refresh();
 			LFGMM_ListTab_MessageInfoWindow_Refresh();
