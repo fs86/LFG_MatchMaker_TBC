@@ -556,6 +556,11 @@ function LFGMM_LfgTab_StartStopSearchButton_OnClick()
 		LFGMM_Core_RemoveUnavailableDungeonsFromSelections();
 
 	else
+		-- Reset ignored messages
+		for _,message in pairs(LFGMM_GLOBAL.MESSAGES) do
+			message.Ignore = {};
+		end
+
 		-- Determine if autostop is available or not
 		local groupSize = table.getn(LFGMM_GLOBAL.GROUP_MEMBERS);
 		if (groupSize > 1) then
@@ -571,11 +576,6 @@ function LFGMM_LfgTab_StartStopSearchButton_OnClick()
 		-- Start broadcast
 		if (LFGMM_DB.SEARCH.LFG.Broadcast) then
 			LFGMM_BroadcastWindow_StartBroadcast();
-		end
-
-		-- Reset ignored messages
-		for _,message in pairs(LFGMM_GLOBAL.MESSAGES) do
-			message.Ignore = {};
 		end
 
 		-- Search for group match after 2 seconds
