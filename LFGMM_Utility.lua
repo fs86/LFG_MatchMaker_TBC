@@ -89,7 +89,7 @@ function LFGMM_Utility_ToggleEnabledColor(frameElement, enabled)
 end
 
 
-function LFGMM_Utility_CreateDungeonDropdownItem(dungeon)
+function LFGMM_Utility_CreateDungeonsDropdownItem(dungeon)
 	local item = UIDropDownMenu_CreateInfo();
 	item.arg1 = dungeon.Index;
 

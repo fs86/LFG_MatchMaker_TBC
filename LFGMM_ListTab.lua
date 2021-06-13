@@ -301,7 +301,7 @@ end
 
 function LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(level, categoryCode, dungeonMap)
 	local createSingleDungeonItem = function(dungeon)
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.keepShownOnClick = true;
 		item.isNotRadio = true;
 		item.checked = LFGMM_Utility_ArrayContains(LFGMM_DB.LIST.Dungeons, dungeon.Index);
@@ -326,7 +326,7 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(level, categoryCod
 			end
 		end
 
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.hasArrow = true;
 		item.keepShownOnClick = true;
 		item.isNotRadio = true;
@@ -347,7 +347,7 @@ function LFGMM_ListTab_DungeonsDropDown_OnInitialize_Interial(level, categoryCod
 	local createSubDungeonItem = function(dungeonIndex)
 		-- Create dungeon menu item
 		local dungeon = LFGMM_GLOBAL.DUNGEONS[dungeonIndex];
-		local item = LFGMM_Utility_CreateDungeonDropdownItem(dungeon);
+		local item = LFGMM_Utility_CreateDungeonsDropdownItem(dungeon);
 		item.keepShownOnClick = true;
 		item.isNotRadio = true;
 		item.checked = LFGMM_Utility_ArrayContains(LFGMM_DB.LIST.Dungeons, dungeonIndex);

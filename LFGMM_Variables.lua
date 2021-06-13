@@ -79,6 +79,8 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
+					Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Mode = LFGMM_KEYS.DUNGEON_MODES.NONE,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "{L} {C} LFG {A}",
@@ -90,7 +92,8 @@ function LFGMM_Load()
 					MatchUnknown = true,
 					AutoStop = true,
 					IgnoreBoosts = false,
-					CategoryCode = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Category = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
+					Mode = LFGMM_KEYS.DUNGEON_MODES.NONE,
 					Broadcast = false,
 					BroadcastMessage = "",
 					BroadcastMessageTemplate = "LF{N}M {D}",
@@ -151,6 +154,11 @@ LFGMM_KEYS = {
 		VANILLA = "VANILLA_DUNGEONS",
 		TBC = "TBC_DUNGEONS",
 		PVP = "PVP",
+	},
+	DUNGEON_MODES = {
+		NHC = "NHC",
+		HC = "HC",
+		NONE = "NONE"
 	}
 }
 
@@ -171,10 +179,6 @@ LFGMM_GLOBAL = {
 	GROUP_MEMBERS = {},
 	MESSAGES = {},
 	CATEGORIES = {
-		-- {
-		-- 	Code = "TEST",
-		-- 	Name = "Test",
-		-- },
 		{
 			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA,
 			Name = "Vanilla Dungeons",
@@ -186,6 +190,20 @@ LFGMM_GLOBAL = {
 		{
 			Code = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Name = "PvP",
+		}
+	},
+	MODES = {
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.NONE,
+			Name = "<none>",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.NHC,
+			Name = "Normal",
+		},
+		{
+			Code = LFGMM_KEYS.DUNGEON_MODES.HC,
+			Name = "Heroic",
 		}
 	},
 	LANGUAGES = {
@@ -512,6 +530,30 @@ LFGMM_GLOBAL = {
 		ES = {},
 		RU = {}
 	},
+	HC_IDENTIFIERS = {
+		EN = {
+			"hero[i]?[c]?",
+			"nhc[%W]*/[%W]*hc",
+			"nhc[%W]*or[%W]*hc",
+			"[%(]?hc[%)]?"
+		},
+		DE = {
+			"hero[i]?[s]?[c]?[h]?"
+		},
+		FR = {},
+		ES = {},
+		RU = {}
+	},
+	NOT_HC_IDENTIFIERS = {
+		EN = {
+			"non[%W]*hero[i]?[c]?",
+			"[%(]?nh[c]?[%)]?"
+		},
+		DE = {},
+		FR = {},
+		ES = {},
+		RU = {}
+	},
 	DUNGEONS = {
 		{
 			Index = 1,
@@ -545,8 +587,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 13,
-			MaxLevel = 18,
+			MinLevel = 12,
+			MaxLevel = 21,
 		},
 		{
 			Index = 2,
@@ -609,8 +651,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 18,
-			MaxLevel = 23,
+			MinLevel = 14,
+			MaxLevel = 24,
 		},
 		{
 			Index = 4,
@@ -644,8 +686,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 22,
-			MaxLevel = 30,
+			MinLevel = 16,
+			MaxLevel = 27,
 		},
 		{
 			Index = 5,
@@ -677,8 +719,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 24,
-			MaxLevel = 32,
+			MinLevel = 20,
+			MaxLevel = 30,
 		},
 		{
 			Index = 6,
@@ -705,7 +747,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 22,
+			MinLevel = 21,
 			MaxLevel = 30,
 		},
 		{
@@ -746,8 +788,8 @@ LFGMM_GLOBAL = {
 			},
 			SubDungeons = { 8, 9, 10, 11 },
 			Size = 5,
-			MinLevel = 28,
-			MaxLevel = 45
+			MinLevel = 25,
+			MaxLevel = 44
 		},
 		{
 			Index = 8,
@@ -816,8 +858,8 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 7,
 			Size = 5,
-			MinLevel = 28,
-			MaxLevel = 38
+			MinLevel = 25,
+			MaxLevel = 35
 		},
 		{
 			Index = 9,
@@ -937,8 +979,8 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 7,
 			Size = 5,
-			MinLevel = 35,
-			MaxLevel = 45
+			MinLevel = 34,
+			MaxLevel = 44
 		},
 		{
 			Index = 12,
@@ -956,8 +998,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 29,
-			MaxLevel = 38,
+			MinLevel = 25,
+			MaxLevel = 35,
 		},
 		{
 			Index = 13,
@@ -985,8 +1027,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 30,
-			MaxLevel = 40,
+			MinLevel = 24,
+			MaxLevel = 36,
 		},
 		{
 			Index = 14,
@@ -1015,8 +1057,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 40,
-			MaxLevel = 50,
+			MinLevel = 37,
+			MaxLevel = 46,
 		},
 		{
 			Index = 15,
@@ -1034,8 +1076,8 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 42,
-			MaxLevel = 52,
+			MinLevel = 38,
+			MaxLevel = 48,
 		},
 		{
 			Index = 16,
@@ -1060,8 +1102,8 @@ LFGMM_GLOBAL = {
 				}
 			},
 			Size = 5,
-			MinLevel = 44,
-			MaxLevel = 54,
+			MinLevel = 40,
+			MaxLevel = 51,
 		},
 		{
 			Index = 17,
@@ -1079,8 +1121,8 @@ LFGMM_GLOBAL = {
 			},
 			SubDungeons = { 18, 19, 20 },
 			Size = 5,
-			MinLevel = 45,
-			MaxLevel = 57
+			MinLevel = 44,
+			MaxLevel = 54
 		},
 		{
 			Index = 18,
@@ -1107,7 +1149,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 17,
 			Size = 5,
-			MinLevel = 45,
+			MinLevel = 44,
 			MaxLevel = 54
 		},
 		{
@@ -1135,7 +1177,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 17,
 			Size = 5,
-			MinLevel = 45,
+			MinLevel = 44,
 			MaxLevel = 53
 		},
 		{
@@ -1172,8 +1214,8 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 17,
 			Size = 5,
-			MinLevel = 48,
-			MaxLevel = 57
+			MinLevel = 46,
+			MaxLevel = 54
 		},
 		{
 			Index = 21,
@@ -1216,7 +1258,7 @@ LFGMM_GLOBAL = {
 				},
 			},
 			Size = 5,
-			MinLevel = 50,
+			MinLevel = 47,
 			MaxLevel = 60,
 		},
 		{
@@ -1248,7 +1290,7 @@ LFGMM_GLOBAL = {
 			},
 			SubDungeons = { 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 },
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60
 		},
 		{
@@ -1290,7 +1332,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1346,7 +1388,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1401,7 +1443,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1463,7 +1505,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1507,7 +1549,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1550,7 +1592,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1593,7 +1635,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1636,7 +1678,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1699,7 +1741,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1771,7 +1813,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 22,
 			Size = 5,
-			MinLevel = 52,
+			MinLevel = 49,
 			MaxLevel = 60,
 		},
 		{
@@ -1844,7 +1886,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 10,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60,
 		},
 		{
@@ -1865,7 +1907,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 56,
 			MaxLevel = 60,
 		},
 		{
@@ -1886,7 +1928,7 @@ LFGMM_GLOBAL = {
 			},
 			SubDungeons = { 37, 38 },
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 56,
 			MaxLevel = 60,
 		},
 		{
@@ -1938,7 +1980,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 36,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 56,
 			MaxLevel = 60
 		},
 		{
@@ -2001,7 +2043,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 36,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 56,
 			MaxLevel = 60
 		},
 		{
@@ -2033,7 +2075,7 @@ LFGMM_GLOBAL = {
 			},
 			SubDungeons = { 40, 41, 42, 43 },
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60
 		},
 		{
@@ -2097,7 +2139,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 39,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60
 		},
 		{
@@ -2158,7 +2200,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 39,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60
 		},
 		{
@@ -2217,7 +2259,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 39,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60
 		},
 		{
@@ -2276,7 +2318,7 @@ LFGMM_GLOBAL = {
 			},
 			ParentDungeon = 39,
 			Size = 5,
-			MinLevel = 58,
+			MinLevel = 55,
 			MaxLevel = 60
 		},
 		{
@@ -2892,6 +2934,7 @@ LFGMM_GLOBAL = {
 				DE = {
 					"schat[t]?en[%W]*lab[y]?[r]?[i]?[n]?[t]?[h]?",
 					"schat[t]?en[%W]*la.*",
+					"schlab[b]?[y]?",
 					"schab[b]?[y]?"
 				},
 				FR = {
