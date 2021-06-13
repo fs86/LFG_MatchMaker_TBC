@@ -46,16 +46,6 @@ end
 
 
 function LFGMM_PopupWindow_ShowForMatch(message)
-	local showAsLfgMatch = message.ShowAsLfgMatch and "true" or "false";
-	local showAsLfmMatch = message.ShowAsLfmMatch and "true" or "false";
-
-	-- print("ShowAsLfgMatch: " .. showAsLfgMatch .. ", Message: " .. message.Message);
-	-- print("ShowAsLfmMatch: " .. showAsLfmMatch .. ", Message: " .. message.Message);
-	
-	if (LFGMM_DB.SEARCH.LFG.Running and not message.ShowAsLfgMatch) or (LFGMM_DB.SEARCH.LFM.Running and not message.ShowAsLfmMatch) then
-		return;
-	end
-
 	if (LFGMM_PopupWindow:IsVisible()) then
 		return;
 	end

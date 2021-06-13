@@ -533,6 +533,8 @@ LFGMM_GLOBAL = {
 	HC_IDENTIFIERS = {
 		EN = {
 			"hero[i]?[c]?",
+			"nhc[%W]*/[%W]*hc",
+			"nhc[%W]*or[%W]*hc",
 			"[%(]?hc[%)]?"
 		},
 		DE = {

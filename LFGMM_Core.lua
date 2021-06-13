@@ -342,6 +342,10 @@ function LFGMM_Core_FindSearchMatch()
 
 		-- Skip LFG and/or UNKNOWN match for LFG search
 		elseif (LFGMM_DB.SEARCH.LFG.Running) then
+			if not message.ShowAsLfgMatch then
+				skip = true;
+			end
+
 			if (message.Type == "LFG" and not LFGMM_DB.SEARCH.LFG.MatchLfg) then
 				skip = true;
 			elseif (message.Type == "UNKNOWN" and not LFGMM_DB.SEARCH.LFG.MatchUnknown) then
@@ -350,6 +354,10 @@ function LFGMM_Core_FindSearchMatch()
 
 		-- Skip LFM and/or UNKNOWN match for LFM search
 		elseif (LFGMM_DB.SEARCH.LFM.Running) then
+			if not message.ShowAsLfmMatch then
+				skip = true;
+			end
+
 			if (message.Type == "LFM" and not LFGMM_DB.SEARCH.LFM.MatchLfm) then
 				skip = true;
 			elseif (message.Type == "UNKNOWN" and not LFGMM_DB.SEARCH.LFM.MatchUnknown) then
@@ -800,15 +808,6 @@ function LFGMM_Core_EventHandler(self, event, ...)
 			end
 			messageOrg = string.gsub(messageOrg, "^%s", "");
 			messageOrg = string.gsub(messageOrg, "%s$", "");
-
-			-- Debug HC filter
-			-- if LFGMM_DB.SEARCH.LFG.Running and typeMatch ~= "UNKNOWN" and not showAsLfgMatch then
-			-- 	print("IGNORE: " .. messageOrg);
-			-- end
-
-			-- if LFGMM_DB.SEARCH.LFM.Running and typeMatch ~= "UNKNOWN" and not showAsLfmMatch then
-			-- 	print("IGNORE: " .. messageOrg);
-			-- end
 
 			-- Update existing message
 			if (LFGMM_GLOBAL.MESSAGES[player] ~= nil) then
