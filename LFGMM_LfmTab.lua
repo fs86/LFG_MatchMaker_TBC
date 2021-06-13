@@ -369,6 +369,11 @@ end
 
 
 function LFGMM_LfmTab_StartStopSearchButton_OnClick()
+	-- TODO: Find better solution
+	-- Workaround to prevent false positives when using the HC filter.
+	-- This will temporary disable the message buffer.
+	LFGMM_GLOBAL.MESSAGES = {};
+
 	PlaySound(SOUNDKIT.GS_LOGIN);
 
 	-- Close drop down
