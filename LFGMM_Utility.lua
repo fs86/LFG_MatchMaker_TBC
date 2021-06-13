@@ -687,7 +687,7 @@ function LFGMM_Utility_GetLfgChannelName()
 			channel == "ProcurandoGrupo" or
 			channel == "SucheNachGruppe" or
 			channel == "BuscandoGrupo" or
-			channel == "RechercheGroupe"
+			channel == "RechercheDeGroupe"
 		) then
 			lfgChannelName = channel;
 			break;
