@@ -535,7 +535,8 @@ LFGMM_GLOBAL = {
 			"hero[i]?[c]?",
 			"nhc[%W]*/[%W]*hc",
 			"nhc[%W]*or[%W]*hc",
-			"[.]?hc[.]?"
+			"[.]?hc[.]?",
+			"hm"
 		},
 		DE = {
 			"hero[i]?[s]?[c]?[h]?"
@@ -547,7 +548,9 @@ LFGMM_GLOBAL = {
 	NOT_HC_IDENTIFIERS = {
 		EN = {
 			"non[%W]*hero[i]?[c]?",
-			"[.]?nh[c]?[.]?"
+			"[.]?nh[c]?[.]?",
+			"normal",
+			"nm"
 		},
 		DE = {},
 		FR = {},
