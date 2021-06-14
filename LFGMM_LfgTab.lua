@@ -546,7 +546,9 @@ function LFGMM_LfgTab_StartStopSearchButton_OnClick()
 	-- TODO: Find better solution
 	-- Workaround to prevent false positives when using the HC filter.
 	-- This will temporary disable the message buffer.
-	LFGMM_GLOBAL.MESSAGES = {};
+	if LFGMM_DB.SEARCH.LFG.Category == LFGMM_KEYS.DUNGEON_CATEGORIES.TBC and LFGMM_DB.SEARCH.LFG.Mode ~= LFGMM_KEYS.DUNGEON_MODES.NONE then
+		LFGMM_GLOBAL.MESSAGES = {};
+	end
 
 	PlaySound(SOUNDKIT.GS_LOGIN);
 
