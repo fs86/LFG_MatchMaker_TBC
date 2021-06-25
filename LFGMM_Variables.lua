@@ -2809,7 +2809,8 @@ LFGMM_GLOBAL = {
 					"cot[%W]*1",
 					"durn[%W]*hold[e]?",
 					"hil[l]?s[%W]*brad",
-					"efd"
+					"efd",
+					"ohf"
 				},
 				DE = {
 					"hdz[%W]*1"
@@ -2818,6 +2819,8 @@ LFGMM_GLOBAL = {
 					-- Contreforts de Hautebrande d'antan
 					"contre[f]?[o]?[r]?[t]?[s]?",
 					"contre[f]?[o]?[r]?[s]?",
+					"gt[%W]*1",
+					"gt"
 				},
 				ES = {},
 				RU = {},
@@ -2867,6 +2870,7 @@ LFGMM_GLOBAL = {
 				FR = {
 					-- Le Noir Marécage
 					"mare[c]?[a]?[g]?[e]?",
+					"gt[%W]*2"
 				},
 				ES = {},
 				RU = {},
