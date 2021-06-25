@@ -1,0 +1,25 @@
+name: Package and release
+
+on:
+  push:
+    tags:
+      - "**"
+
+env:
+  CF_API_KEY: ${{ secrets.CF_API_KEY }}
+  GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v1
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v1
+
+      - name: Package and release for Classic TBC
+        uses: BigWigsMods/packager@v1
+        with:
+          args: -g bcc -n "{package-name}_{project-version}" -p 487937
