@@ -1,0 +1,10 @@
+package-as: LFG_MatchMaker_TBC
+
+ignore:
+  - Test
+  - img
+  - README.md
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
