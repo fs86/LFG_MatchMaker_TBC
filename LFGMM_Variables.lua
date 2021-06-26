@@ -137,7 +137,7 @@ function LFGMM_Load()
 		if (LFGMM_DB.VERSION <= 4) then
 			LFGMM_DB.SEARCH.LFG.Dungeons = {};
 			LFGMM_DB.SEARCH.LFM.Dungeon = nil;
-			LFGMM_DB.SEARCH.LIST.Dungeons = {};
+			LFGMM_DB.LIST.Dungeons = {};
 		end
 
 		if (LFGMM_DB.VERSION < LFGMM_DB_VERSION) then

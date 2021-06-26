@@ -1,4 +1,4 @@
-VANILLA_TESTS = {
+VANILLA_Dungeon_Tests = {
     {
         DungeonName = "Wailing Caverns",
         TestDefinitions = {
