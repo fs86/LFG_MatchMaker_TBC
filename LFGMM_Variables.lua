@@ -27,7 +27,7 @@
 
 
 function LFGMM_Load()
-	LFGMM_DB_VERSION = 4;
+	LFGMM_DB_VERSION = 5;
 
 	-- Get locale language
 	local locale = GetLocale();
@@ -132,6 +132,12 @@ function LFGMM_Load()
 			LFGMM_DB.SETTINGS.InfoWindowLocation = "right";
 			LFGMM_DB.SETTINGS.UseTradeChannel = false;
 			LFGMM_DB.SETTINGS.UseGeneralChannel = false;
+		end
+
+		if (LFGMM_DB.VERSION <= 4) then
+			LFGMM_DB.SEARCH.LFG.Dungeons = {};
+			LFGMM_DB.SEARCH.LFM.Dungeon = nil;
+			LFGMM_DB.SEARCH.LIST.Dungeons = {};
 		end
 
 		if (LFGMM_DB.VERSION < LFGMM_DB_VERSION) then
@@ -2591,6 +2597,60 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 54,
+			Name ="Arena (2 vs. 2)",
+			Abbreviation = "2vs2",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
+			Identifiers = {
+				EN = {
+					"2[%W]*v[s]?[.]?[%W]*2"
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 2,
+			MinLevel = 20,
+			MaxLevel = 70
+		},
+		{
+			Index = 55,
+			Name ="Arena (3 vs. 3)",
+			Abbreviation = "3vs3",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
+			Identifiers = {
+				EN = {
+					"3[%W]*v[s]?[.]?[%W]*3"
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 3,
+			MinLevel = 20,
+			MaxLevel = 70
+		},
+		{
+			Index = 56,
+			Name ="Arena (5 vs. 5)",
+			Abbreviation = "5vs5",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
+			Identifiers = {
+				EN = {
+					"5[%W]*v[s]?[.]?[%W]*5"
+				},
+				DE = {},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 3,
+			MinLevel = 20,
+			MaxLevel = 70
+		},
+		{
+			Index = 57,
 			Name = "Hellfire Ramparts",
 			Abbreviation = "Ramps",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2622,7 +2682,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 55,
+			Index = 58,
 			Name = "The Blood Furnace",
 			Abbreviation = "BF",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2650,7 +2710,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 56,
+			Index = 59,
 			Name = "The Slave Pens",
 			Abbreviation = "SP",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2683,7 +2743,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 57,
+			Index = 60,
 			Name = "The Underbog",
 			Abbreviation = "UB",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2712,7 +2772,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 58,
+			Index = 61,
 			Name = "Mana-Tombs",
 			Abbreviation = "MT",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2743,7 +2803,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 59,
+			Index = 62,
 			Name = "Auchenai Crypts",
 			Abbreviation = "Crypts",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2773,7 +2833,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 60,
+			Index = 63,
 			Name = "Sethekk Halls",
 			Abbreviation = "Seth",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2800,7 +2860,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 61,
+			Index = 64,
 			Name = "Escape from Durnholde",
 			Abbreviation = "OH",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2830,7 +2890,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 62,
+			Index = 65,
 			Name = "The Mechanar",
 			Abbreviation = "Mech",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2851,7 +2911,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 63,
+			Index = 66,
 			Name = "Black Morass",
 			Abbreviation = "BM",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2880,7 +2940,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 64,
+			Index = 67,
 			Name = "The Shattered Halls",
 			Abbreviation = "SH",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2907,7 +2967,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 65,
+			Index = 68,
 			Name = "The Botanica",
 			Abbreviation = "Bot",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2927,7 +2987,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 66,
+			Index = 69,
 			Name = "Shadow Labyrinth",
 			Abbreviation = "SL",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2957,7 +3017,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 67,
+			Index = 70,
 			Name = "The Steamvaults",
 			Abbreviation = "SV",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -2986,7 +3046,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 68,
+			Index = 71,
 			Name = "The Arcatraz",
 			Abbreviation = "Arc",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3010,7 +3070,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 69,
+			Index = 72,
 			Name = "Karazahn",
 			Abbreviation = "KZ",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3029,7 +3089,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 70,
+			Index = 73,
 			Name = "Gruul's Lair",
 			Abbreviation = "GL",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3053,7 +3113,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 71,
+			Index = 74,
 			Name = "Magtheridon's Lair",
 			Abbreviation = "Mag",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3130,7 +3190,7 @@ LFGMM_GLOBAL = {
 				1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
 
 				-- TBC
-				54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68
+				57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71
 			},
 			Identifiers = {
 				EN = {
@@ -3157,7 +3217,7 @@ LFGMM_GLOBAL = {
 				44, 45, 46, 47, 48, 49, 50,
 
 				-- TBC
-				69, 70, 71
+				72, 73, 74
 			},
 			Identifiers = {
 				EN = {
@@ -3172,7 +3232,7 @@ LFGMM_GLOBAL = {
 			},
 		},
 		{
-			Dungeons = { 51, 52, 53 },
+			Dungeons = { 51, 52, 53, 54, 55, 56 },
 			Identifiers = {
 				EN = {
 					"pvp",
