@@ -46,7 +46,7 @@ function runTests(dungeons, testData, languages)
 
       local testResultEntry = {
         TestDefinition = testDefinition,
-        ExpectedDungeonMatch = test.DungeonName,
+        ExpectedDungeonMatch = test.Name,
         MatchesOnDungeons = {}
       }
 

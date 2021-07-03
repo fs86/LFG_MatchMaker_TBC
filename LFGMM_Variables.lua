@@ -2610,7 +2610,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 2,
-			MinLevel = 20,
+			MinLevel = 70,
 			MaxLevel = 70
 		},
 		{
@@ -2628,7 +2628,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 3,
-			MinLevel = 20,
+			MinLevel = 70,
 			MaxLevel = 70
 		},
 		{
@@ -2646,7 +2646,7 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 3,
-			MinLevel = 20,
+			MinLevel = 70,
 			MaxLevel = 70
 		},
 		{

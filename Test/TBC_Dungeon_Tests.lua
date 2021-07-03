@@ -1,6 +1,6 @@
 TBC_Dungeon_Tests = {
   {
-    DungeonName = "Hellfire Ramparts",
+    Name = "Hellfire Ramparts",
     TestDefinitions = {
       -- EN
       "lfg 1 tank for ramps",
@@ -24,7 +24,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Blood Furnace",
+    Name = "The Blood Furnace",
     TestDefinitions = {
       -- EN
       "lfg tbf",
@@ -46,7 +46,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Slave Pens",
+    Name = "The Slave Pens",
     TestDefinitions = {
       -- EN
       "lfg slave",
@@ -70,7 +70,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Underbog",
+    Name = "The Underbog",
     TestDefinitions = {
       -- EN
       "lfg 3 dd for underbog",
@@ -89,7 +89,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Mana-Tombs",
+    Name = "Mana-Tombs",
     TestDefinitions = {
       -- EN
       "lfm 3 dd for mana",
@@ -113,7 +113,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Auchenai Crypts",
+    Name = "Auchenai Crypts",
     TestDefinitions = {
       -- EN
       "lfg ac bin dd",
@@ -135,7 +135,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Sethekk Halls",
+    Name = "Sethekk Halls",
     TestDefinitions = {
       -- EN
       "lfg sethekhalls",
@@ -163,7 +163,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Escape from Durnholde",
+    Name = "Escape from Durnholde",
     TestDefinitions = {
       -- EN
       "lfg cot1",
@@ -183,7 +183,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Mechanar",
+    Name = "The Mechanar",
     TestDefinitions = {
       -- EN
       "lfg mecha",
@@ -199,7 +199,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Black Morass",
+    Name = "Black Morass",
     TestDefinitions = {
       -- EN
       "lfg black moras",
@@ -220,7 +220,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Shattered Halls",
+    Name = "The Shattered Halls",
     TestDefinitions = {
       -- EN
       "lfg shatered hals",
@@ -241,7 +241,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Botanica",
+    Name = "The Botanica",
     TestDefinitions = {
       -- EN
       "lfg bot",
@@ -252,7 +252,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Shadow Labyrinth",
+    Name = "Shadow Labyrinth",
     TestDefinitions = {
       -- EN
       "lfg shadow labs",
@@ -276,7 +276,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Steamvaults",
+    Name = "The Steamvaults",
     TestDefinitions = {
       -- EN
       "lfg steamvault",
@@ -301,7 +301,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "The Arcatraz",
+    Name = "The Arcatraz",
     TestDefinitions = {
       -- EN
       "lfg arca",
@@ -322,7 +322,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Karazahn",
+    Name = "Karazahn",
     TestDefinitions = {
       -- EN
       "lfg kara",
@@ -331,7 +331,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Gruul's Lair",
+    Name = "Gruul's Lair",
     TestDefinitions = {
       -- EN
       "lfg gruul's lair",
@@ -352,7 +352,7 @@ TBC_Dungeon_Tests = {
     }
   },
   {
-    DungeonName = "Magtheridon's Lair",
+    Name = "Magtheridon's Lair",
     TestDefinitions = {
       -- EN
       "lfg magtheridon",
