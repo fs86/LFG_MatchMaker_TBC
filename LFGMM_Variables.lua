@@ -2870,7 +2870,8 @@ LFGMM_GLOBAL = {
 					"durn[%W]*hold[e]?",
 					"hil[l]?s[%W]*brad",
 					"efd",
-					"ohf"
+					"ohf",
+					"ohb"
 				},
 				DE = {
 					"hdz[%W]*1"
