@@ -2597,7 +2597,7 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 54,
-			Name ="Arena (2 vs. 2)",
+			Name ="Arena (2vs2)",
 			Abbreviation = "2vs2",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {
@@ -2615,7 +2615,7 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 55,
-			Name ="Arena (3 vs. 3)",
+			Name ="Arena (3vs3)",
 			Abbreviation = "3vs3",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {
@@ -2633,7 +2633,7 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 56,
-			Name ="Arena (5 vs. 5)",
+			Name ="Arena (5vs5)",
 			Abbreviation = "5vs5",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.PVP,
 			Identifiers = {

@@ -206,7 +206,7 @@ function LFGMM_PopupWindow_Refresh()
 	LFGMM_PopupWindow_LevelText:SetText(message.PlayerClass.Color .. (message.PlayerLevel or "?"));
 	
 	-- Player
-	LFGMM_PopupWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "]:");
+	LFGMM_PopupWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "] " .. message.Player.GuildName .. ":");
 	
 	-- Message
 	LFGMM_PopupWindow_MessageText:SetText(message.Message);

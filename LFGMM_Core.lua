@@ -511,10 +511,22 @@ function LFGMM_Core_EventHandler(self, event, ...)
 	-- Parse /who response for player level
 	elseif (event == "CHAT_MSG_SYSTEM") then
 		local message = select(1, ...);
-		local player, level = string.match(message, "%[(.+)%]%ph%s?: [^%s]* (%d*)");
+		local player, level, guild = string.match(message, "%[(.+)%]%ph%s?: [^%s]* (%d*)");
+
+		-- I don't know how to get the guild name with string.match() ...
+		local guildName = "";
+		local guildBracketStart = strfind(message, "<");
+		local guildBrackedEnd = strfind(message, ">");
+		
+		if (guildBracketStart ~= nil and guildBrackedEnd ~= nil) then
+			if (guildBracketStart > 0 and guildBrackedEnd > 0) then
+				guildName = strsub(message, guildBracketStart, guildBrackedEnd);
+			end
+		end
 
 		if (LFGMM_GLOBAL.MESSAGES[player] ~= nil) then
 			LFGMM_GLOBAL.MESSAGES[player].PlayerLevel = level;
+			LFGMM_GLOBAL.MESSAGES[player].GuildName = guildName;
 
 			LFGMM_ListTab_Refresh();
 			LFGMM_ListTab_MessageInfoWindow_Refresh();

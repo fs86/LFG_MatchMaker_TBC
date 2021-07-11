@@ -1,6 +1,6 @@
 TBC_PvP_Tests = {
   {
-    Name = "Arena (2 vs. 2)",
+    Name = "Arena (2vs2)",
     TestDefinitions = {
       -- EN
       "lfg 2vs2 arena",
@@ -10,7 +10,7 @@ TBC_PvP_Tests = {
     }
   },
   {
-    Name = "Arena (3 vs. 3)",
+    Name = "Arena (3vs3)",
     TestDefinitions = {
       -- EN
       "lfg 3vs3 arena",
@@ -20,7 +20,7 @@ TBC_PvP_Tests = {
     }
   },
   {
-    Name = "Arena (5 vs. 5)",
+    Name = "Arena (5vs5)",
     TestDefinitions = {
       -- EN
       "lfg 5vs5 arena",
