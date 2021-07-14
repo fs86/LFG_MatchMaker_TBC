@@ -206,7 +206,12 @@ function LFGMM_ListTab_Refresh()
 				playerLevel = " [" .. message.PlayerLevel .. "]";
 			end
 
-			getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "PlayerName"):SetText(message.PlayerClass.Color .. message.Player .. playerLevel);
+			local guildName = "";
+			if (message.GuildName ~= nil and message.GuildName ~= "") then
+				guildName = " " .. message.GuildName;
+			end
+
+			getglobal("LFGMM_ListTab_Entry" .. entryIndex .. "PlayerName"):SetText(message.PlayerClass.Color .. message.Player .. guildName .. playerLevel);
 
 			-- Message
 			local messageText = message.Message;
@@ -712,8 +717,13 @@ function LFGMM_ListTab_MessageInfoWindow_Refresh()
 
 	local message = LFGMM_ListTab_MessageInfoWindow.Message;
 
+	local guildName = "";
+	if (message.GuildName ~= nil and message.GuildName ~= "") then
+		guildName = " " .. message.GuildName;
+	end
+
 	-- Player
-	LFGMM_ListTab_MessageInfoWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "]:");
+	LFGMM_ListTab_MessageInfoWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "]" .. guildName .. ":");
 
 	-- Message
 	LFGMM_ListTab_MessageInfoWindow_MessageText:SetText(message.Message);

@@ -198,6 +198,11 @@ function LFGMM_PopupWindow_Refresh()
 
 	local message = LFGMM_PopupWindow.Message;
 	
+	local guildName = "";
+	if (message.GuildName ~= nil and message.GuildName ~= "") then
+		guildName = " " .. message.GuildName;
+	end
+	
 	-- Class
 	LFGMM_PopupWindow_ClassIcon:SetTexCoord(unpack(message.PlayerClass.IconCoordinates));
 	LFGMM_PopupWindow_ClassText:SetText(message.PlayerClass.Color .. message.PlayerClass.LocalizedName);
@@ -206,7 +211,7 @@ function LFGMM_PopupWindow_Refresh()
 	LFGMM_PopupWindow_LevelText:SetText(message.PlayerClass.Color .. (message.PlayerLevel or "?"));
 	
 	-- Player
-	LFGMM_PopupWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "] " .. message.Player.GuildName .. ":");
+	LFGMM_PopupWindow_PlayerText:SetText(message.PlayerClass.Color .. "[" .. message.Player .. "]" .. guildName .. ":");
 	
 	-- Message
 	LFGMM_PopupWindow_MessageText:SetText(message.Message);
