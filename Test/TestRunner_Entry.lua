@@ -14,9 +14,9 @@ require("Test/TBC_Dungeon_Tests_FR")
 require("Test/TBC_Dungeon_Tests_RU")
 require("Test/TBC_PvP_Tests_EN")
 
---runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_DE, { "EN", "DE" })
-runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_EN, { "EN", "EN" })
---runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_FR, { "EN", "FR" })
---runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_RU, { "EN", "RU" })
+--runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_DE, { "EN", "DE" }, true)
+--runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_EN, { "EN", "EN" }, true)
+--runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_FR, { "EN", "FR" }, true)
+runTests(LFGMM_GLOBAL.DUNGEONS, TBC_Dungeon_Tests_RU, { "EN", "RU" }, true)
 
 --runTests(LFGMM_GLOBAL.DUNGEONS, TBC_PvP_Tests_EN, { "EN" })
