@@ -1,15 +1,13 @@
-VANILLA_Dungeon_Tests = {
+VANILLA_Dungeon_Tests_DE = {
     {
         Name = "Wailing Caverns",
         TestDefinitions = {
-            -- DE
             "lfg höhlen des wehklagen"
         }
     },
     {
         Name = "Razorfen Downs",
         TestDefinitions = {
-            -- DE
             "lfg hügel"
         }
     },

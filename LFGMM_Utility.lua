@@ -166,6 +166,50 @@ function LFGMM_Utility_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
 	return false;
 end
 
+function LFGMM_RU_To_LATIN(value)
+	-- https://en.wikipedia.org/wiki/Romanization_of_Russian
+	local mapping = {
+		["а"] = "a",
+		["б"] = "b",
+		["в"] = "v",
+		["г"] = "g",
+		["д"] = "d",
+		["е"] = "e",
+		["ё"] = "e",
+		["ж"] = "zh",
+		["з"] = "z",
+		["и"] = "i",
+		["й"] = "i",
+		["к"] = "k",
+		["л"] = "l",
+		["м"] = "m",
+		["н"] = "n",
+		["о"] = "o",
+		["п"] = "p",
+		["р"] = "r",
+		["с"] = "s",
+		["т"] = "t",
+		["у"] = "u",
+		["ф"] = "f",
+		["х"] = "kh",
+		["ц"] = "ts",
+		["ч"] = "ch",
+		["ш"] = "sh",
+		["щ"] = "shch",
+		["ъ"] = "ie",
+		["ы"] = "y",
+		["э"] = "e",
+		["ю"] = "iu",
+		["я"] = "ia",
+		["ь"] = ""
+	}
+
+	value = string.utf8lower(value);
+	value = string.utf8replace(value, mapping);
+
+	return value;
+end
+
 function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	local message = string.lower(chatMessage);
 
@@ -196,8 +240,9 @@ function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	message = string.gsub(message, "ß", "ss");
 	message = string.gsub(message, "œ", "oe");
 	message = string.gsub(message, "ç", "c");
-	-- message = string.gsub(message, "щ", "ш");
-	-- message = string.gsub(message, "й", "и");
+
+	-- RU
+	message = LFGMM_RU_To_LATIN(message);
 
 	-- Remove item links to prevent false positive matches from item names
 	message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");

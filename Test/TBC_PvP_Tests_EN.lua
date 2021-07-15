@@ -1,4 +1,4 @@
-TBC_PvP_Tests = {
+TBC_PvP_Tests_EN = {
   {
     Name = "Arena (2vs2)",
     TestDefinitions = {

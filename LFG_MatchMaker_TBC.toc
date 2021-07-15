@@ -29,6 +29,8 @@
 
 LFGMM_FrameBackdrops.lua
 LFGMM_Interface.xml
+Libs\UTF8\utf8data.lua
+Libs\UTF8\utf8.lua
 LFGMM_Core.lua
 LFGMM_Utility.lua
 LFGMM_MinimapButton.lua

@@ -2678,13 +2678,13 @@ LFGMM_GLOBAL = {
 
 				RU = {
 					-- Бастионы Адского Пламени
-					"Бастионы[%W]*Адского[%W]*Пламени",
-					"бап",
-					"бастионы",
-					"бастион",
-					"цап",
-					"бастеоны",
-					"бастеон"
+					LFGMM_RU_To_LATIN("Бастионы[%W]*Адского[%W]*Пламени"),
+					LFGMM_RU_To_LATIN("бап"),
+					LFGMM_RU_To_LATIN("бастионы"),
+					LFGMM_RU_To_LATIN("бастион"),
+					LFGMM_RU_To_LATIN("цап"),
+					LFGMM_RU_To_LATIN("бастеоны"),
+					LFGMM_RU_To_LATIN("бастеон")
 				},
 			},
 			Size = 5,
@@ -2715,12 +2715,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Кузня Крови
-					"Кузня[%W]*Крови",
-					"кузня",
-					"крови",
-					"кк",
-					"кузню",
-					"кузни"
+					LFGMM_RU_To_LATIN("Кузня[%W]*Крови"),
+					LFGMM_RU_To_LATIN("кузня"),
+					LFGMM_RU_To_LATIN("крови"),
+					LFGMM_RU_To_LATIN("кк"),
+					LFGMM_RU_To_LATIN("кузню"),
+					LFGMM_RU_To_LATIN("кузни"),
 				},
 			},
 			Size = 5,
@@ -2756,12 +2756,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Узилище
-					"Узилище",
-					"узилише",
-					"узлще",
-					"улилище",
-					"узилеще",
-					"узилища"
+					LFGMM_RU_To_LATIN("Узилище"),
+					LFGMM_RU_To_LATIN("узилише"),
+					LFGMM_RU_To_LATIN("узлще"),
+					LFGMM_RU_To_LATIN("улилище"),
+					LFGMM_RU_To_LATIN("узилеще"),
+					LFGMM_RU_To_LATIN("узилища"),
 				},
 			},
 			Size = 5,
@@ -2793,12 +2793,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Нижетопь
-					"Нижетопь",
-					"нт",
-					"нижнетопь",
-					"нижетопь",
-					"нежитопь",
-					"нижетоп"
+					LFGMM_RU_To_LATIN("Нижетопь"),
+					LFGMM_RU_To_LATIN("нт"),
+					LFGMM_RU_To_LATIN("нижнетопь"),
+					LFGMM_RU_To_LATIN("нижетопь"),
+					LFGMM_RU_To_LATIN("нежитопь"),
+					LFGMM_RU_To_LATIN("нижетоп"),
 				},
 			},
 			Size = 5,
@@ -2832,18 +2832,18 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Гробницы маны
-					"Гробницы[%W]*маны",
-					"гм",
-					"маны",
-					"томбы",
-					"манатомбы",
-					"манатомба",
-					"манатомбс",
-					"томбс",
-					"томба",
-					"ману",
-					"манатомб",
-					"манатомс"
+					LFGMM_RU_To_LATIN("Гробницы[%W]*маны"),
+					LFGMM_RU_To_LATIN("гм"),
+					LFGMM_RU_To_LATIN("маны"),
+					LFGMM_RU_To_LATIN("томбы"),
+					LFGMM_RU_To_LATIN("манатомбы"),
+					LFGMM_RU_To_LATIN("манатомба"),
+					LFGMM_RU_To_LATIN("манатомбс"),
+					LFGMM_RU_To_LATIN("томбс"),
+					LFGMM_RU_To_LATIN("томба"),
+					LFGMM_RU_To_LATIN("ману"),
+					LFGMM_RU_To_LATIN("манатомб"),
+					LFGMM_RU_To_LATIN("манатомс"),
 				},
 			},
 			Size = 5,
@@ -2876,15 +2876,15 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Аукенайские гробницы
-					"Аукенайские[%W]*гробницы",
-					"аг",
-					"аукенайские",
-					"аукинайские",
-					"аук",
-					"аукен",
-					"аукенские",
-					"гроб",
-					"аук[%W]*гроб"
+					LFGMM_RU_To_LATIN("Аукенайские[%W]*гробницы"),
+					LFGMM_RU_To_LATIN("аг"),
+					LFGMM_RU_To_LATIN("аукенайские"),
+					LFGMM_RU_To_LATIN("аукинайские"),
+					LFGMM_RU_To_LATIN("аук"),
+					LFGMM_RU_To_LATIN("аукен"),
+					LFGMM_RU_To_LATIN("аукенские"),
+					LFGMM_RU_To_LATIN("гроб"),
+					LFGMM_RU_To_LATIN("аук[%W]*гроб"),
 				},
 			},
 			Size = 5,
@@ -2914,16 +2914,16 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Сетеккские залы
-					"Сетеккские[%W]*залы",
-					"сз",
-					"сеттекские",
-					"сетеккские",
-					"сетеки",
-					"сеттеки",
-					"сетекки",
-					"сетекские",
-					"сеттекскиезалы",
-					"сетеккскиезалы"
+					LFGMM_RU_To_LATIN("Сетеккские[%W]*залы"),
+					LFGMM_RU_To_LATIN("сз"),
+					LFGMM_RU_To_LATIN("сеттекские"),
+					LFGMM_RU_To_LATIN("сетеккские"),
+					LFGMM_RU_To_LATIN("сетеки"),
+					LFGMM_RU_To_LATIN("сеттеки"),
+					LFGMM_RU_To_LATIN("сетекки"),
+					LFGMM_RU_To_LATIN("сетекские"),
+					LFGMM_RU_To_LATIN("сеттекскиезалы"),
+					LFGMM_RU_To_LATIN("сетеккскиезалы"),
 				},
 			},
 			Size = 5,
@@ -2957,12 +2957,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Старые предгорья Хилсбрада
-					"Старые[%W]*предгорья[%W]*Хилсбрада",
-					"хилсбрад",
-					"хилсбард",
-					"старый[%W]*хилсбрад",
-					"старый[%W]*хилсбарад",
-					"старый[%W]*хилсбард"
+					LFGMM_RU_To_LATIN("Старые[%W]*предгорья[%W]*Хилсбрада"),
+					LFGMM_RU_To_LATIN("хилсбрад"),
+					LFGMM_RU_To_LATIN("хилсбард"),
+					LFGMM_RU_To_LATIN("старый[%W]*хилсбрад"),
+					LFGMM_RU_To_LATIN("старый[%W]*хилсбарад"),
+					LFGMM_RU_To_LATIN("старый[%W]*хилсбард"),
 				},
 			},
 			Size = 5,
@@ -2986,11 +2986,11 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Механар
-					"Механар",
-					"кбм",
-					"мех",
-					"меха",
-					"меху"
+					LFGMM_RU_To_LATIN("Механар"),
+					LFGMM_RU_To_LATIN("кбм"),
+					LFGMM_RU_To_LATIN("мех"),
+					LFGMM_RU_To_LATIN("меха"),
+					LFGMM_RU_To_LATIN("меху"),
 				},
 			},
 			Size = 5,
@@ -3022,9 +3022,9 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Черные топи
-					"Черные[%W]*топи",
-					"топи",
-					"чёрные[%W]*топи"
+					LFGMM_RU_To_LATIN("Черные[%W]*топи"),
+					LFGMM_RU_To_LATIN("топи"),
+					LFGMM_RU_To_LATIN("чёрные[%W]*топи"),
 				},
 			},
 			Size = 5,
@@ -3054,11 +3054,11 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Разрушенные залы
-					"Разрушенные[%W]*залы",
-					"рз",
-					"разрушеные",
-					"разрушенныезалы",
-					"разрушеныезалы"
+					LFGMM_RU_To_LATIN("Разрушенные[%W]*залы"),
+					LFGMM_RU_To_LATIN("рз"),
+					LFGMM_RU_To_LATIN("разрушеные"),
+					LFGMM_RU_To_LATIN("разрушенныезалы"),
+					LFGMM_RU_To_LATIN("разрушеныезалы"),
 				},
 			},
 			Size = 5,
@@ -3081,11 +3081,11 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Ботаника
-					"Ботаника",
-					"бот",
-					"боту",
-					"кбб",
-					"ботанику"
+					LFGMM_RU_To_LATIN("Ботаника"),
+					LFGMM_RU_To_LATIN("бот"),
+					LFGMM_RU_To_LATIN("боту"),
+					LFGMM_RU_To_LATIN("кбб"),
+					LFGMM_RU_To_LATIN("ботанику"),
 				},
 			},
 			Size = 5,
@@ -3118,12 +3118,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Темный лабиринт
-					"Темный[%W]*лабиринт",
-					"тёмный",
-					"тёмный[%W]*лабиринт",
-					"лаберинт",
-					"шл",
-					"лаба"
+					LFGMM_RU_To_LATIN("Темный[%W]*лабиринт"),
+					LFGMM_RU_To_LATIN("тёмный"),
+					LFGMM_RU_To_LATIN("тёмный[%W]*лабиринт"),
+					LFGMM_RU_To_LATIN("лаберинт"),
+					LFGMM_RU_To_LATIN("шл"),
+					LFGMM_RU_To_LATIN("лаба"),
 				},
 			},
 			Size = 5,
@@ -3155,12 +3155,12 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Паровое подземелье
-					"Паровое[%W]*подземелье",
-					"резервуар",
-					"паравое",
-					"паровые",
-					"пп",
-					"парового"
+					LFGMM_RU_To_LATIN("Паровое[%W]*подземелье"),
+					LFGMM_RU_To_LATIN("резервуар"),
+					LFGMM_RU_To_LATIN("паравое"),
+					LFGMM_RU_To_LATIN("паровые"),
+					LFGMM_RU_To_LATIN("пп"),
+					LFGMM_RU_To_LATIN("парового"),
 				},
 			},
 			Size = 5,
@@ -3187,9 +3187,9 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Аркатрац
-					"Аркатрац",
-					"аркатрац",
-					"кба",
+					LFGMM_RU_To_LATIN("Аркатрац"),
+					LFGMM_RU_To_LATIN("аркатрац"),
+					LFGMM_RU_To_LATIN("кба"),
 				},
 			},
 			Size = 5,
@@ -3211,9 +3211,9 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Каражан
-					"Каражан",
-					"кара",
-					"кару"
+					LFGMM_RU_To_LATIN("Каражан"),
+					LFGMM_RU_To_LATIN("кара"),
+					LFGMM_RU_To_LATIN("кару"),
 				},
 			},
 			Size = 10,
@@ -3240,10 +3240,10 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Логово Груула
-					"Логово[%W]*Груула",
-					"груул",
-					"грул",
-					"грулла"
+					LFGMM_RU_To_LATIN("Логово[%W]*Груула"),
+					LFGMM_RU_To_LATIN("груул"),
+					LFGMM_RU_To_LATIN("грул"),
+					LFGMM_RU_To_LATIN("грулла"),
 				},
 			},
 			Size = 25,
@@ -3271,9 +3271,9 @@ LFGMM_GLOBAL = {
 				ES = {},
 				RU = {
 					-- Логово Магтеридона
-					"Логово[%W]*Магтеридона",
-					"магтеридон",
-					"магтередон"
+					LFGMM_RU_To_LATIN("Логово[%W]*Магтеридона"),
+					LFGMM_RU_To_LATIN("магтеридон"),
+					LFGMM_RU_To_LATIN("магтередон"),
 				},
 			},
 			Size = 25,
