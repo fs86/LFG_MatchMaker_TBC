@@ -196,6 +196,8 @@ function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	message = string.gsub(message, "ß", "ss");
 	message = string.gsub(message, "œ", "oe");
 	message = string.gsub(message, "ç", "c");
+	-- message = string.gsub(message, "щ", "ш");
+	-- message = string.gsub(message, "й", "и");
 
 	-- Remove item links to prevent false positive matches from item names
 	message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");
