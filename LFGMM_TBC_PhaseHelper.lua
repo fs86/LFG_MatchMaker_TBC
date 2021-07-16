@@ -1,3 +1,18 @@
+function LFGMM_TBC_PhaseHelper_Time(date)
+  local timeFn = time or os.time;
+
+  if date ~= nil then
+    return timeFn(date);
+  end
+
+  return timeFn();
+end
+
+function LFGMM_TBC_PhaseHelper_Difftime(t2, t1)
+  local difftimeFn = difftime or os.difftime;
+  return difftimeFn(t2, t1);
+end
+
 TBC_PHASES = {
   PHASE_1 = "PHASE_1",  -- TBC release, Karazahn, Gruul's Lair, Magtheridon's Lair
   PHASE_2 = "PHASE_2",  -- Serpentshrine Cavern, Tempest Keep
@@ -7,7 +22,7 @@ TBC_PHASES = {
 }
 
 TBC_PHASE_RELEASE_DATES = {
-  [TBC_PHASES.PHASE_1] = os.time { month = 6, day = 1, year = 2021 },
+  [TBC_PHASES.PHASE_1] = LFGMM_TBC_PhaseHelper_Time({ month = 6, day = 1, year = 2021 }),
   [TBC_PHASES.PHASE_2] = nil,
   [TBC_PHASES.PHASE_3] = nil,
   [TBC_PHASES.PHASE_4] = nil,
@@ -21,6 +36,6 @@ function LFGMM_TBC_PhaseHelper_EnableFor(tbcPhase)
     return false;
   end
 
-  local diffInDays = os.difftime(os.time(), releaseDate) / (24 * 60 * 60);
+  local diffInDays = LFGMM_TBC_PhaseHelper_Difftime(LFGMM_TBC_PhaseHelper_Time(), releaseDate) / (24 * 60 * 60);
   return diffInDays < 0 and false or true;
 end
