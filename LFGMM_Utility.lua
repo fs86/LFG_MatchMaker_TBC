@@ -166,7 +166,9 @@ function LFGMM_Utility_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
 	return false;
 end
 
-function LFGMM_RU_To_LATIN(value)
+function LFGMM_RU_To_LATIN(value, toLowerCase)
+  toLowerCase = toLowerCase or false;
+
 	-- https://en.wikipedia.org/wiki/Romanization_of_Russian
 	local mapping = {
 		["а"] = "a",
@@ -204,7 +206,10 @@ function LFGMM_RU_To_LATIN(value)
 		["ь"] = ""
 	}
 
-	value = string.utf8lower(value);
+  if (toLowerCase == true) then
+    value = string.utf8lower(value);
+  end
+
 	value = string.utf8replace(value, mapping);
 
 	return value;
@@ -242,7 +247,7 @@ function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	message = string.gsub(message, "ç", "c");
 
 	-- RU
-	message = LFGMM_RU_To_LATIN(message);
+	message = LFGMM_RU_To_LATIN(message, true);
 
 	-- Remove item links to prevent false positive matches from item names
 	message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");

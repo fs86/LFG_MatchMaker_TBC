@@ -442,14 +442,16 @@ function LFGMM_LfgTab_DungeonsDropDown_OnInitialize_Internal(level, dungeonMap)
 
 				-- Dungeon menu items
 				for _, dungeon in ipairs(entry.List) do
-					if (dungeon.ParentDungeon == nil) then
-						if (dungeon.SubDungeons == nil) then
-							createSingleDungeonItem(dungeon);
-						else
-							createMultiDungeonItem(dungeon, buttonIndex);
-						end
-						buttonIndex = buttonIndex + 1;
-					end
+          if (dungeon.Enabled) then
+            if (dungeon.ParentDungeon == nil) then
+              if (dungeon.SubDungeons == nil) then
+                createSingleDungeonItem(dungeon);
+              else
+                createMultiDungeonItem(dungeon, buttonIndex);
+              end
+              buttonIndex = buttonIndex + 1;
+            end
+          end
 				end
 			end
 		end
