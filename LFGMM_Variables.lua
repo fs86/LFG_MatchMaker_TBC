@@ -3271,16 +3271,18 @@ LFGMM_GLOBAL = {
 		},
 		{
 			Index = 72,
-			Name = "Karazahn",
+			Name = "Karazhan",
 			Abbreviation = "KZ",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
       Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_1),
 			Identifiers = {
 				EN = {
-					"kara[%W]*[z]?[a]?[h]?[n]?",
+					"kara[%W]*[z]?[h]?[a]?[n]?",
 					"kz"
 				},
-				DE = {},
+				DE = {
+					"kara[%W]*[z]?[a]?[h]?[n]?",
+				},
 				FR = {},
 				ES = {},
 				RU = {

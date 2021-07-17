@@ -170,7 +170,7 @@ TBC_Dungeon_Tests_RU = {
     }
   },
   {
-    Name = "Karazahn",
+    Name = "Karazhan",
     TestDefinitions = {
       LFGMM_RU_To_LATIN("??? ??? Каражан ??? ???", true),
       LFGMM_RU_To_LATIN("??? ??? кара ??? ???", true),

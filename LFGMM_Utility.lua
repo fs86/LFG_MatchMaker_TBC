@@ -739,7 +739,8 @@ function LFGMM_Utility_GetLfgChannelName()
 			channel == "ProcurandoGrupo" or
 			channel == "SucheNachGruppe" or
 			channel == "BuscandoGrupo" or
-			channel == "RechercheDeGroupe"
+			channel == "RechercheDeGroupe" or 
+			channel == "ПоискСпутников"
 		) then
 			lfgChannelName = channel;
 			break;
@@ -758,7 +759,8 @@ function LFGMM_Utility_GetGeneralChannelName()
 			channel == "General" or
 			channel == "Geral" or
 			channel == "Allgemein" or
-			channel == "Général"
+			channel == "Général" or 
+			channel == "Общий"
 		) then
 			generalChannelName = channel;
 			break;
@@ -779,7 +781,8 @@ function LFGMM_Utility_GetTradeChannelName()
 			channel == "Comercio" or
 			channel == "Comércio" or
 			channel == "Handel" or
-			channel == "Commerce"
+			channel == "Commerce" or
+			channel == "Торговля"
 		) then
 			tradeChannelName = channel;
 			isAvailable = true;

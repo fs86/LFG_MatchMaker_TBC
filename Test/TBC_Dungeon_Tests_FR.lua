@@ -134,7 +134,7 @@ TBC_Dungeon_Tests_FR = {
     }
   },
   {
-    Name = "Karazahn",
+    Name = "Karazhan",
     TestDefinitions = {}
   },
   {

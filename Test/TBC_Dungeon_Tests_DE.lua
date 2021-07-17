@@ -124,8 +124,10 @@ TBC_Dungeon_Tests_DE = {
     }
   },
   {
-    Name = "Karazahn",
-    TestDefinitions = {}
+    Name = "Karazhan",
+    TestDefinitions = {
+      "lfg karazahn"
+    }
   },
   {
     Name = "Gruul's Lair",

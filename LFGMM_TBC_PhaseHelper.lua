@@ -14,7 +14,7 @@ function LFGMM_TBC_PhaseHelper_Difftime(t2, t1)
 end
 
 TBC_PHASES = {
-  PHASE_1 = "PHASE_1",  -- TBC release, Karazahn, Gruul's Lair, Magtheridon's Lair
+  PHASE_1 = "PHASE_1",  -- TBC release, Karazhan, Gruul's Lair, Magtheridon's Lair
   PHASE_2 = "PHASE_2",  -- Serpentshrine Cavern, Tempest Keep
   PHASE_3 = "PHASE_3",  -- Hyjal, Black Temple
   PHASE_4 = "PHASE_4",  -- Zul'aman

@@ -119,6 +119,8 @@ TBC_Dungeon_Tests_EN = {
       "lfg labs",
       "1 tank for shadowlabs",
       "mage LFG shadowlaby",
+      "lfg slab",
+      "lfg slabs",
     }
   },
   {
@@ -142,10 +144,10 @@ TBC_Dungeon_Tests_EN = {
     }
   },
   {
-    Name = "Karazahn",
+    Name = "Karazhan",
     TestDefinitions = {
       "lfg kara",
-      "lfg karazahn",
+      "lfg karazhan",
       "2 heal for kz",
     }
   },
