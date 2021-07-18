@@ -12,7 +12,7 @@
 - Added arena 2vs2, 3vs3 and 5vs5 for PvP category
 - Added new dungeon identifiers for COT1 and Shadow Lab.
 - Possibility to add dungeons that will be released in a future phase. These dungeons will then be shown once the phase is live.
-- Changed internal dungeon indexes. **If any LUA errors occur, please delete the SavedVariables file 'LFG_MatchMaker_TBC.lua' in your Account directory.**
+- Changed internal dungeon indexes. **If any LUA errors occur, please delete 'LFG_MatchMaker_TBC.lua' in your Account directory.**
 
 **What's next?**\
 I can't make any promises at this point, but I will try to include role selection for the LFG and LFM tab for one of the next versions.
