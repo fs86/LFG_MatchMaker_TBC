@@ -166,6 +166,55 @@ function LFGMM_Utility_IsMatchForAnyLanguage(normalizedMessage, identifierTable)
 	return false;
 end
 
+function LFGMM_RU_To_LATIN(value, toLowerCase)
+  toLowerCase = toLowerCase or false;
+
+	-- https://en.wikipedia.org/wiki/Romanization_of_Russian
+	local mapping = {
+		["а"] = "a",
+		["б"] = "b",
+		["в"] = "v",
+		["г"] = "g",
+		["д"] = "d",
+		["е"] = "e",
+		["ё"] = "e",
+		["ж"] = "zh",
+		["з"] = "z",
+		["и"] = "i",
+		["й"] = "i",
+		["к"] = "k",
+		["л"] = "l",
+		["м"] = "m",
+		["н"] = "n",
+		["о"] = "o",
+		["п"] = "p",
+		["р"] = "r",
+		["с"] = "s",
+		["т"] = "t",
+		["у"] = "u",
+		["ф"] = "f",
+		["х"] = "kh",
+		["ц"] = "ts",
+		["ч"] = "ch",
+		["ш"] = "sh",
+		["щ"] = "shch",
+		["ъ"] = "ie",
+		["ы"] = "y",
+		["э"] = "e",
+		["ю"] = "iu",
+		["я"] = "ia",
+		["ь"] = ""
+	}
+
+  if (toLowerCase == true) then
+    value = string.utf8lower(value);
+  end
+
+	value = string.utf8replace(value, mapping);
+
+	return value;
+end
+
 function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	local message = string.lower(chatMessage);
 
@@ -196,6 +245,9 @@ function LFGMM_Utility_NormalizeChatMessage(chatMessage, identifierLanguages)
 	message = string.gsub(message, "ß", "ss");
 	message = string.gsub(message, "œ", "oe");
 	message = string.gsub(message, "ç", "c");
+
+	-- RU
+	message = LFGMM_RU_To_LATIN(message, true);
 
 	-- Remove item links to prevent false positive matches from item names
 	message = string.gsub(message, "%phitem[%d:]+%ph%[.-%]", "");
@@ -688,6 +740,7 @@ function LFGMM_Utility_GetLfgChannelName()
 			channel == "SucheNachGruppe" or
 			channel == "BuscandoGrupo" or
 			channel == "RechercheDeGroupe"
+			-- channel == "ПоискСпутников"
 		) then
 			lfgChannelName = channel;
 			break;
@@ -707,6 +760,7 @@ function LFGMM_Utility_GetGeneralChannelName()
 			channel == "Geral" or
 			channel == "Allgemein" or
 			channel == "Général"
+			-- channel == "Общий"
 		) then
 			generalChannelName = channel;
 			break;
@@ -728,6 +782,7 @@ function LFGMM_Utility_GetTradeChannelName()
 			channel == "Comércio" or
 			channel == "Handel" or
 			channel == "Commerce"
+			-- channel == "Торговля"
 		) then
 			tradeChannelName = channel;
 			isAvailable = true;

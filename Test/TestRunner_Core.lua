@@ -34,7 +34,7 @@ function hasValue(tab, val)
   return false
 end
 
-function runTests(dungeons, testData, languages)
+function runTests(dungeons, testData, languages, printInvalidOnly)
   local testResults = {}
   local testDefinitionCount = 0
   local errorCount = 0
@@ -46,7 +46,7 @@ function runTests(dungeons, testData, languages)
 
       local testResultEntry = {
         TestDefinition = testDefinition,
-        ExpectedDungeonMatch = test.DungeonName,
+        ExpectedDungeonMatch = test.Name,
         MatchesOnDungeons = {}
       }
 
@@ -68,7 +68,9 @@ function runTests(dungeons, testData, languages)
     end
     for dungeonMatch in values(result.MatchesOnDungeons) do
       if dungeonMatch == result.ExpectedDungeonMatch then
-        print(  "✔️ '" .. result.TestDefinition .. "' \27[32mMATCHES DUNGEON\27[0m " .. dungeonMatch)
+        if not printInvalidOnly then
+          print(  "✔️ '" .. result.TestDefinition .. "' \27[32mMATCHES DUNGEON\27[0m " .. dungeonMatch)
+        end
       else
         print(  "❌ '" .. result.TestDefinition .. "' \27[31mMATCHES DUNGEON\27[0m " .. dungeonMatch .. " \27[32mEXPECTED\27[0m " .. result.ExpectedDungeonMatch)
         errorCount = errorCount + 1

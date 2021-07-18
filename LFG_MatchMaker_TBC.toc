@@ -22,14 +22,17 @@
 
 ## Title: LFG Match Maker TBC
 ## Interface: 20501
-## Version: 1.0.4d
+## Version: 1.10.0
 ## Author: L.I.R.
 ## Notes: TBC Version of LFG MatchMaker
 ## SavedVariablesPerCharacter: LFGMM_DB
 
 LFGMM_FrameBackdrops.lua
 LFGMM_Interface.xml
+Libs\UTF8\utf8data.lua
+Libs\UTF8\utf8.lua
 LFGMM_Core.lua
+LFGMM_TBC_PhaseHelper.lua
 LFGMM_Utility.lua
 LFGMM_MinimapButton.lua
 LFGMM_LfgTab.lua
