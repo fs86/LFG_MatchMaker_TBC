@@ -229,10 +229,10 @@ LFGMM_GLOBAL = {
 			Code = "ES",
 			Name = "Spanish",
 		},
-		{
-			Code = "RU",
-			Name = "Russian (currently TBC dungeons only)",
-		},
+		-- {
+		-- 	Code = "RU",
+		-- 	Name = "Russian (currently TBC dungeons only)",
+		-- },
 	},
 	CLASSES = {
 		WARRIOR = {
