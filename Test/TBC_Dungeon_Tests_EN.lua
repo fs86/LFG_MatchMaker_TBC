@@ -103,6 +103,7 @@ TBC_Dungeon_Tests_EN = {
       "lfg shatered hals",
       "lfg shathalls",
       "lfg shattered",
+      "lfm norm sh",
     }
   },
   {
@@ -141,6 +142,7 @@ TBC_Dungeon_Tests_EN = {
       "lfg arca",
       "heal lfg arcatraz",
       "1 dd for arca traz",
+      "lfm dps arc"
     }
   },
   {

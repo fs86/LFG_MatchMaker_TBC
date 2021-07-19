@@ -3108,7 +3108,8 @@ LFGMM_GLOBAL = {
 				EN = {
 					"shat[t]?[e]?[r]?[e]?[d]?[%W]*hal[l]?[s]?",
 					"shat[t]?[e]?[r]?[e]?[d]?",
-					"shh"
+					"shh",
+					"sh"
 				},
 				DE = {
 					"zerschmet[t]?erte[n]?[%W]*hal[l]?[e]?[n]?",
@@ -3248,6 +3249,7 @@ LFGMM_GLOBAL = {
 			Identifiers = {
 				EN = {
 					"arca[%W]*[t]?[r]?[a]?[z]?",
+					"arc[a]?"
 				},
 				DE = {
 					"arka[%W]*[t]?[r]?[a]?[z]?",
