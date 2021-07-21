@@ -34,6 +34,7 @@ function LFGMM_LfmTab_Initialize()
 
 	LFGMM_LfmTab_StartStopSearchButton:SetScript("OnClick", LFGMM_LfmTab_StartStopSearchButton_OnClick);
 
+	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_UseRoleSelectionCheckBox, "Use role selection", "Use role selection", false, LFGMM_LfmTab_UseRoleSelectionCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_MatchLfgCheckBox, "LFG", "Get notifications on LFG messages", true, LFGMM_LfmTab_MatchLfgCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_MatchLfmCheckBox,	"LFM", "Get notifications on LFM messages", LFGMM_DB.SEARCH.LFM.MatchLfm, LFGMM_LfmTab_MatchLfmCheckBox_OnClick);
 	LFGMM_Utility_InitializeCheckbox(LFGMM_LfmTab_MatchUnknownCheckBox, "Unknown", "Get notifications when dungeon matches, but LFG/LFM cannot be determined", LFGMM_DB.SEARCH.LFM.MatchUnknown, LFGMM_LfmTab_MatchUnknownCheckBox_OnClick);
@@ -49,6 +50,9 @@ function LFGMM_LfmTab_Initialize()
 	LFGMM_LfmTab_BroadcastMessagePreviewSliderHigh:SetText("");
 
 	LFGMM_LfmTab_BroadcastMessageInfoButton:SetScript("OnClick", LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick);
+	LFGMM_LfmTab_RoleSelectionButton:SetScript("OnClick", LFGMM_LfmTab_RoleSelectionButton_OnClick);
+
+	LFGMM_LfmTab_RoleSelectionButton:SetEnabled(false);
 
 	LFGMM_LfmTab.SearchAnimationLock = false;
 
@@ -561,9 +565,31 @@ function LFGMM_LfmTab_BroadcastMessageInfoButton_OnClick()
 	else
 		LFGMM_LfgTab_BroadcastMessageInfoWindow:Hide();
 		LFGMM_LfmTab_BroadcastMessageInfoWindow:Show();
+		LFGMM_LfmTab_RoleSelectionWindow:Hide();
 		LFGMM_SettingsTab_RequestInviteMessageInfoWindow:Hide();
 		LFGMM_SettingsTab_ChannelsDropDownInfoWindow:Hide();
 		LFGMM_ListTab_MessageInfoWindow:Hide();
 	end
 end
 
+function LFGMM_LfmTab_UseRoleSelectionCheckBox_OnClick()
+	local checked = LFGMM_LfmTab_UseRoleSelectionCheckBox:GetChecked();
+	LFGMM_LfmTab_RoleSelectionButton:SetEnabled(checked);
+
+	if not checked then
+		LFGMM_LfmTab_RoleSelectionWindow:Hide();
+	end
+end
+
+function LFGMM_LfmTab_RoleSelectionButton_OnClick()
+	if (LFGMM_LfmTab_RoleSelectionWindow:IsVisible()) then
+		LFGMM_LfmTab_RoleSelectionWindow:Hide();
+	else
+		LFGMM_LfmTab_RoleSelectionWindow:Show();
+		LFGMM_LfmTab_BroadcastMessageInfoWindow:Hide();
+		LFGMM_LfgTab_BroadcastMessageInfoWindow:Hide();
+		LFGMM_SettingsTab_RequestInviteMessageInfoWindow:Hide();
+		LFGMM_SettingsTab_ChannelsDropDownInfoWindow:Hide();
+		LFGMM_ListTab_MessageInfoWindow:Hide();
+	end
+end

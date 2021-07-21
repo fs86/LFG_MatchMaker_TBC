@@ -422,6 +422,24 @@
 						</Anchors>
 					</Frame>
 
+					<CheckButton name="LFGMM_LfmTab_UseRoleSelectionCheckBox" inherits="ChatConfigCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset x="-43" y="-134" />
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<Button name="LFGMM_LfmTab_RoleSelectionButton" text=">>" inherits="UIPanelButtonTemplate">
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset x="94" y="-134" />
+							</Anchor>
+						</Anchors>
+
+						<Size x="40" y="20" />
+					</Button>
+
 					<Button name="LFGMM_LfmTab_StartStopSearchButton" text="Start search" inherits="UIPanelButtonTemplate">
 						<Anchors>
 							<Anchor point="CENTER" relativePoint="CENTER">
@@ -1046,6 +1064,29 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<!-- LFM ROLE SELECTION WINDOW -->
+	<Frame name="LFGMM_LfmTab_RoleSelectionWindow" hidden="true" enableMouse="true" frameStrata="HIGH" parent="LFGMM_MainWindow" inherits="TooltipBorderedFrameTemplate">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+				<Offset x="10" y="265" />
+			</Anchor>
+		</Anchors>
+
+		<Size x="240" y="90" />
+
+		<Layers>
+			<Layer>
+				<CheckButton name="LFGMM_LfmTab_UseRoleSelectionCheckBox" inherits="ChatConfigCheckButtonTemplate">
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="CENTER">
+							<Offset x="-50" y="-65" />
+						</Anchor>
+					</Anchors>
+				</CheckButton>
 			</Layer>
 		</Layers>
 	</Frame>

@@ -1,4 +1,6 @@
-# LFG MatchMaker TBC
+## 1.10.1
+
+- Added missing dungeons identifers for Arcatraz and Shattered Halls
 
 ## 1.10.0
 
