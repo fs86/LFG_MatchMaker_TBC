@@ -23,7 +23,7 @@ TBC_PHASES = {
 
 TBC_PHASE_RELEASE_DATES = {
   [TBC_PHASES.PHASE_1] = LFGMM_TBC_PhaseHelper_Time({ month = 6, day = 1, year = 2021 }),
-  [TBC_PHASES.PHASE_2] = nil,
+  [TBC_PHASES.PHASE_2] = LFGMM_TBC_PhaseHelper_Time({ month = 9, day = 16, year = 2021 }),
   [TBC_PHASES.PHASE_3] = nil,
   [TBC_PHASES.PHASE_4] = nil,
   [TBC_PHASES.PHASE_5] = nil,
