@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.1
+
+- Added missing dungeons identifers for Arcatraz and Shattered Halls
+
 ## 1.10.0
 
 **Technical info:** This release jumps to version number 1.10.0 to better reflect past changes. Many new features have been added that should have resulted in an increase in the minor version number rather than the patch level.
