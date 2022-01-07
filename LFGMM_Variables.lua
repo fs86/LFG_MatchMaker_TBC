@@ -3360,6 +3360,56 @@ LFGMM_GLOBAL = {
 			MinLevel = 70,
 			MaxLevel = 70
 		},
+				{
+			Index = 75,
+			Name = "Serpentshrine Cavern",
+			Abbreviation = "SSC",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_2),
+			Identifiers = {
+				EN = {
+					"serpent[%W]*[s]?[h]?[r]?[i]?[n]?[e]?",
+					"ssc"
+				},
+				DE = {
+					"schlangen[%W]*schr[e]?[i]?[n]?",
+					"ssc"
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70
+		},
+		{
+			Index = 76,
+			Name = "Tempest Keep",
+			Abbreviation = "TK",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_2),
+			Identifiers = {
+				EN = {
+					"tempest[%W]*[k]?[e]?[e]?[p]?",
+					"TK",
+					"eye"
+				},
+				DE = {
+					"tempest[%W]*[k]?[e]?[e]?[p]?",
+					"TK",
+					"festung[%W]*[s]?[t]?[ü]?[r]?[m]?[e]?",
+					"auge"
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70
+		},
+		
 	},
 	DUNGEONS_FALLBACK = {
 		{
