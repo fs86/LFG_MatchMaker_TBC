@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.2
+
+- Added Serpentshrine Cavern and Tempest Keep
+
 ## 1.10.1
 
 - Added missing dungeons identifers for Arcatraz and Shattered Halls

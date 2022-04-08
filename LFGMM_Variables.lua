@@ -3409,7 +3409,79 @@ LFGMM_GLOBAL = {
 			MinLevel = 70,
 			MaxLevel = 70
 		},
-		
+		{
+			Index = 77,
+			Name = "Mount Hyjal",
+			Abbreviation = "MH",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_3),
+			Identifiers = {
+				EN = {
+					"mount[%W]*[h]?[y]?[j]?[a]?[l]?",
+					"mh[+]?[b]?[t]?",
+					"hyj[a]?[l]?",
+				},
+				DE = {
+					"mount[%W]*[h]?[y]?[j]?[a]?[l]?",
+					"mh[+]?[b]?[t]?",
+					"hyj[a]?[l]?",
+					"hyjal[g]?[i]?[p]?[f]?[e]?[l]?",
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70
+		},		
+		{
+			Index = 78,
+			Name = "Black Tempel",
+			Abbreviation = "BT",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_3),
+			Identifiers = {
+				EN = {
+					"black[%W]*[t]?[e]?[m]?[p]?[e]?[l]?",
+					"[m]?[h]?[+]?BT",
+				},
+				DE = {
+					"black[%W]*[t]?[e]?[m]?[p]?[e]?[l]?",
+					"schwarzer[%W]*[t]?[e]?[m]?[p]?[e]?[l]?",
+					"[m]?[h]?[+]?BT",
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 25,
+			MinLevel = 70,
+			MaxLevel = 70
+		},
+		{
+			Index = 79,
+			Name = "Zul'Aman",
+			Abbreviation = "ZA",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_4),
+			Identifiers = {
+				EN = {
+					"zul[%W]*[a]?[m]?[a]?[n]??",
+					"za",
+				},
+				DE = {
+					"zul[%W]*[a]?[m]?[a]?[n]??",
+					"za",
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 10,
+			MinLevel = 70,
+			MaxLevel = 70
+		},
 	},
 	DUNGEONS_FALLBACK = {
 		{
@@ -3490,7 +3562,7 @@ LFGMM_GLOBAL = {
 				44, 45, 46, 47, 48, 49, 50,
 
 				-- TBC
-				72, 73, 74
+				72, 73, 74, 75, 76, 77, 78, 79
 			},
 			Identifiers = {
 				EN = {
