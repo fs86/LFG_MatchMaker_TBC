@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.3
+
+- Added Hyjal, BlackTempel and ZulAman
+
 ## 1.10.2
 
 - Added Serpentshrine Cavern and Tempest Keep

@@ -3275,8 +3275,31 @@ LFGMM_GLOBAL = {
 			MinLevel = 68,
 			MaxLevel = 70
 		},
-		{
+				{
 			Index = 72,
+			Name = "Magisters' Terrace",
+			Abbreviation = "mgt",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_5),
+			Identifiers = {
+				EN = {
+					"magagister[s]?",
+					"mgt"
+				},
+				DE = {
+					"terasse",
+					"tdm"
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 5,
+			MinLevel = 69,
+			MaxLevel = 70	
+		},
+		{
+			Index = 73,
 			Name = "Karazhan",
 			Abbreviation = "KZ",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3303,7 +3326,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 73,
+			Index = 74,
 			Name = "Gruul's Lair",
 			Abbreviation = "GL",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3334,7 +3357,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 74,
+			Index = 75,
 			Name = "Magtheridon's Lair",
 			Abbreviation = "Mag",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3365,7 +3388,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 				{
-			Index = 75,
+			Index = 76,
 			Name = "Serpentshrine Cavern",
 			Abbreviation = "SSC",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3388,7 +3411,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 76,
+			Index = 77,
 			Name = "Tempest Keep",
 			Abbreviation = "TK",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3414,7 +3437,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 77,
+			Index = 78,
 			Name = "Mount Hyjal",
 			Abbreviation = "MH",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3440,7 +3463,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},		
 		{
-			Index = 78,
+			Index = 79,
 			Name = "Black Tempel",
 			Abbreviation = "BT",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3464,7 +3487,7 @@ LFGMM_GLOBAL = {
 			MaxLevel = 70
 		},
 		{
-			Index = 79,
+			Index = 80,
 			Name = "Zul'Aman",
 			Abbreviation = "ZA",
 			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
@@ -3483,6 +3506,29 @@ LFGMM_GLOBAL = {
 				RU = {},
 			},
 			Size = 10,
+			MinLevel = 70,
+			MaxLevel = 70
+		},
+		{
+			Index = 81,
+			Name = "Sunwell Plateau",
+			Abbreviation = "SWP",
+			Category = LFGMM_KEYS.DUNGEON_CATEGORIES.TBC,
+      Enabled = LFGMM_TBC_PhaseHelper_EnableFor(TBC_PHASES.PHASE_5),
+			Identifiers = {
+				EN = {
+					"sun[%W]*[w]?[e]?[l]?[l]??",
+					"sw[p]?",
+				},
+				DE = {
+					"sonnen[%W]*[b]?[r]?[u]?[n]?[n]?[e]?[n]??",
+					"sb[p]?",
+				},
+				FR = {},
+				ES = {},
+				RU = {},
+			},
+			Size = 25,
 			MinLevel = 70,
 			MaxLevel = 70
 		},
@@ -3539,7 +3585,7 @@ LFGMM_GLOBAL = {
 				1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
 
 				-- TBC
-				57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71
+				57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72,
 			},
 			Identifiers = {
 				EN = {
@@ -3566,7 +3612,7 @@ LFGMM_GLOBAL = {
 				44, 45, 46, 47, 48, 49, 50,
 
 				-- TBC
-				72, 73, 74, 75, 76, 77, 78, 79
+				73, 74, 75, 76, 77, 78, 79, 80, 81,
 			},
 			Identifiers = {
 				EN = {
