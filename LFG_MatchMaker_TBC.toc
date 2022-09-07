@@ -20,11 +20,11 @@
 # along with 'LFG MatchMaker'. If not, see <https://www.gnu.org/licenses/>.
 #
 
-## Title: LFG Match Maker TBC
-## Interface: 20504
-## Version: 1.10.4
+## Title: LFG Match Maker WotLK prePatch (TBC)
+## Interface: 30400
+## Version: 1.10.5
 ## Author: L.I.R.
-## Notes: TBC Version of LFG MatchMaker
+## Notes: WotLK prePatch (TBC) Version of LFG MatchMaker
 ## SavedVariablesPerCharacter: LFGMM_DB
 
 LFGMM_FrameBackdrops.lua
