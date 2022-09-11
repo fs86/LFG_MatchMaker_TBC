@@ -548,7 +548,9 @@ LFGMM_GLOBAL = {
 			"nhc[%W]*/[%W]*hc",
 			"nhc[%W]*or[%W]*hc",
 			"[.]?hc[.]?",
-			"hm"
+			"hm",
+			" h ",
+			"(h)"
 		},
 		DE = {
 			"hero[i]?[s]?[c]?[h]?"
@@ -562,7 +564,9 @@ LFGMM_GLOBAL = {
 			"non[%W]*hero[i]?[c]?",
 			"[.]?nh[c]?[.]?",
 			"normal",
-			"nm"
+			"nm",
+			" n ",
+			"(n)"
 		},
 		DE = {},
 		FR = {},
