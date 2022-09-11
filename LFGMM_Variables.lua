@@ -289,6 +289,12 @@ LFGMM_GLOBAL = {
 			IconCoordinates = CLASS_ICON_TCOORDS.DRUID,
 			Color = "|cFFFF7D0A",
 		},
+		DEATHKNIGHT = {
+			Name = "Deathknight",
+			LocalizedName = LOCALIZED_CLASS_NAMES_MALE.DEATHKNIGHT,
+			IconCoordinates = CLASS_ICON_TCOORDS.DEATHKNIGHT,
+			Color = "|cFFC41E3A",
+		},
 	},
 	MESSAGETYPE_IDENTIFIERS = {
 		EN = {
