@@ -1,5 +1,13 @@
 # LFG MatchMaker TBC
 
+## 1.10.5
+
+- Updated Interface Version
+
+## 1.10.4
+
+- Added P5 Content - Sunwell Plateau raid and Magister's Terrace dungeon.
+
 ## 1.10.3
 
 - Added Hyjal, BlackTempel and ZulAman

@@ -22,7 +22,7 @@
 
 ## Title: LFG Match Maker TBC
 ## Interface: 20505
-## Version: 1.10.5
+## Version: 1.10.6
 ## Author: L.I.R.
 ## Notes: TBC Version of LFG MatchMaker
 ## SavedVariablesPerCharacter: LFGMM_DB
