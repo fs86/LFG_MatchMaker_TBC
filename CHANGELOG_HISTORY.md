@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.6
+
+- Reset phases because of TBC anniversary launch
+
 ## 1.10.5
 
 - Updated Interface Version

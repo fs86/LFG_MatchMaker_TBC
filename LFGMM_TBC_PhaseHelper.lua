@@ -23,7 +23,7 @@ TBC_PHASES = {
 
 TBC_PHASE_RELEASE_DATES = {
   [TBC_PHASES.PHASE_1] = LFGMM_TBC_PhaseHelper_Time({ month = 2, day = 5, year = 2026 }),
-  -- [TBC_PHASES.PHASE_2] = LFGMM_TBC_PhaseHelper_Time({ month = ???, day = ???, year = 2026 }),
+  [TBC_PHASES.PHASE_2] = LFGMM_TBC_PhaseHelper_Time({ month = 5, day = 14, year = 2026 }),
   -- [TBC_PHASES.PHASE_3] = LFGMM_TBC_PhaseHelper_Time({ month = ???, day = ???, year = 2026 }),
   -- [TBC_PHASES.PHASE_4] = LFGMM_TBC_PhaseHelper_Time({ month = ???, day = ???, year = 2026 }),
   -- [TBC_PHASES.PHASE_5] = LFGMM_TBC_PhaseHelper_Time({ month = ???, day = ???, year = 2026 }),
