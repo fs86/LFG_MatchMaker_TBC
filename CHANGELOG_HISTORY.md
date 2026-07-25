@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.7
+
+- Added P2 Content
+
 ## 1.10.6
 
 - Reset phases because of TBC anniversary launch
