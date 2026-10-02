@@ -65,6 +65,7 @@ function LFGMM_Load()
 			LIST = {
 				Dungeons = {},
 				ShowUnknownDungeons = false,
+				IgnoreBoosts = false,
 				MessageTypes = {
 					Unknown = false,
 					Lfg = true,
@@ -138,6 +139,10 @@ function LFGMM_Load()
 			LFGMM_DB.SEARCH.LFG.Dungeons = {};
 			LFGMM_DB.SEARCH.LFM.Dungeon = nil;
 			LFGMM_DB.LIST.Dungeons = {};
+		end
+
+		if (LFGMM_DB.LIST.IgnoreBoosts == nil) then
+			LFGMM_DB.LIST.IgnoreBoosts = false;
 		end
 
 		if (LFGMM_DB.VERSION < LFGMM_DB_VERSION) then

@@ -1,5 +1,9 @@
 # LFG MatchMaker TBC
 
+## 1.10.8
+
+- Added P3 Content
+
 ## 1.10.7
 
 - Added P2 Content

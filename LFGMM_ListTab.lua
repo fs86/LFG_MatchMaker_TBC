@@ -31,6 +31,7 @@ function LFGMM_ListTab_Initialize()
 	LFGMM_Utility_InitializeDropDown(LFGMM_ListTab_DungeonsDropDown_PVP, 120, LFGMM_ListTab_DungeonsDropDown_PVP_OnInitialize);
 
 	LFGMM_Utility_InitializeCheckbox(LFGMM_ListTab_IncludeUnknownCheckBox, "Include unknown", "Include requests that cannot be matched", LFGMM_DB.LIST.ShowUnknownDungeons, LFGMM_ListTab_IncludeUnknownCheckBox_OnClick);
+	LFGMM_Utility_InitializeCheckbox(LFGMM_ListTab_IgnoreBoostsCheckBox, "Ignore boosts", "Hide boost offers from the list", LFGMM_DB.LIST.IgnoreBoosts, LFGMM_ListTab_IgnoreBoostsCheckBox_OnClick);
 
 	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.VANILLA);
 	LFGMM_ListTab_DungeonsDropDown_UpdateText(LFGMM_KEYS.DUNGEON_CATEGORIES.TBC);
@@ -54,33 +55,6 @@ function LFGMM_ListTab_Initialize()
 	LFGMM_ListTab_ConfirmForgetAll_YesButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_YesButton_OnClick);
 	LFGMM_ListTab_ConfirmForgetAll_NoButton:SetScript("OnClick", LFGMM_ListTab_ConfirmForgetAll_NoButton_OnClick);
 
-	local vLine = LFGMM_ListTab_SettingsContainer:CreateLine();
-	vLine:SetColorTexture(1, .8, 0, .9);
-	vLine:SetStartPoint("TOP", 10, 10);
-	vLine:SetEndPoint("BOTTOM", 10, 10);
-	vLine:SetThickness(1);
-	vLine:Show();
-
-	local hLineTop = LFGMM_ListTab_SettingsContainer:CreateLine();
-	hLineTop:SetColorTexture(1, .8, 0, .9);
-	hLineTop:SetStartPoint("TOP", 10, 10);
-	hLineTop:SetEndPoint("TOP", 6, 10);
-	hLineTop:SetThickness(1);
-	hLineTop:Show();
-
-	local hLineBottom = LFGMM_ListTab_SettingsContainer:CreateLine();
-	hLineBottom:SetColorTexture(1, .8, 0, .9);
-	hLineBottom:SetStartPoint("BOTTOM", 10, 10);
-	hLineBottom:SetEndPoint("BOTTOM", 6, 10);
-	hLineBottom:SetThickness(1);
-	hLineBottom:Show();
-
-	local hLineMiddle = LFGMM_ListTab_SettingsContainer:CreateLine();
-	hLineMiddle:SetColorTexture(1, .8, 0, .9);
-	hLineMiddle:SetStartPoint("CENTER", 10, -17);
-	hLineMiddle:SetEndPoint("CENTER", 16, -17);
-	hLineMiddle:SetThickness(1);
-	hLineMiddle:Show();
 end
 
 
@@ -126,6 +100,9 @@ function LFGMM_ListTab_Refresh()
 			(not LFGMM_DB.LIST.MessageTypes.Lfg and message.Type == "LFG") or
 			(not LFGMM_DB.LIST.MessageTypes.Lfm and message.Type == "LFM"))
 		then
+			skip = true;
+
+		elseif (LFGMM_DB.LIST.IgnoreBoosts and LFGMM_Core_IsBoost(LFGMM_Utility_NormalizeChatMessage(message.Message, LFGMM_DB.SETTINGS.IdentifierLanguages))) then
 			skip = true;
 
 		elseif (message.Timestamp < maxMessageAge) then
@@ -280,6 +257,11 @@ end
 
 function LFGMM_ListTab_IncludeUnknownCheckBox_OnClick(self)
 	LFGMM_DB.LIST.ShowUnknownDungeons = LFGMM_ListTab_IncludeUnknownCheckBox:GetChecked();
+	LFGMM_ListTab_Refresh();
+end
+
+function LFGMM_ListTab_IgnoreBoostsCheckBox_OnClick(self)
+	LFGMM_DB.LIST.IgnoreBoosts = LFGMM_ListTab_IgnoreBoostsCheckBox:GetChecked();
 	LFGMM_ListTab_Refresh();
 end
 

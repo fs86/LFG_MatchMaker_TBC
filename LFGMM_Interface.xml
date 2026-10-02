@@ -591,8 +591,16 @@
 
 					<CheckButton name="LFGMM_ListTab_IncludeUnknownCheckBox" inherits="ChatConfigCheckButtonTemplate">
 						<Anchors>
-							<Anchor point="CENTER" relativePoint="TOP">
-								<Offset x="30" y="-103" />
+							<Anchor point="BOTTOMLEFT" relativeTo="LFGMM_ListTab_MessageTypeDropDown" relativePoint="BOTTOMLEFT">
+								<Offset x="16" y="-28" />
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<CheckButton name="LFGMM_ListTab_IgnoreBoostsCheckBox" inherits="ChatConfigCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativeTo="LFGMM_ListTab_MessageTypeDropDown" relativePoint="BOTTOMLEFT">
+								<Offset x="16" y="-52" />
 							</Anchor>
 						</Anchors>
 					</CheckButton>
