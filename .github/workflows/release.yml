@@ -1,24 +1,32 @@
-name: Package and release
+name: Release to CurseForge
 
 on:
   push:
     tags:
-      - "**"
+      - '[0-9]*.[0-9]*.[0-9]*'
+
+permissions:
+  contents: read
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      CF_API_KEY: ${{ secrets.CF_API_KEY }}
-      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Clone project
-        uses: actions/checkout@v1
-
-      - name: Package and release
-        uses: BigWigsMods/packager@v1
-
-      - name: Package and release for Classic TBC
-        uses: BigWigsMods/packager@v1
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          args: -g bcc -n "{package-name}_{project-version}" -p 487937
+          fetch-depth: 0
+
+      - name: Validate release tag
+        run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag must use the format MAJOR.MINOR.PATCH (for example, 1.0.0)." >&2
+            exit 1
+          fi
+
+      - name: Package and publish to CurseForge
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -p 487937 -n "{package-name}-{project-version}"
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}

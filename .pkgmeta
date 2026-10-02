@@ -1,6 +1,7 @@
 package-as: LFG_MatchMaker_TBC
 
 ignore:
+  - .git
   - Test
   - img
   - README.md
